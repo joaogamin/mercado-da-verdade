@@ -38,8 +38,8 @@ export default function Auditoria() {
             [`${CAIU_MAS_AINDA_CARO} desses ${CAIU_NO_LULA}`, "caíram, mas seguem acima do preço de 2019"],
             [`${TOTAL - ACIMA_DE_2019}`, "produtos estão de fato abaixo do nível de 2019"],
           ].map(([n, k]) => (
-            <div key={k} style={{ background: "var(--blue-dd)", padding: "22px 18px", borderTop: "4px solid var(--yellow)" }}>
-              <div className="disp" style={{ fontSize: "clamp(26px,3.4vw,38px)", color: "var(--yellow)", lineHeight: 1 }}>{n}</div>
+            <div key={k} style={{ background: "var(--blue-dd)", padding: "22px 18px", borderTop: "4px solid var(--accent)" }}>
+              <div className="disp" style={{ fontSize: "clamp(26px,3.4vw,38px)", color: "var(--accent)", lineHeight: 1 }}>{n}</div>
               <div className="stat-k">{k}</div>
             </div>
           ))}
@@ -64,9 +64,9 @@ export default function Auditoria() {
           ] as [Filtro, string][]).map(([k, t]) => (
             <button key={k} onClick={() => setFiltro(k)} className="mono"
               style={{
-                background: filtro === k ? "var(--yellow)" : "transparent",
+                background: filtro === k ? "var(--accent)" : "transparent",
                 color: filtro === k ? "var(--ink)" : "rgba(255,255,255,.85)",
-                border: "2px solid " + (filtro === k ? "var(--yellow)" : "rgba(255,255,255,.28)"),
+                border: "2px solid " + (filtro === k ? "var(--accent)" : "rgba(255,255,255,.28)"),
                 padding: "11px 14px", fontSize: 12, fontWeight: 700, letterSpacing: ".06em",
                 textTransform: "uppercase", cursor: "pointer",
               }}>
@@ -82,7 +82,7 @@ export default function Auditoria() {
                 <th style={{ padding: "12px 14px", fontWeight: 700 }}>Produto</th>
                 <th style={{ padding: "12px 14px", textAlign: "right" }}>Janela 2019-2022</th>
                 <th style={{ padding: "12px 14px", textAlign: "right" }}>Janela 2023-2026</th>
-                <th style={{ padding: "12px 14px", textAlign: "right", background: "var(--yellow)", color: "var(--ink)" }}>
+                <th style={{ padding: "12px 14px", textAlign: "right", background: "var(--accent)", color: "var(--ink)" }}>
                   Preço hoje vs. jan/2019
                 </th>
               </tr>
@@ -92,12 +92,15 @@ export default function Auditoria() {
                 <tr key={p.n} style={{ background: i % 2 ? "rgba(255,255,255,.04)" : "transparent" }}>
                   <td style={{ padding: "10px 14px" }}>{p.n[0].toUpperCase() + p.n.slice(1)}</td>
                   <td style={{ padding: "10px 14px", textAlign: "right", color: "rgba(255,255,255,.7)" }}>{fmt(p.b)}</td>
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: p.l < 0 ? "#5fd07f" : "rgba(255,255,255,.7)" }}>
+                  {/* Coluna neutra de proposito: e a variacao que a peca original destaca,
+                      e pinta-la de verde reforcaria justamente a leitura que o site contesta. */}
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: "rgba(255,255,255,.7)" }}>
                     {fmt(p.l)}
                   </td>
                   <td style={{
                     padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                    color: p.a > 0 ? "var(--yellow)" : "#5fd07f",
+                    // verde fica reservado ao caso raro de preco de fato abaixo de 2019
+                    color: p.a > 0 ? "#ffffff" : "var(--accent)",
                   }}>
                     {fmt(p.a)}
                   </td>
@@ -112,8 +115,8 @@ export default function Auditoria() {
           </table>
         </div>
 
-        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--yellow)" }}>
-          <span className="verdict-label" style={{ color: "var(--yellow)" }}>Veredito</span>
+        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--accent)" }}>
+          <span className="verdict-label" style={{ color: "var(--accent)" }}>Veredito</span>
           <p style={{ color: "#fff" }}>
             O óleo de soja aparece como &quot;mais barato com Lula&quot; (−14,2%). Verdade — e ainda assim ele custa{" "}
             <strong>135% a mais</strong> que em 2019. O arroz caiu 1,9% e segue 47,6% acima. Uma queda depois de

@@ -49,7 +49,7 @@ export default function Metodologia() {
       <footer className="sec--navy" style={{ padding: "48px 0 40px", borderTop: "4px solid var(--blue)" }}>
         <div className="wrap">
           <div className="disp" style={{ fontSize: 30, color: "#fff" }}>
-            MERCADO DA <span style={{ color: "var(--yellow)" }}>VERDADE</span>
+            MERCADO DA <span style={{ color: "var(--accent)" }}>VERDADE</span>
           </div>
           <p style={{ maxWidth: "70ch", marginTop: 14, color: "rgba(255,255,255,.78)", fontSize: 15.5 }}>
             Projeto independente e de autoria identificada, feito por conta própria.{" "}

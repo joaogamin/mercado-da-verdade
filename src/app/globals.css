@@ -19,7 +19,10 @@
   --sky-l: #cfe0ec;
 
   /* apoio */
-  --yellow: #ffd400;
+  /* verde de verificacao: destaque de marca sobre azul/navy.
+     Nao confundir com --green, que e semantico ("correto"). */
+  --accent: #35e08b;
+  --accent-d: #12b76a;
   --green: #0e8a2f;
   --green-d: #0a6b24;
   --amber: #c9942a;
@@ -96,7 +99,7 @@ h1, h2, h3, .disp {
   background: currentColor;
   display: inline-block;
 }
-.sec--navy .eyebrow, .sec--blue .eyebrow { color: var(--yellow); }
+.sec--navy .eyebrow, .sec--blue .eyebrow { color: var(--accent); }
 
 .sec-title { font-size: clamp(34px, 5.6vw, 62px); max-width: 20ch; }
 .sec-lead {

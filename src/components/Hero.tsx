@@ -3,14 +3,14 @@ export default function Hero() {
     <section id="topo" style={{ background: "var(--blue)", color: "#fff", padding: "72px 0 0", overflow: "hidden" }}>
       <div className="wrap">
         <span className="mono"
-          style={{ display: "inline-block", background: "var(--yellow)", color: "var(--ink)", fontSize: 11.5,
+          style={{ display: "inline-block", background: "var(--accent)", color: "var(--ink)", fontSize: 11.5,
             fontWeight: 700, letterSpacing: ".16em", padding: "7px 12px", textTransform: "uppercase" }}>
           ✓ Checagem de método, não de partido
         </span>
 
         <h1 style={{ fontSize: "clamp(42px,9vw,104px)", margin: "22px 0 0", maxWidth: "16ch" }}>
           O dado é real.<br />
-          <span style={{ color: "var(--yellow)" }}>O contexto foi cortado.</span>
+          <span style={{ color: "var(--accent)" }}>O contexto foi cortado.</span>
         </h1>
 
         <p style={{ fontSize: "clamp(17px,2.2vw,22px)", maxWidth: "58ch", marginTop: 22, color: "rgba(255,255,255,.9)" }}>
@@ -26,8 +26,8 @@ export default function Hero() {
             ["159,7", "o índice global de alimentos da FAO bateu recorde em mar/2022"],
             ["0", "provas de fraude nos números — o problema está na régua, não na planilha"],
           ].map(([n, k]) => (
-            <div key={k} style={{ background: "var(--blue-d)", padding: "24px 20px", borderTop: "4px solid var(--yellow)" }}>
-              <div className="stat-n" style={{ color: "var(--yellow)" }}>{n}</div>
+            <div key={k} style={{ background: "var(--blue-d)", padding: "24px 20px", borderTop: "4px solid var(--accent)" }}>
+              <div className="stat-n" style={{ color: "var(--accent)" }}>{n}</div>
               <div className="stat-k" style={{ color: "rgba(255,255,255,.72)" }}>{k}</div>
             </div>
           ))}

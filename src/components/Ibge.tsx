@@ -54,8 +54,8 @@ export default function Ibge() {
           </div>
         </div>
 
-        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--yellow)" }}>
-          <span className="verdict-label" style={{ color: "var(--yellow)" }}>Veredito</span>
+        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--accent)" }}>
+          <span className="verdict-label" style={{ color: "var(--accent)" }}>Veredito</span>
           <p style={{ color: "#fff" }}>
             Acusar o IBGE de fraude é injusto com quem produz os dados e desvia a atenção do problema de verdade.
             O dado é confiável; a régua aplicada sobre ele na propaganda é que é escolhida. Ao mesmo tempo, a crise

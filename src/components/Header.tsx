@@ -26,11 +26,11 @@ export default function Header() {
         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 66, gap: 16 }}
       >
         <a href="#topo" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
-          <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--yellow)", display: "block" }}>
+          <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--accent)", display: "block" }}>
             CHECAGEM ESTATÍSTICA
           </span>
           <span className="disp" style={{ fontSize: 22, letterSpacing: "-.01em" }}>
-            MERCADO DA <span style={{ color: "var(--yellow)" }}>VERDADE</span>
+            MERCADO DA <span style={{ color: "var(--accent)" }}>VERDADE</span>
           </span>
         </a>
 

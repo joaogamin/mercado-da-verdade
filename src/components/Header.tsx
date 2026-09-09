@@ -1,7 +1,6 @@
-"use client";
-import { useState } from "react";
-
-const LINKS = [
+// Server component: o menu mobile usa <details>, que e nativo do HTML.
+// Isso evita marcar o header como client component so para abrir um menu.
+const LINKS: [string, string][] = [
   ["#regua", "A régua"],
   ["#alimentos", "Alimentos"],
   ["#auditoria", "Produto a produto"],
@@ -12,19 +11,18 @@ const LINKS = [
   ["#verdade", "O que é verdade"],
 ];
 
+const linkStyle: React.CSSProperties = {
+  color: "rgba(255,255,255,.82)", textDecoration: "none", fontSize: 11.5,
+  letterSpacing: ".06em", textTransform: "uppercase",
+};
+
 export default function Header() {
-  const [open, setOpen] = useState(false);
   return (
-    <header
-      style={{
-        position: "sticky", top: 0, zIndex: 50, background: "var(--navy)",
-        color: "#fff", borderBottom: "3px solid var(--blue)",
-      }}
-    >
-      <div
-        className="wrap"
-        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 66, gap: 16 }}
-      >
+    <header style={{
+      position: "sticky", top: 0, zIndex: 50, background: "var(--navy)",
+      color: "#fff", borderBottom: "3px solid var(--blue)",
+    }}>
+      <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 66, gap: 16 }}>
         <a href="#topo" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
           <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--accent)", display: "block" }}>
             CHECAGEM ESTATÍSTICA
@@ -34,41 +32,21 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hide-sm" style={{ display: "flex", gap: 18, flexWrap: "wrap", justifyContent: "flex-end" }}>
+        <nav className="nav-desk" style={{ display: "flex", gap: 18, flexWrap: "wrap", justifyContent: "flex-end" }}>
           {LINKS.map(([h, t]) => (
-            <a key={h} href={h} className="mono"
-              style={{ color: "rgba(255,255,255,.82)", textDecoration: "none", fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase" }}>
-              {t}
-            </a>
+            <a key={h} href={h} className="mono" style={linkStyle}>{t}</a>
           ))}
         </nav>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label="Abrir menu"
-          style={{
-            display: "none", background: "none", border: "2px solid rgba(255,255,255,.4)",
-            color: "#fff", fontSize: 20, width: 40, height: 40, cursor: "pointer",
-          }}
-          data-mobile-toggle
-        >
-          ☰
-        </button>
+        <details className="nav-mob">
+          <summary aria-label="Abrir menu" className="mono">☰</summary>
+          <div>
+            {LINKS.map(([h, t]) => (
+              <a key={h} href={h} className="mono">{t}</a>
+            ))}
+          </div>
+        </details>
       </div>
-
-      {open && (
-        <div className="wrap" style={{ paddingBottom: 16, display: "grid", gap: 10 }}>
-          {LINKS.map(([h, t]) => (
-            <a key={h} href={h} onClick={() => setOpen(false)} className="mono"
-              style={{ color: "#fff", textDecoration: "none", fontSize: 13, textTransform: "uppercase" }}>
-              {t}
-            </a>
-          ))}
-        </div>
-      )}
-
-      <style>{`@media (max-width:700px){[data-mobile-toggle]{display:block !important}}`}</style>
     </header>
   );
 }

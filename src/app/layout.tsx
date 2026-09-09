@@ -6,11 +6,11 @@ const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mercadodaverdade.com.br";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mercadodaverdade.com.br";
 
 const TITLE = "Mercado da Verdade — o dado é real, o contexto foi cortado";
 const DESC =
-  "Checagem estatística da propaganda eleitoral sobre custo de vida. Os números do IBGE são reais; a comparação entre 2019-2022 e 2023-2026 omite a pandemia e o pico global de alimentos. Veja o acumulado que a régua esconde.";
+  "Checagem número a número do site mercadodamentira.com.br. Os dados do IBGE são reais — a régua é que foi escolhida: a comparação entre 2019-2022 e 2023-2026 omite a pandemia e o pico global de alimentos. 109 dos 112 produtos seguem acima do preço de 2019.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

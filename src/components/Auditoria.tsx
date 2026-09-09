@@ -1,24 +1,46 @@
-"use client";
-import { useMemo, useState } from "react";
+// Server component. O filtro roda em ~25 linhas de JS puro sobre as linhas ja
+// renderizadas, em vez de hidratar o React so para buscar e esconder <tr>.
 import { PRODUTOS, TOTAL, ACIMA_DE_2019, CAIU_NO_LULA, CAIU_MAS_AINDA_CARO } from "@/data/produtos";
 
-type Filtro = "todos" | "enganosos" | "acima";
-
 const fmt = (v: number) => `${v > 0 ? "+" : ""}${v.toFixed(1).replace(".", ",")}%`;
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+const FILTROS: [string, string][] = [
+  ["enganosos", "Caiu, mas ainda caro"],
+  ["acima", "Acima de 2019"],
+  ["todos", "Todos"],
+];
+
+const SCRIPT = `(function(){
+  var t=document.getElementById('aud-tabela'); if(!t) return;
+  var q=document.getElementById('aud-busca');
+  var linhas=[].slice.call(t.tBodies[0].rows);
+  var vazio=document.getElementById('aud-vazio');
+  var modo='enganosos';
+  function aplica(){
+    var termo=(q.value||'').trim().toLowerCase(), n=0;
+    linhas.forEach(function(tr){
+      var ok=true;
+      if(termo && tr.dataset.n.indexOf(termo)<0) ok=false;
+      else if(modo==='enganosos') ok=tr.dataset.caiu==='1'&&tr.dataset.caro==='1';
+      else if(modo==='acima') ok=tr.dataset.caro==='1';
+      tr.hidden=!ok; if(ok)n++;
+    });
+    vazio.hidden=n>0;
+  }
+  q.addEventListener('input',aplica);
+  [].slice.call(document.querySelectorAll('.fbtn')).forEach(function(b){
+    b.addEventListener('click',function(){
+      modo=b.dataset.f;
+      document.querySelectorAll('.fbtn').forEach(function(o){o.setAttribute('aria-pressed',String(o===b));});
+      aplica();
+    });
+  });
+  aplica();
+})();`;
 
 export default function Auditoria() {
-  const [q, setQ] = useState("");
-  const [filtro, setFiltro] = useState<Filtro>("enganosos");
-
-  const lista = useMemo(() => {
-    const termo = q.trim().toLowerCase();
-    return PRODUTOS.filter((p) => {
-      if (termo && !p.n.toLowerCase().includes(termo)) return false;
-      if (filtro === "enganosos") return p.l < 0 && p.a > 0;
-      if (filtro === "acima") return p.a > 0;
-      return true;
-    }).sort((a, b) => b.a - a.a);
-  }, [q, filtro]);
+  const lista = [...PRODUTOS].sort((a, b) => b.a - a.a);
 
   return (
     <section id="auditoria" className="sec sec--navy">
@@ -47,8 +69,7 @@ export default function Auditoria() {
 
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 18 }}>
           <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
+            id="aud-busca"
             placeholder="Buscar produto…"
             aria-label="Buscar produto"
             className="mono"
@@ -57,26 +78,15 @@ export default function Auditoria() {
               color: "#fff", padding: "11px 14px", fontSize: 14,
             }}
           />
-          {([
-            ["enganosos", "Caiu, mas ainda caro"],
-            ["acima", "Acima de 2019"],
-            ["todos", "Todos"],
-          ] as [Filtro, string][]).map(([k, t]) => (
-            <button key={k} onClick={() => setFiltro(k)} className="mono"
-              style={{
-                background: filtro === k ? "var(--accent)" : "transparent",
-                color: filtro === k ? "var(--ink)" : "rgba(255,255,255,.85)",
-                border: "2px solid " + (filtro === k ? "var(--accent)" : "rgba(255,255,255,.28)"),
-                padding: "11px 14px", fontSize: 12, fontWeight: 700, letterSpacing: ".06em",
-                textTransform: "uppercase", cursor: "pointer",
-              }}>
+          {FILTROS.map(([k, t]) => (
+            <button key={k} className="fbtn mono" data-f={k} aria-pressed={k === "enganosos"} type="button">
               {t}
             </button>
           ))}
         </div>
 
         <div style={{ overflowX: "auto", border: "2px solid rgba(255,255,255,.2)" }}>
-          <table className="mono" style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5, minWidth: 620 }}>
+          <table id="aud-tabela" className="mono" style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5, minWidth: 620 }}>
             <thead>
               <tr style={{ background: "var(--blue)", color: "#fff", textAlign: "left" }}>
                 <th style={{ padding: "12px 14px", fontWeight: 700 }}>Produto</th>
@@ -89,30 +99,34 @@ export default function Auditoria() {
             </thead>
             <tbody>
               {lista.map((p, i) => (
-                <tr key={p.n} style={{ background: i % 2 ? "rgba(255,255,255,.04)" : "transparent" }}>
-                  <td style={{ padding: "10px 14px" }}>{p.n[0].toUpperCase() + p.n.slice(1)}</td>
+                <tr
+                  key={p.n}
+                  data-n={p.n.toLowerCase()}
+                  data-caiu={p.l < 0 ? "1" : "0"}
+                  data-caro={p.a > 0 ? "1" : "0"}
+                  style={{ background: i % 2 ? "rgba(255,255,255,.04)" : "transparent" }}
+                >
+                  <td style={{ padding: "10px 14px" }}>{cap(p.n)}</td>
                   <td style={{ padding: "10px 14px", textAlign: "right", color: "rgba(255,255,255,.7)" }}>{fmt(p.b)}</td>
                   {/* Coluna neutra de proposito: e a variacao que a peca original destaca,
                       e pinta-la de verde reforcaria justamente a leitura que o site contesta. */}
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: "rgba(255,255,255,.7)" }}>
-                    {fmt(p.l)}
-                  </td>
-                  <td style={{
-                    padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                    // verde fica reservado ao caso raro de preco de fato abaixo de 2019
-                    color: p.a > 0 ? "#ffffff" : "var(--accent)",
-                  }}>
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: "rgba(255,255,255,.7)" }}>{fmt(p.l)}</td>
+                  <td
+                    style={{
+                      padding: "10px 14px", textAlign: "right", fontWeight: 700,
+                      // verde fica reservado ao caso raro de preco de fato abaixo de 2019
+                      color: p.a > 0 ? "#ffffff" : "var(--accent)",
+                    }}
+                  >
                     {fmt(p.a)}
                   </td>
                 </tr>
               ))}
-              {lista.length === 0 && (
-                <tr><td colSpan={4} style={{ padding: 22, textAlign: "center", color: "rgba(255,255,255,.6)" }}>
-                  Nenhum produto encontrado.
-                </td></tr>
-              )}
             </tbody>
           </table>
+          <p id="aud-vazio" hidden style={{ padding: 22, textAlign: "center", color: "rgba(255,255,255,.6)", margin: 0 }}>
+            Nenhum produto encontrado.
+          </p>
         </div>
 
         <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--accent)" }}>
@@ -131,6 +145,8 @@ export default function Auditoria() {
           IPCA/IBGE. Ao encadear períodos consecutivos, os índices se multiplicam — não se somam.
         </p>
       </div>
+
+      <script dangerouslySetInnerHTML={{ __html: SCRIPT }} />
     </section>
   );
 }

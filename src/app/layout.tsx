@@ -10,7 +10,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mercado
 
 const TITLE = "Mercado da Verdade — o dado é real, o contexto foi cortado";
 const DESC =
-  "Checagem número a número do site mercadodamentira.com.br. Os dados do IBGE são reais — a régua é que foi escolhida: a comparação entre 2019-2022 e 2023-2026 omite a pandemia e o pico global de alimentos. 109 dos 112 produtos seguem acima do preço de 2019.";
+  "Checagem número a número do site mercadodamentira.com.br. Os dados do IBGE são reais — a régua é que foi escolhida: 109 dos 112 produtos seguem acima de 2019.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

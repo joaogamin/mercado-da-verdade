@@ -44,6 +44,8 @@ const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[]
   },
 ];
 
+const VERIFICADO_EM = "2026-09-09";
+
 function jsonLd() {
   const autor = {
     "@type": "Organization",
@@ -59,18 +61,28 @@ function jsonLd() {
       url: SITE_URL,
       inLanguage: "pt-BR",
       sameAs: ["https://www.linkedin.com/in/jgamin/"],
+      publisher: autor,
+      dateModified: VERIFICADO_EM,
       description:
         "Checagem estatística da propaganda eleitoral sobre custo de vida no Brasil, com dados do IBGE e da FAO.",
     },
     ...CHECAGENS.map((c) => ({
       "@context": "https://schema.org",
       "@type": "ClaimReview",
-      datePublished: "2026-09-09",
+      datePublished: VERIFICADO_EM,
       url: `${SITE_URL}/${c.url}`,
       author: autor,
       claimReviewed: c.claim,
       itemReviewed: {
         "@type": "Claim",
+        // author = quem fez a afirmacao (a peca original), exigido pelo Google
+        // para o ClaimReview ser elegivel; nao confundir com o autor da checagem.
+        author: {
+          "@type": "Organization",
+          name: "mercadodamentira.com.br",
+          url: "https://mercadodamentira.com.br/",
+        },
+        datePublished: "2026-09-01",
         appearance: { "@type": "CreativeWork", url: "https://mercadodamentira.com.br/" },
       },
       reviewRating: {

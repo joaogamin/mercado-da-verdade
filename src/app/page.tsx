@@ -9,6 +9,9 @@ import Escala from "@/components/Escala";
 import Ibge from "@/components/Ibge";
 import Verdade from "@/components/Verdade";
 import Metodologia from "@/components/Metodologia";
+import Compartilhe from "@/components/Compartilhe";
+import Autor from "@/components/Autor";
+import Footer from "@/components/Footer";
 import { SITE_URL } from "./layout";
 
 const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[] = [
@@ -115,7 +118,10 @@ export default function Home() {
         <Ibge />
         <Verdade />
         <Metodologia />
+        <Compartilhe />
+        <Autor />
       </main>
+      <Footer />
     </>
   );
 }

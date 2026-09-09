@@ -45,7 +45,12 @@ const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[]
 ];
 
 function jsonLd() {
-  const autor = { "@type": "Organization", name: "Mercado da Verdade", url: SITE_URL };
+  const autor = {
+    "@type": "Organization",
+    name: "Mercado da Verdade",
+    url: SITE_URL,
+    sameAs: ["https://www.linkedin.com/in/jgamin/"],
+  };
   return [
     {
       "@context": "https://schema.org",
@@ -53,6 +58,7 @@ function jsonLd() {
       name: "Mercado da Verdade",
       url: SITE_URL,
       inLanguage: "pt-BR",
+      sameAs: ["https://www.linkedin.com/in/jgamin/"],
       description:
         "Checagem estatística da propaganda eleitoral sobre custo de vida no Brasil, com dados do IBGE e da FAO.",
     },

@@ -52,8 +52,9 @@ export default function Metodologia() {
             MERCADO DA <span style={{ color: "var(--yellow)" }}>VERDADE</span>
           </div>
           <p style={{ maxWidth: "70ch", marginTop: 14, color: "rgba(255,255,255,.78)", fontSize: 15.5 }}>
-            Projeto independente de checagem estatística. <strong>Não é ligado a nenhum partido, campanha,
-            coligação, candidato ou órgão público</strong>, e não é propaganda eleitoral. Não temos qualquer
+            Projeto independente e de autoria identificada, feito por conta própria.{" "}
+            <strong>Não é ligado a nenhum partido, campanha, coligação, candidato ou órgão
+            público</strong>, e não é propaganda eleitoral. Não temos qualquer
             vínculo com os responsáveis pelo site mercadodamentira.com.br, cujo conteúdo é citado aqui apenas
             para fins de análise crítica e checagem.
           </p>
@@ -62,9 +63,34 @@ export default function Metodologia() {
             A correção é publicada com a mesma clareza da afirmação original — é essa a diferença entre checagem
             e propaganda.
           </p>
-          <p className="mono" style={{ marginTop: 22, color: "rgba(255,255,255,.45)", fontSize: 12 }}>
-            Última verificação dos indicadores: 9 de setembro de 2026.
-          </p>
+          <div style={{
+            marginTop: 26, paddingTop: 22, borderTop: "1px solid rgba(255,255,255,.16)",
+            display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center",
+            justifyContent: "space-between",
+          }}>
+            <p className="mono" style={{ margin: 0, color: "rgba(255,255,255,.45)", fontSize: 12 }}>
+              Última verificação dos indicadores: 9 de setembro de 2026.
+            </p>
+
+            <a
+              href="https://www.linkedin.com/in/jgamin/"
+              target="_blank"
+              rel="noopener noreferrer me author"
+              className="mono"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 9,
+                background: "var(--blue)", color: "#fff", textDecoration: "none",
+                fontSize: 12, fontWeight: 700, letterSpacing: ".08em",
+                textTransform: "uppercase", padding: "10px 14px",
+                border: "2px solid var(--blue-soft)",
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+              </svg>
+              Autoria do projeto · LinkedIn
+            </a>
+          </div>
         </div>
       </footer>
     </>

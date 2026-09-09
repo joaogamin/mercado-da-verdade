@@ -5,6 +5,7 @@ const FONTES = [
   ["Senado · PEC 221/2019", "https://www25.senado.leg.br/web/atividade/materias/-/materia/174386"],
   ["Planalto · Lei 15.270/2025 (IRPF)", "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm"],
   ["Planalto · Lei 14.663/2023 (salário mínimo)", "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm"],
+  ["Arquivo do site original (09/09/2026)", "https://web.archive.org/web/20260909203458/https://mercadodamentira.com.br/"],
 ];
 
 export default function Metodologia() {
@@ -18,6 +19,7 @@ export default function Metodologia() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 26, marginTop: 32 }}>
             {[
               ["Usamos os números deles", "A tabela foi extraída da própria seção “Produto por produto” do site original, em setembro de 2026. Nenhuma variação foi alterada. Removemos apenas 4 rótulos repetidos (o mesmo item do IPCA aparecia com nome curto e nome completo), ficando 112 produtos. A única coluna nova é o acumulado."],
+            ["Arquivamos a peça original", "Uma cópia do site checado foi salva no Internet Archive em 9 de setembro de 2026. Se eles editarem ou tirarem a página do ar, a versão que auditamos continua pública e conferível — o link está nas fontes abaixo."],
               ["Encadeamos, não somamos", "Para saber onde o preço está hoje em relação a jan/2019, os dois períodos consecutivos se multiplicam: (1+a)×(1+b)−1. Somar as duas variações daria um número errado."],
               ["Comparamos começo com começo", "Para desemprego e renda, usamos o valor do trimestre em que cada governo assumiu e do trimestre em que entregou — em vez do pior e do melhor ponto da série."],
               ["Testamos contra uma série global", "O índice de alimentos da FAO funciona como controle: se o mesmo movimento aparece no mundo inteiro, ele não pode ser creditado nem debitado a um governo brasileiro."],

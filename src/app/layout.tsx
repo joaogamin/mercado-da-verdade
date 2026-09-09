@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
@@ -47,7 +48,10 @@ export const viewport = { themeColor: "#0034d2", width: "device-width", initialS
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${anton.variable} ${archivo.variable} ${mono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

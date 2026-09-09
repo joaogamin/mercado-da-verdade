@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   category: "news",
 };
 
-export const viewport = { themeColor: "#0034d2", width: "device-width", initialScale: 1 };
+export const viewport = { themeColor: "#00822f", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

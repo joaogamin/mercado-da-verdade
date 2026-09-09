@@ -48,12 +48,12 @@ export default function Regua() {
               </g>
             ))}
 
-            <path d={line} fill="none" stroke="var(--blue)" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+            <path d={line} fill="none" stroke="var(--brand)" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
 
             {FAO.map(([lab, v], i) => (
               <g key={lab}>
-                <circle cx={x(i)} cy={y(v)} r="6" fill="#fff" stroke="var(--blue)" strokeWidth="3.5" />
-                <text x={x(i)} y={y(v) - 15} textAnchor="middle" className="mono" fontSize="12.5" fontWeight="700" fill="var(--blue-dd)">
+                <circle cx={x(i)} cy={y(v)} r="6" fill="#fff" stroke="var(--brand)" strokeWidth="3.5" />
+                <text x={x(i)} y={y(v) - 15} textAnchor="middle" className="mono" fontSize="12.5" fontWeight="700" fill="var(--brand-dd)">
                   {v.toFixed(1)}
                 </text>
                 <text x={x(i)} y={H - PB + 20} textAnchor="middle" className="mono" fontSize="12" fill="#5b636a">{lab}</text>

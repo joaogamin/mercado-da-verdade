@@ -43,7 +43,7 @@ export default function Auditoria() {
   const lista = [...PRODUTOS].sort((a, b) => b.a - a.a);
 
   return (
-    <section id="auditoria" className="sec sec--navy">
+    <section id="auditoria" className="sec sec--deep">
       <div className="wrap">
         <div className="eyebrow">Produto a produto</div>
         <h2 className="sec-title">&quot;Mais barato&quot; não quer dizer barato.</h2>
@@ -60,7 +60,7 @@ export default function Auditoria() {
             [`${CAIU_MAS_AINDA_CARO} desses ${CAIU_NO_LULA}`, "caíram, mas seguem acima do preço de 2019"],
             [`${TOTAL - ACIMA_DE_2019}`, "produtos estão de fato abaixo do nível de 2019"],
           ].map(([n, k]) => (
-            <div key={k} style={{ background: "var(--blue-dd)", padding: "22px 18px", borderTop: "4px solid var(--accent)" }}>
+            <div key={k} style={{ background: "var(--brand-dd)", padding: "22px 18px", borderTop: "4px solid var(--accent)" }}>
               <div className="disp" style={{ fontSize: "clamp(26px,3.4vw,38px)", color: "var(--accent)", lineHeight: 1 }}>{n}</div>
               <div className="stat-k">{k}</div>
             </div>
@@ -74,7 +74,7 @@ export default function Auditoria() {
             aria-label="Buscar produto"
             className="mono"
             style={{
-              flex: "1 1 220px", background: "var(--blue-dd)", border: "2px solid rgba(255,255,255,.28)",
+              flex: "1 1 220px", background: "var(--brand-dd)", border: "2px solid rgba(255,255,255,.28)",
               color: "#fff", padding: "11px 14px", fontSize: 14,
             }}
           />
@@ -88,7 +88,7 @@ export default function Auditoria() {
         <div style={{ overflowX: "auto", border: "2px solid rgba(255,255,255,.2)" }}>
           <table id="aud-tabela" className="mono" style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5, minWidth: 620 }}>
             <thead>
-              <tr style={{ background: "var(--blue)", color: "#fff", textAlign: "left" }}>
+              <tr style={{ background: "var(--brand)", color: "#fff", textAlign: "left" }}>
                 <th style={{ padding: "12px 14px", fontWeight: 700 }}>Produto</th>
                 <th style={{ padding: "12px 14px", textAlign: "right" }}>Janela 2019-2022</th>
                 <th style={{ padding: "12px 14px", textAlign: "right" }}>Janela 2023-2026</th>
@@ -129,7 +129,7 @@ export default function Auditoria() {
           </p>
         </div>
 
-        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--accent)" }}>
+        <div className="verdict" style={{ background: "var(--brand-dd)", borderLeftColor: "var(--accent)" }}>
           <span className="verdict-label" style={{ color: "var(--accent)" }}>Veredito</span>
           <p style={{ color: "#fff" }}>
             O óleo de soja aparece como &quot;mais barato com Lula&quot; (−14,2%). Verdade — e ainda assim ele custa{" "}

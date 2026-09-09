@@ -19,8 +19,8 @@ const linkStyle: React.CSSProperties = {
 export default function Header() {
   return (
     <header style={{
-      position: "sticky", top: 0, zIndex: 50, background: "var(--navy)",
-      color: "#fff", borderBottom: "3px solid var(--blue)",
+      position: "sticky", top: 0, zIndex: 50, background: "var(--deep)",
+      color: "#fff", borderBottom: "3px solid var(--brand)",
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 66, gap: 16 }}>
         <a href="#topo" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>

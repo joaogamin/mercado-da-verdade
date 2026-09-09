@@ -45,7 +45,7 @@ export default function Alimentos() {
             ["133,3", "e voltou a subir: agosto de 2026, o nível mais alto desde o fim de 2022"],
           ].map(([n, k]) => (
             <div key={k} style={{ background: "#fff", border: "2px solid var(--ink)", padding: "22px 18px" }}>
-              <div className="disp" style={{ fontSize: 42, color: "var(--blue)", lineHeight: 1 }}>{n}</div>
+              <div className="disp" style={{ fontSize: 42, color: "var(--brand)", lineHeight: 1 }}>{n}</div>
               <div className="stat-k">{k}</div>
             </div>
           ))}

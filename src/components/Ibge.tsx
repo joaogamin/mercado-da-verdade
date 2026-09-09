@@ -1,6 +1,6 @@
 export default function Ibge() {
   return (
-    <section id="ibge" className="sec sec--navy">
+    <section id="ibge" className="sec sec--deep">
       <div className="wrap">
         <div className="eyebrow">Bloco 4 · A credibilidade do IBGE</div>
         <h2 className="sec-title">O erro não está na planilha. E o problema do IBGE também é real.</h2>
@@ -11,7 +11,7 @@ export default function Ibge() {
         </p>
 
         <div className="duo">
-          <div className="card" style={{ background: "var(--blue-dd)", borderColor: "rgba(255,255,255,.25)", color: "#fff" }}>
+          <div className="card" style={{ background: "var(--brand-dd)", borderColor: "rgba(255,255,255,.25)", color: "#fff" }}>
             <span className="card-tag" style={{ background: "rgba(255,255,255,.16)", color: "#fff" }}>
               O que NÃO se sustenta
             </span>
@@ -54,7 +54,7 @@ export default function Ibge() {
           </div>
         </div>
 
-        <div className="verdict" style={{ background: "var(--blue-dd)", borderLeftColor: "var(--accent)" }}>
+        <div className="verdict" style={{ background: "var(--brand-dd)", borderLeftColor: "var(--accent)" }}>
           <span className="verdict-label" style={{ color: "var(--accent)" }}>Veredito</span>
           <p style={{ color: "#fff" }}>
             Acusar o IBGE de fraude é injusto com quem produz os dados e desvia a atenção do problema de verdade.

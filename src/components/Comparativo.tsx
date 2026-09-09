@@ -69,7 +69,7 @@ export default function Comparativo() {
                   Coluna &quot;Bolsonaro&quot;: <strong style={{ color: "var(--ink)" }}>{l.a}</strong>
                 </span>
                 <span style={{ color: "var(--muted)" }}>
-                  Coluna &quot;Lula&quot;: <strong style={{ color: "var(--blue)" }}>{l.b}</strong>
+                  Coluna &quot;Lula&quot;: <strong style={{ color: "var(--brand)" }}>{l.b}</strong>
                 </span>
               </div>
 

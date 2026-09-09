@@ -7,7 +7,7 @@ const STATS: [string, string][] = [
 
 export default function Hero() {
   return (
-    <section id="topo" style={{ background: "var(--blue)", color: "#fff", padding: "68px 0 0", overflow: "hidden" }}>
+    <section id="topo" style={{ background: "var(--brand)", color: "#fff", padding: "68px 0 0", overflow: "hidden" }}>
       <div className="wrap">
         <span className="mono"
           style={{ display: "inline-block", background: "var(--accent)", color: "var(--ink)", fontSize: 11.5,
@@ -42,7 +42,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <aside style={{ background: "var(--blue-dd)", borderLeft: "5px solid var(--accent)", padding: "22px 24px" }}>
+          <aside style={{ background: "var(--brand-dd)", borderLeft: "5px solid var(--accent)", padding: "22px 24px" }}>
             <h2 style={{ fontSize: 25, color: "var(--accent)", marginBottom: 12 }}>Aqui não tem meia-verdade.</h2>
             <p style={{ margin: 0, fontSize: 16, color: "rgba(255,255,255,.88)" }}>
               Das seis comparações da tabela deles, <strong>três se sustentam sem ressalva</strong> — e estão marcadas
@@ -58,7 +58,7 @@ export default function Hero() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: 2, margin: "44px 0 0" }}>
           {STATS.map(([n, k]) => (
-            <div key={k} style={{ background: "var(--blue-d)", padding: "24px 20px", borderTop: "4px solid var(--accent)" }}>
+            <div key={k} style={{ background: "var(--brand-d)", padding: "24px 20px", borderTop: "4px solid var(--accent)" }}>
               <div className="stat-n" style={{ color: "var(--accent)" }}>{n}</div>
               <div className="stat-k" style={{ color: "rgba(255,255,255,.72)" }}>{k}</div>
             </div>

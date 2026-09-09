@@ -26,7 +26,7 @@ export default function Metodologia() {
               ["Datamos tudo", "Indicadores conjunturais mudam. Cada bloco traz a data de verificação, e a página informa a última atualização geral."],
             ].map(([t, d]) => (
               <div key={t}>
-                <h3 style={{ fontSize: 21, marginBottom: 9, color: "var(--blue)" }}>{t}</h3>
+                <h3 style={{ fontSize: 21, marginBottom: 9, color: "var(--brand)" }}>{t}</h3>
                 <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)" }}>{d}</p>
               </div>
             ))}

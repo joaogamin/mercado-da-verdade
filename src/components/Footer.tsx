@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="sec--navy" style={{ padding: "48px 0 40px", borderTop: "4px solid var(--blue)" }}>
+    <footer className="sec--deep" style={{ padding: "48px 0 40px", borderTop: "4px solid var(--brand)" }}>
         <div className="wrap">
           <div className="disp" style={{ fontSize: 30, color: "#fff" }}>
             MERCADO DA <span style={{ color: "var(--accent)" }}>VERDADE</span>

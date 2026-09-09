@@ -43,8 +43,8 @@ export default function Autor() {
                     display: "inline-flex", alignItems: "center", gap: 9,
                     padding: "12px 18px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".08em",
                     textTransform: "uppercase", textDecoration: "none",
-                    border: "2px solid var(--blue)", background: r.nome === "Instagram" ? "var(--blue)" : "transparent",
-                    color: r.nome === "Instagram" ? "#fff" : "var(--blue)",
+                    border: "2px solid var(--brand)", background: r.nome === "Instagram" ? "var(--brand)" : "transparent",
+                    color: r.nome === "Instagram" ? "#fff" : "var(--brand)",
                   }}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d={r.path} />
@@ -56,7 +56,7 @@ export default function Autor() {
           </div>
 
           <div className="hide-sm" style={{
-            border: "3px solid var(--blue)", padding: "24px 26px", minWidth: 250,
+            border: "3px solid var(--brand)", padding: "24px 26px", minWidth: 250,
             background: "var(--paper)",
           }}>
             <div className="mono" style={{ fontSize: 11, letterSpacing: ".14em", color: "var(--muted)", marginBottom: 12 }}>
@@ -69,7 +69,7 @@ export default function Autor() {
               ["100%", "do código aberto"],
             ].map(([n, k]) => (
               <div key={k} style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 9 }}>
-                <span className="disp" style={{ fontSize: 26, color: "var(--blue)", minWidth: 62 }}>{n}</span>
+                <span className="disp" style={{ fontSize: 26, color: "var(--brand)", minWidth: 62 }}>{n}</span>
                 <span className="mono" style={{ fontSize: 11.5, color: "var(--muted)" }}>{k}</span>
               </div>
             ))}

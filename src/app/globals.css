@@ -9,20 +9,26 @@
    ========================================================================== */
 
 :root {
-  /* eixo primario — azul no lugar do vermelho #FD0000 do original */
-  --blue: #0034d2;
-  --blue-d: #00239a;
-  --blue-dd: #001a73;
-  --blue-soft: #3157cc;
-  --navy: #0b1533;
-  --sky: #2e7fc2;
-  --sky-l: #cfe0ec;
+  /* Eixo primario: verde e amarelo da bandeira, no lugar do vermelho
+     #FD0000 do site original.
+     O verde e mais profundo que o verde-bandeira puro (#009739) por uma
+     razao de legibilidade: sobre #009739 o texto branco fica em 3,83:1 e
+     reprova no WCAG AA. Em #00822f sobe para 4,96:1.
+     O amarelo NUNCA deve ficar sobre o verde (2,42:1, ilegivel) — ele so
+     aparece sobre --deep, ou como fundo com texto escuro. */
+  --brand: #00822f;
+  --brand-d: #006b26;
+  --brand-dd: #00521c;
+  --brand-soft: #2e9e52;
+  --deep: #06231a;
+  --tint: #2e7fc2;
+  --tint-l: #dff3e3;
 
   /* apoio */
   /* verde de verificacao: destaque de marca sobre azul/navy.
      Nao confundir com --green, que e semantico ("correto"). */
-  --accent: #35e08b;
-  --accent-d: #12b76a;
+  --accent: #ffdf00;
+  --accent-d: #d9be00;
   --green: #0e8a2f;
   --green-d: #0a6b24;
   --amber: #c9942a;
@@ -31,7 +37,7 @@
   --ink: #161a20;
   --ink-d: #0c0f14;
   --gray: #f1f0f1;
-  --paper: #eef4f8;
+  --paper: #f0f6f1;
   --white: #ffffff;
   --muted: #5b636a;
   --muted-l: #8a94a0;
@@ -85,8 +91,8 @@ h1, h2, h3, .disp {
   contain-intrinsic-size: auto 900px;
 }
 .sec--tight { padding: 52px 0; }
-.sec--navy { background: var(--navy); color: var(--white); }
-.sec--blue { background: var(--blue); color: var(--white); }
+.sec--deep { background: var(--deep); color: var(--white); }
+.sec--brand { background: var(--brand); color: var(--white); }
 .sec--white { background: var(--white); }
 
 .eyebrow {
@@ -95,7 +101,7 @@ h1, h2, h3, .disp {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--brand);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -108,7 +114,7 @@ h1, h2, h3, .disp {
   background: currentColor;
   display: inline-block;
 }
-.sec--navy .eyebrow, .sec--blue .eyebrow { color: var(--accent); }
+.sec--deep .eyebrow, .sec--brand .eyebrow { color: var(--accent); }
 
 .sec-title { font-size: clamp(34px, 5.6vw, 62px); max-width: 20ch; }
 .sec-lead {
@@ -117,7 +123,7 @@ h1, h2, h3, .disp {
   max-width: 62ch;
   margin-top: 18px;
 }
-.sec--navy .sec-lead, .sec--blue .sec-lead { color: rgba(255, 255, 255, 0.78); }
+.sec--deep .sec-lead, .sec--brand .sec-lead { color: rgba(255, 255, 255, 0.78); }
 
 /* ---------- blocos narrativa x contexto ---------- */
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 34px; }
@@ -130,7 +136,7 @@ h1, h2, h3, .disp {
   box-shadow: var(--shadow);
 }
 .card--claim { background: var(--gray); border-color: var(--muted-l); color: var(--ink); }
-.card--fact { background: var(--white); border-color: var(--blue); border-width: 3px; color: var(--ink); }
+.card--fact { background: var(--white); border-color: var(--brand); border-width: 3px; color: var(--ink); }
 
 .card-tag {
   font-family: var(--mono);
@@ -143,7 +149,7 @@ h1, h2, h3, .disp {
   margin-bottom: 14px;
 }
 .tag--claim { background: var(--muted); color: var(--white); }
-.tag--fact { background: var(--blue); color: var(--white); }
+.tag--fact { background: var(--brand); color: var(--white); }
 
 .card--claim h3, .card--fact h3, .card--claim p, .card--fact p { color: var(--ink); }
 .card h3 { font-size: 25px; margin-bottom: 12px; line-height: 1.02; }
@@ -155,8 +161,8 @@ h1, h2, h3, .disp {
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  border-left: 6px solid var(--blue);
-  background: var(--sky-l);
+  border-left: 6px solid var(--brand);
+  background: var(--tint-l);
   padding: 18px 20px;
   margin-top: 20px;
 }
@@ -166,11 +172,11 @@ h1, h2, h3, .disp {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blue-dd);
+  color: var(--brand-dd);
   white-space: nowrap;
   padding-top: 2px;
 }
-.verdict p { margin: 0; font-size: 16px; font-weight: 600; color: var(--navy); }
+.verdict p { margin: 0; font-size: 16px; font-weight: 600; color: var(--deep); }
 
 /* ---------- numeros ---------- */
 .stat-n {
@@ -187,7 +193,7 @@ h1, h2, h3, .disp {
   color: var(--muted);
   margin-top: 9px;
 }
-.sec--navy .stat-k, .sec--blue .stat-k { color: rgba(255, 255, 255, 0.62); }
+.sec--deep .stat-k, .sec--brand .stat-k { color: rgba(255, 255, 255, 0.62); }
 
 /* ---------- fontes ---------- */
 .src {
@@ -197,10 +203,10 @@ h1, h2, h3, .disp {
   margin-top: 16px;
   line-height: 1.5;
 }
-.sec--navy .src, .sec--blue .src { color: rgba(255, 255, 255, 0.55); }
+.sec--deep .src, .sec--brand .src { color: rgba(255, 255, 255, 0.55); }
 .src a { color: inherit; text-underline-offset: 3px; }
 
-a { color: var(--blue); }
+a { color: var(--brand); }
 
 /* ---------- utilitarios ---------- */
 .rule { height: 3px; background: var(--ink); border: 0; margin: 0; }
@@ -228,8 +234,8 @@ a { color: var(--blue); }
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  background: var(--navy);
-  border: 2px solid var(--blue);
+  background: var(--deep);
+  border: 2px solid var(--brand);
   padding: 12px 16px;
   display: grid;
   gap: 11px;

@@ -54,14 +54,14 @@ export default function Desemprego() {
             <text x={(x(4.5) + x(10)) / 2} y={H - PB - 10} textAnchor="middle" className="mono"
               fontSize="11.5" fontWeight="700" fill="#c0161c">PANDEMIA / LOCKDOWNS</text>
 
-            <path d={line} fill="none" stroke="var(--blue)" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+            <path d={line} fill="none" stroke="var(--brand)" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
 
             {P.map((p) => (
               <g key={p.lab}>
                 <circle cx={x(p.t)} cy={y(p.v)} r={p.mark ? 8 : 5.5}
-                  fill={p.mark === "pico" ? "#c0161c" : "#fff"} stroke={p.mark === "pico" ? "#c0161c" : "var(--blue)"} strokeWidth="3.5" />
+                  fill={p.mark === "pico" ? "#c0161c" : "#fff"} stroke={p.mark === "pico" ? "#c0161c" : "var(--brand)"} strokeWidth="3.5" />
                 <text x={x(p.t) + (p.t === 0 ? 6 : 0)} y={y(p.v) - 17} textAnchor={p.t === 0 ? "start" : "middle"} className="mono"
-                  fontSize="13" fontWeight="700" fill={p.mark === "pico" ? "#c0161c" : "var(--blue-dd)"}>
+                  fontSize="13" fontWeight="700" fill={p.mark === "pico" ? "#c0161c" : "var(--brand-dd)"}>
                   {p.v.toFixed(1).replace(".", ",")}%
                 </text>
                 <text x={x(p.t)} y={H - PB + 22} textAnchor="middle" className="mono" fontSize="11.5" fill="#5b636a">{p.lab}</text>

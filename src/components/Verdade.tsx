@@ -43,7 +43,7 @@ export default function Verdade() {
 
         <div className="duo" style={{ marginTop: 34 }}>
           <Col titulo="✓ O que se confirma" cor="var(--green)" itens={ACERTOS} />
-          <Col titulo="! O que fica de fora dos dois lados" cor="var(--blue)" itens={OMISSOES} />
+          <Col titulo="! O que fica de fora dos dois lados" cor="var(--brand)" itens={OMISSOES} />
         </div>
 
         <div className="verdict">

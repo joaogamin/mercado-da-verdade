@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mercado da Verdade
 
-## Getting Started
+Landing page de checagem estatística que responde ao site de propaganda eleitoral
+`mercadodamentira.com.br`, replicando sua estrutura e linguagem visual com o eixo
+cromático trocado de vermelho para azul.
 
-First, run the development server:
+A tese do site: **os números da peça original são verdadeiros; o que foi manipulado
+é a régua** — as janelas de comparação (jan/2019–jul/2022 vs. jan/2023–jul/2026)
+isolam a pandemia e o pico global de alimentos de um lado só.
+
+## Stack
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind 4 · fontes via `next/font`.
+Todas as rotas são estáticas (SSG), sem dependência de runtime.
+
+## Rodando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # build de produção
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy na Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx vercel login
+npx vercel --prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Depois de apontar o domínio, defina a variável de ambiente para que canonical,
+sitemap, robots e Open Graph usem a URL correta:
 
-## Learn More
+```
+NEXT_PUBLIC_SITE_URL=https://seu-dominio.com.br
+```
 
-To learn more about Next.js, take a look at the following resources:
+## SEO
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Metadata completa + Open Graph e Twitter Card (imagem gerada em `src/app/opengraph-image.tsx`)
+- `sitemap.xml` e `robots.txt` gerados pelo Next
+- JSON-LD com `WebSite` e cinco entradas `ClaimReview` (schema de fact-checking do Google)
+- Conteúdo 100% renderizado no servidor, inclusive a tabela interativa
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Dados
 
-## Deploy on Vercel
+`src/data/produtos.ts` traz os 112 produtos extraídos da tabela do site original.
+As colunas `b` e `l` são as variações publicadas por eles; `a` é o **acumulado
+encadeado** — `((1+b)×(1+l)−1)` — que mostra onde o preço está hoje em relação a
+janeiro de 2019. Essa coluna não existe no site original e é o principal achado:
+109 dos 112 produtos seguem acima do nível de 2019.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Cada bloco cita as fontes primárias (IBGE, FAO, Senado, Planalto). Indicadores
+conjunturais verificados em 9 de setembro de 2026.

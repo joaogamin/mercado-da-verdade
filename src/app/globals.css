@@ -1,26 +1,201 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Mercado da Verdade — design tokens
+   Espelha a linguagem visual do site original (display Anton, corpo Archivo,
+   blocos chapados de alto contraste) trocando o eixo cromático de vermelho
+   para azul. O azul carrega leitura de verificacao/tecnico e cria contraste
+   direto com a peca original.
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* eixo primario — azul no lugar do vermelho #FD0000 do original */
+  --blue: #0034d2;
+  --blue-d: #00239a;
+  --blue-dd: #001a73;
+  --blue-soft: #3157cc;
+  --navy: #0b1533;
+  --sky: #2e7fc2;
+  --sky-l: #cfe0ec;
+
+  /* apoio */
+  --yellow: #ffd400;
+  --green: #0e8a2f;
+  --green-d: #0a6b24;
+  --amber: #c9942a;
+  --alert: #c0161c;
+
+  --ink: #161a20;
+  --ink-d: #0c0f14;
+  --gray: #f1f0f1;
+  --paper: #eef4f8;
+  --white: #ffffff;
+  --muted: #5b636a;
+  --muted-l: #8a94a0;
+  --line: #d7dee6;
+
+  --disp: var(--font-anton), "Arial Black", Impact, sans-serif;
+  --body: var(--font-archivo), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --mono: var(--font-mono), "JetBrains Mono", "Courier New", monospace;
+
+  --wrap: 1180px;
+  --shadow: 0 2px 0 rgba(11, 21, 51, 0.16);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; scroll-padding-top: 74px; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .disp {
+  font-family: var(--disp);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- secoes ---------- */
+.sec { padding: 74px 0; position: relative; }
+.sec--tight { padding: 52px 0; }
+.sec--navy { background: var(--navy); color: var(--white); }
+.sec--blue { background: var(--blue); color: var(--white); }
+.sec--white { background: var(--white); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 3px;
+  background: currentColor;
+  display: inline-block;
+}
+.sec--navy .eyebrow, .sec--blue .eyebrow { color: var(--yellow); }
+
+.sec-title { font-size: clamp(34px, 5.6vw, 62px); max-width: 20ch; }
+.sec-lead {
+  font-size: clamp(16px, 1.9vw, 19px);
+  color: var(--muted);
+  max-width: 62ch;
+  margin-top: 18px;
+}
+.sec--navy .sec-lead, .sec--blue .sec-lead { color: rgba(255, 255, 255, 0.78); }
+
+/* ---------- blocos narrativa x contexto ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 34px; }
+@media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+
+.card {
+  border: 2px solid var(--ink);
+  background: var(--white);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.card--claim { background: var(--gray); border-color: var(--muted-l); color: var(--ink); }
+.card--fact { background: var(--white); border-color: var(--blue); border-width: 3px; color: var(--ink); }
+
+.card-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 10px;
+  margin-bottom: 14px;
+}
+.tag--claim { background: var(--muted); color: var(--white); }
+.tag--fact { background: var(--blue); color: var(--white); }
+
+.card--claim h3, .card--fact h3, .card--claim p, .card--fact p { color: var(--ink); }
+.card h3 { font-size: 25px; margin-bottom: 12px; line-height: 1.02; }
+.card p { margin: 0 0 12px; font-size: 16px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ---------- veredito ---------- */
+.verdict {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-left: 6px solid var(--blue);
+  background: var(--sky-l);
+  padding: 18px 20px;
+  margin-top: 20px;
+}
+.verdict-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-dd);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.verdict p { margin: 0; font-size: 16px; font-weight: 600; color: var(--navy); }
+
+/* ---------- numeros ---------- */
+.stat-n {
+  font-family: var(--disp);
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+}
+.stat-k {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 9px;
+}
+.sec--navy .stat-k, .sec--blue .stat-k { color: rgba(255, 255, 255, 0.62); }
+
+/* ---------- fontes ---------- */
+.src {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+.sec--navy .src, .sec--blue .src { color: rgba(255, 255, 255, 0.55); }
+.src a { color: inherit; text-underline-offset: 3px; }
+
+a { color: var(--blue); }
+
+/* ---------- utilitarios ---------- */
+.rule { height: 3px; background: var(--ink); border: 0; margin: 0; }
+.hide-sm { display: initial; }
+@media (max-width: 700px) { .hide-sm { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

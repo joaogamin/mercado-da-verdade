@@ -1,69 +1,103 @@
-import Image from "next/image";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Regua from "@/components/Regua";
+import Alimentos from "@/components/Alimentos";
+import Auditoria from "@/components/Auditoria";
+import Desemprego from "@/components/Desemprego";
+import Comparativo from "@/components/Comparativo";
+import Escala from "@/components/Escala";
+import Ibge from "@/components/Ibge";
+import Verdade from "@/components/Verdade";
+import Metodologia from "@/components/Metodologia";
+import { SITE_URL } from "./layout";
+
+const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[] = [
+  {
+    claim: "O desemprego caiu de mais de 14% para 5,4% por causa da gestão atual.",
+    rating: "Enganoso: compara o pico da pandemia com o dado atual",
+    valor: 2,
+    url: "#desemprego",
+  },
+  {
+    claim: "A comida subiu 4x mais no governo anterior do que no atual.",
+    rating: "Correto no dado, enganoso na causa: omite o ciclo global de alimentos",
+    valor: 3,
+    url: "#alimentos",
+  },
+  {
+    claim: "Dezenas de produtos ficaram mais baratos no governo atual.",
+    rating: "Sem contexto: 109 dos 112 produtos seguem acima do preço de jan/2019",
+    valor: 3,
+    url: "#auditoria",
+  },
+  {
+    claim: "O fim da escala 6x1 está entre as entregas do governo atual.",
+    rating: "Enganoso: a PEC ainda não foi votada no Plenário do Senado",
+    valor: 2,
+    url: "#seis-por-um",
+  },
+  {
+    claim: "O IBGE estaria fraudando os dados de emprego e inflação.",
+    rating: "Falso: não há evidência de manipulação do IPCA ou da PNAD",
+    valor: 1,
+    url: "#ibge",
+  },
+];
+
+function jsonLd() {
+  const autor = { "@type": "Organization", name: "Mercado da Verdade", url: SITE_URL };
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Mercado da Verdade",
+      url: SITE_URL,
+      inLanguage: "pt-BR",
+      description:
+        "Checagem estatística da propaganda eleitoral sobre custo de vida no Brasil, com dados do IBGE e da FAO.",
+    },
+    ...CHECAGENS.map((c) => ({
+      "@context": "https://schema.org",
+      "@type": "ClaimReview",
+      datePublished: "2026-09-09",
+      url: `${SITE_URL}/${c.url}`,
+      author: autor,
+      claimReviewed: c.claim,
+      itemReviewed: {
+        "@type": "Claim",
+        appearance: { "@type": "CreativeWork", url: "https://mercadodamentira.com.br/" },
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: c.valor,
+        bestRating: 5,
+        worstRating: 1,
+        alternateName: c.rating,
+      },
+    })),
+  ];
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
+      />
+      <Header />
+      <main>
+        <Hero />
+        <Regua />
+        <Alimentos />
+        <Auditoria />
+        <Desemprego />
+        <Comparativo />
+        <Escala />
+        <Ibge />
+        <Verdade />
+        <Metodologia />
       </main>
-    </div>
+    </>
   );
 }

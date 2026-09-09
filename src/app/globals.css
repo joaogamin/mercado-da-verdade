@@ -74,7 +74,16 @@ h1, h2, h3, .disp {
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
 
 /* ---------- secoes ---------- */
-.sec { padding: 74px 0; position: relative; }
+/* A pagina e longa e a tabela de auditoria tem 112 linhas. content-visibility
+   deixa o navegador pular layout e pintura das secoes fora da tela ate que
+   elas se aproximem do viewport, adiantando a primeira pintura.
+   contain-intrinsic-size reserva a altura estimada para nao gerar CLS. */
+.sec {
+  padding: 74px 0;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
 .sec--tight { padding: 52px 0; }
 .sec--navy { background: var(--navy); color: var(--white); }
 .sec--blue { background: var(--blue); color: var(--white); }

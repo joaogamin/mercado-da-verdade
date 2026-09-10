@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mercado da Verdade">
+  <!-- Mesmo selo do site original (mesmo path da estrela), na nossa paleta:
+       fundo verde-escuro no lugar do quase-preto, selo no amarelo da bandeira
+       e o sinal desenhado como forma, nao como texto, para nao depender de
+       fonte instalada no navegador. -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#06231a"/>
+  <path fill="#ffdf00" stroke="#06231a" stroke-width="2.5" stroke-linejoin="round"
+        transform="translate(6,6) scale(0.52)"
+        d="M50 3 60 17 77 11 78 29 95 34 85 49 95 64 78 69 77 87 60 81 50 96 40 81 23 87 22 69 5 64 15 49 5 34 22 29 23 11 40 17Z"/>
+  <rect x="29.4" y="17.5" width="5.2" height="14.5" rx="2.6" fill="#06231a"/>
+  <circle cx="32" cy="37.4" r="3.1" fill="#06231a"/>
+</svg>

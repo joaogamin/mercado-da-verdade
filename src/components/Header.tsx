@@ -1,4 +1,5 @@
 import Bandeira from "@/components/Bandeira";
+import Selo from "@/components/Selo";
 import { LOCALES, SIGLA_DO_LOCALE, NOME_DO_LOCALE, caminhoDoLocale, type Locale } from "@/i18n/config";
 import type { Dicionario } from "@/i18n";
 
@@ -51,12 +52,13 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
       color: "#fff", borderBottom: "3px solid var(--brand)",
     }}>
       <div className="wrap header-barra">
-        <a href="#topo" className="marca-header" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
-          <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--accent)", display: "block", textTransform: "uppercase" }}>
-            {n.tagline}
-          </span>
-          <span className="disp" style={{ fontSize: 22, letterSpacing: "-.01em" }}>
-            {n.marca} <span style={{ color: "var(--accent)" }}>{n.marcaDestaque}</span>
+        <a href="#topo" className="marca-header">
+          <Selo />
+          <span className="marca-txt">
+            <span className="mono marca-tag">{n.tagline}</span>
+            <span className="disp marca-nome">
+              {n.marca} <span style={{ color: "var(--accent)" }}>{n.marcaDestaque}</span>
+            </span>
           </span>
         </a>
 

@@ -364,3 +364,245 @@ tr[hidden] { display: none; }
   box-sizing: border-box;
 }
 .idioma-item { min-height: 44px; }
+
+/* ==========================================================================
+   Auditoria: cards, busca e modal
+   Reproduz o formato de card do site original (selo com emoji, nome em
+   display, linhas comparativas e faixa de conclusao no rodape), com a
+   diferenca que importa: uma terceira linha com o acumulado, que e o dado
+   que a peca original nao mostra.
+   ========================================================================== */
+
+.aud-destaque-titulo {
+  font-size: clamp(20px, 2.6vw, 27px);
+  color: var(--accent);
+  margin: 6px 0 18px;
+}
+
+.pgrade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: 16px;
+}
+.pgrade--destaque { margin-bottom: 26px; }
+
+.pcard {
+  background: #fff;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 16px 16px 0;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pcard-topo { display: flex; align-items: center; gap: 12px; }
+.pcard-emoji {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--ink);
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  line-height: 1;
+  background: var(--paper);
+}
+.pcard-nome {
+  font-family: var(--disp);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.pcard-corpo {
+  margin-top: 14px;
+  border-top: 2px dashed var(--line);
+  padding-top: 10px;
+  flex: 1;
+}
+.pcard-linha {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+}
+.pcard-rot {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pcard-val {
+  font-family: var(--disp);
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.pcard-val span { font-size: 11px; margin-right: 3px; vertical-align: 1px; }
+
+/* Terceira linha: o acumulado, que e o argumento do site. So ela recebe
+   enfase — as duas de cima sao os numeros da peca original, e destacá-las
+   reforcaria justamente a leitura que este site contesta. */
+.pcard-linha--forte {
+  border-top: 2px dashed var(--line);
+  margin-top: 6px;
+  padding-top: 10px;
+}
+.pcard-linha--forte .pcard-rot { color: var(--ink); }
+.pcard-linha--forte .pcard-val { font-size: 27px; color: var(--ink); }
+
+.pcard-badge {
+  margin: 14px -16px 0;
+  padding: 11px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.pcard-badge--caro { background: var(--accent); color: var(--ink); }
+.pcard-badge--barato { background: var(--green); color: #fff; }
+.pcard-badge--barato ~ * { --nada: 0; }
+.pcard:has(.pcard-badge--barato) .pcard-linha--forte .pcard-val { color: var(--green-d); }
+
+/* ---------- botao que abre a lista completa ---------- */
+.aud-abrir {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 15px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+.aud-abrir:hover { transform: translate(1px, 1px); box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35); }
+
+/* ---------- modal ---------- */
+.aud-modal {
+  border: 0;
+  padding: 0;
+  margin: auto;
+  background: transparent;
+  max-width: min(1140px, 94vw);
+  width: 100%;
+  max-height: 92vh;
+}
+.aud-modal::backdrop { background: rgba(4, 18, 12, 0.72); }
+
+.aud-modal-caixa {
+  position: relative;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 30px clamp(16px, 3vw, 30px) 30px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.aud-fechar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.aud-modal-titulo {
+  font-size: clamp(23px, 3.4vw, 34px);
+  color: var(--ink);
+  margin: 0 54px 12px 0;
+}
+.aud-modal-lead {
+  font-size: 15.5px;
+  color: var(--muted);
+  max-width: 74ch;
+  margin: 0 0 20px;
+}
+
+.aud-busca {
+  width: 100%;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 15px 16px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.aud-busca::placeholder { color: var(--muted-l); }
+
+.aud-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 22px; }
+.aud-modal .fbtn {
+  color: var(--muted);
+  border-color: var(--line);
+  border-radius: 10px;
+}
+.aud-modal .fbtn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.aud-vazio {
+  padding: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.pcard[hidden] { display: none; }
+
+@media (max-width: 560px) {
+  .pgrade { grid-template-columns: 1fr; }
+  .aud-abrir { width: 100%; }
+}
+
+/* ---------- selo da marca ---------- */
+.selo { display: block; flex: 0 0 auto; }
+.selo-txt {
+  font-family: var(--disp);
+  fill: #06231a;
+  letter-spacing: -0.5px;
+}
+.marca-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1;
+}
+.marca-txt { display: block; }
+.marca-tag {
+  display: block;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.marca-nome { font-size: 22px; letter-spacing: -0.01em; }

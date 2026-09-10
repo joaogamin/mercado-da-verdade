@@ -10,7 +10,7 @@ export const en: Dicionario = {
     links: [
       { href: "#regua", rotulo: "The yardstick" },
       { href: "#alimentos", rotulo: "Food" },
-      { href: "#auditoria", rotulo: "Item by item" },
+      { href: "#auditoria", rotulo: "Prices" },
       { href: "#desemprego", rotulo: "Unemployment" },
       { href: "#comparativo", rotulo: "Comparison" },
       { href: "#seis-por-um", rotulo: "6x1 shift" },
@@ -317,6 +317,15 @@ export const en: Dicionario = {
     buscar: "Search for an item…",
     filtros: { enganosos: "Fell, but still costly", acima: "Above 2019", todos: "All" },
     colunas: { produto: "Item", janelaA: "2019-2022 window", janelaB: "2023-2026 window", acumulado: "Price today vs. Jan 2019" },
+    destaqueTitulo: "The ones that weigh most today",
+    verLista: "See the full list of items →",
+    modalTitulo: "Your supermarket, item by item",
+    modalLead:
+      "The first two lines on each card are the original site's own figures, unchanged. The third is the result of the two combined — and it is the one that says where the price stands today. **Yellow**: still pricier than in January 2019. **Green**: genuinely below the 2019 price.",
+    fechar: "Close",
+    linhaHoje: "Today vs. 2019",
+    badgeCaro: "Still {p} pricier than in 2019",
+    badgeBarato: "Below the 2019 price",
     vazio: "No item found.",
     veredito:
       'Soybean oil appears as "cheaper under Lula" (−14.2%). True — and it still costs **135% more** than in 2019. Rice fell 1.9% and remains 47.6% above. A fall after a surge does not give the price back: it gives back a fraction of it. That is why the chart improves while the feeling at the checkout does not follow.',

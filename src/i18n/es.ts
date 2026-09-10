@@ -10,9 +10,9 @@ export const es: Dicionario = {
     links: [
       { href: "#regua", rotulo: "La vara" },
       { href: "#alimentos", rotulo: "Alimentos" },
-      { href: "#auditoria", rotulo: "Producto" },
+      { href: "#auditoria", rotulo: "Precios" },
       { href: "#desemprego", rotulo: "Desempleo" },
-      { href: "#comparativo", rotulo: "Comparación" },
+      { href: "#comparativo", rotulo: "Comparativo" },
       { href: "#seis-por-um", rotulo: "Jornada 6x1" },
       { href: "#ibge", rotulo: "IBGE" },
       { href: "#verdade", rotulo: "Lo que es cierto" },
@@ -317,6 +317,15 @@ export const es: Dicionario = {
     buscar: "Buscar producto…",
     filtros: { enganosos: "Bajó, pero sigue caro", acima: "Por encima de 2019", todos: "Todos" },
     colunas: { produto: "Producto", janelaA: "Ventana 2019-2022", janelaB: "Ventana 2023-2026", acumulado: "Precio hoy vs. ene/2019" },
+    destaqueTitulo: "Los que más pesan hoy en el bolsillo",
+    verLista: "Ver la lista completa de productos →",
+    modalTitulo: "Tu supermercado, producto a producto",
+    modalLead:
+      "Las dos primeras líneas de cada tarjeta son los números del sitio original, sin alterar. La tercera es el resultado de sumar ambas — y es la que dice dónde está el precio hoy. **Amarillo**: sigue más caro que en enero de 2019. **Verde**: realmente por debajo del precio de 2019.",
+    fechar: "Cerrar",
+    linhaHoje: "Hoy vs. 2019",
+    badgeCaro: "Todavía {p} más caro que en 2019",
+    badgeBarato: "Por debajo del precio de 2019",
     vazio: "Ningún producto encontrado.",
     veredito:
       'El aceite de soja aparece como "más barato con Lula" (−14,2%). Es verdad — y aun así cuesta **135% más** que en 2019. El arroz bajó 1,9% y sigue 47,6% por encima. Una caída después de un disparo no devuelve el precio: devuelve una fracción de él. Por eso el gráfico mejora y la sensación en la caja del supermercado no acompaña.',

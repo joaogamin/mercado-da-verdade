@@ -14,12 +14,12 @@ export const ptBR = {
     links: [
       { href: "#regua", rotulo: "A régua" },
       { href: "#alimentos", rotulo: "Alimentos" },
-      { href: "#auditoria", rotulo: "Produto a produto" },
+      { href: "#auditoria", rotulo: "Preços" },
       { href: "#desemprego", rotulo: "Desemprego" },
-      { href: "#comparativo", rotulo: "O comparativo" },
+      { href: "#comparativo", rotulo: "Comparativo" },
       { href: "#seis-por-um", rotulo: "Escala 6x1" },
-      { href: "#ibge", rotulo: "O IBGE" },
-      { href: "#verdade", rotulo: "O que é verdade" },
+      { href: "#ibge", rotulo: "IBGE" },
+      { href: "#verdade", rotulo: "O que confere" },
     ],
   },
   hero: {
@@ -321,6 +321,15 @@ export const ptBR = {
     buscar: "Buscar produto…",
     filtros: { enganosos: "Caiu, mas ainda caro", acima: "Acima de 2019", todos: "Todos" },
     colunas: { produto: "Produto", janelaA: "Janela 2019-2022", janelaB: "Janela 2023-2026", acumulado: "Preço hoje vs. jan/2019" },
+    destaqueTitulo: "Os que mais pesam no bolso hoje",
+    verLista: "Ver a lista completa de produtos →",
+    modalTitulo: "O seu mercado, item por item",
+    modalLead:
+      "As duas primeiras linhas de cada card são os números do site original, sem alteração. A terceira é o resultado das duas somadas — e é ela que diz onde o preço está hoje. **Amarelo**: ainda mais caro que em janeiro de 2019. **Verde**: de fato abaixo do preço de 2019.",
+    fechar: "Fechar",
+    linhaHoje: "Hoje vs. 2019",
+    badgeCaro: "Ainda {p} mais caro que em 2019",
+    badgeBarato: "Abaixo do preço de 2019",
     vazio: "Nenhum produto encontrado.",
     veredito:
       'O óleo de soja aparece como "mais barato com Lula" (−14,2%). Verdade — e ainda assim ele custa **135% a mais** que em 2019. O arroz caiu 1,9% e segue 47,6% acima. Uma queda depois de uma disparada não devolve o preço: devolve uma fração dele. É por isso que o gráfico melhora e a sensação no caixa do mercado não acompanha.',

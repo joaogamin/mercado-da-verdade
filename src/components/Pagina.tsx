@@ -14,6 +14,7 @@ import Autor from "@/components/Autor";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
+import { getDicionario } from "@/i18n";
 
 const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[] = [
   {
@@ -101,20 +102,21 @@ function jsonLd() {
 }
 
 export default function Pagina({ locale }: { locale: Locale }) {
-  void locale; // usado a partir da fase de traducao
+  const t = getDicionario(locale);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
       />
-      <Header />
+      <Header t={t} locale={locale} />
       <main>
-        <Hero />
-        <Regua />
-        <Alimentos />
+        <Hero t={t} />
+        <Regua t={t} locale={locale} />
+        <Alimentos t={t} />
         <Auditoria />
-        <Desemprego />
+        <Desemprego t={t} locale={locale} />
         <Comparativo />
         <Escala />
         <Ibge />

@@ -8,14 +8,14 @@ export const es: Dicionario = {
     abrirMenu: "Abrir menú",
     idioma: "Idioma",
     links: [
-      { href: "#regua", rotulo: "La vara de medir" },
+      { href: "#regua", rotulo: "La vara" },
       { href: "#alimentos", rotulo: "Alimentos" },
-      { href: "#auditoria", rotulo: "Producto a producto" },
+      { href: "#auditoria", rotulo: "Producto" },
       { href: "#desemprego", rotulo: "Desempleo" },
-      { href: "#comparativo", rotulo: "La comparación" },
+      { href: "#comparativo", rotulo: "Comparación" },
       { href: "#seis-por-um", rotulo: "Jornada 6x1" },
-      { href: "#ibge", rotulo: "El IBGE" },
-      { href: "#verdade", rotulo: "Lo que sí es cierto" },
+      { href: "#ibge", rotulo: "IBGE" },
+      { href: "#verdade", rotulo: "Lo que es cierto" },
     ],
   },
   hero: {
@@ -241,6 +241,106 @@ export const es: Dicionario = {
       "La mejora del mercado laboral es real y la desaceleración de los precios es real. Lo que no es real es la relación de causa que la pieza construye entre una cosa y la otra, ni la idea de que el precio de la comida volvió a lo que era. Se puede reconocer el resultado sin comprar la explicación.",
     fontes:
       "Fuentes: IBGE/PNAD Contínua (desocupación, informalidad, subutilización e ingreso real, publicaciones de 2026); Ley 15.270/2025; Ley 14.663/2023; FAO — Índice de Precios de los Alimentos, agosto de 2026; y la propia base de productos publicada en mercadodamentira.com.br.",
+  },
+  metodologia: {
+    eyebrow: "Metodología",
+    titulo: "Cómo llegamos a estos números.",
+    itens: [
+      { t: "Usamos sus propias cifras", d: "La tabla fue extraída de la propia sección “Producto a producto” del sitio original, en septiembre de 2026. Ninguna variación fue alterada. Solo quitamos 4 etiquetas repetidas (el mismo ítem del IPCA aparecía con nombre corto y nombre completo), quedando 112 productos. La única columna nueva es la del acumulado." },
+      { t: "Archivamos la pieza original", d: "Una copia del sitio verificado fue guardada en el Internet Archive el 9 de septiembre de 2026. Si lo editan o bajan la página, la versión que auditamos sigue pública y verificable — el enlace está en las fuentes de abajo." },
+      { t: "Encadenamos, no sumamos", d: "Para saber dónde está el precio hoy respecto a ene/2019, los dos períodos consecutivos se multiplican: (1+a)×(1+b)−1. Sumar las dos variaciones daría un número equivocado." },
+      { t: "Comparamos inicio con inicio", d: "Para desempleo e ingreso usamos el valor del trimestre en que cada gobierno asumió y del trimestre en que entregó — en vez del peor y el mejor punto de la serie." },
+      { t: "Probamos contra una serie global", d: "El índice de alimentos de la FAO funciona como control: si el mismo movimiento aparece en todo el mundo, no puede acreditarse ni debitarse a un gobierno brasileño." },
+      { t: "Decimos cuándo ellos tienen razón", d: "Tres de las seis líneas de la comparación original se sostienen. Están marcadas como correctas, con la fuente legal de cada una." },
+      { t: "Fechamos todo", d: "Los indicadores coyunturales cambian. Cada bloque trae su fecha de verificación, y la página informa la última actualización general." },
+    ],
+    tituloFontes: "Fuentes primarias",
+    fontes: [
+      { t: "IBGE · IPCA (Tabla 7060)", u: "https://sidra.ibge.gov.br/tabela/7060" },
+      { t: "IBGE · PNAD Contínua", u: "https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html" },
+      { t: "FAO · Índice de Precios de los Alimentos", u: "https://www.fao.org/worldfoodsituation/foodpricesindex/en/" },
+      { t: "Senado · Enmienda 221/2019", u: "https://www25.senado.leg.br/web/atividade/materias/-/materia/174386" },
+      { t: "Ley 15.270/2025 (impuesto a la renta)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm" },
+      { t: "Ley 14.663/2023 (salario mínimo)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm" },
+      { t: "Copia archivada del sitio original (9 sep 2026)", u: "https://web.archive.org/web/20260909203458/https://mercadodamentira.com.br/" },
+    ],
+  },
+  compartilhe: {
+    eyebrow: "Compartir",
+    titulo: "Esta cuenta tiene que circular.",
+    lead:
+      "La vara torcida viaja rápido porque es simple. El contexto viaja despacio porque exige explicación. Si esta verificación te ayudó a entender el número, también ayudará a otra persona.",
+    textoCompartilhado:
+      "109 de los 112 productos que la campaña usa como prueba siguen más caros que en enero de 2019. Y la cuenta está hecha con sus propios números.",
+    whatsapp: "WhatsApp",
+    postarNoX: "Publicar en X",
+    copiarLink: "Copiar enlace",
+    linkCopiado: "Enlace copiado",
+    nota: "El texto ya viene listo con el dato principal. Si prefieres, escribe el tuyo — el enlace es el mismo.",
+  },
+  autor: {
+    eyebrow: "Quién hizo esta verificación",
+    nome: "João Pedro Gamin",
+    bio1:
+      "Hice este sitio por cuenta propia, sin vínculo con ningún partido, campaña, medio u organismo público. La motivación fue simple: los números de la pieza original eran verdaderos y aun así la conclusión no se sostenía. Eso es un problema de método, y el método se puede demostrar.",
+    bio2:
+      "Todo el código y la base de datos están abiertos. Si encuentras un error mío, abre una issue en el repositorio — la corrección se publica con la misma claridad que la afirmación original.",
+    tituloNumeros: "ESTE PROYECTO EN NÚMEROS",
+    numeros: [
+      { n: "112", k: "productos auditados" },
+      { n: "9", k: "fuentes primarias" },
+      { n: "5", k: "afirmaciones verificadas" },
+      { n: "100%", k: "del código abierto" },
+    ],
+  },
+  footer: {
+    marca: "MERCADO DA",
+    marcaDestaque: "VERDADE",
+    disclaimer:
+      "Proyecto independiente y de autoría identificada, hecho por cuenta propia. **No está ligado a ningún partido, campaña, coalición, candidato u organismo público**, y no es propaganda electoral. No tenemos vínculo alguno con los responsables del sitio mercadodamentira.com.br, cuyo contenido se cita aquí únicamente con fines de análisis crítico y verificación.",
+    correcoes:
+      "Todos los datos provienen de fuentes públicas y oficiales, listadas en cada bloque, y el código fuente y la base de productos son abiertos: cualquier persona puede rehacer las cuentas. ¿Encontraste un error nuestro? Abre una issue en el repositorio. La corrección se publica con la misma claridad que la afirmación original — esa es la diferencia entre verificación y propaganda.",
+    ultimaVerificacao: "Última verificación de los indicadores: {data}.",
+    github: "Código y datos en GitHub",
+  },
+  auditoria: {
+    eyebrow: "Producto a producto",
+    titulo: '"Más barato" no quiere decir barato.',
+    lead:
+      "Tomamos los **{total} productos** de la propia tabla del sitio original, con sus números, sin cambiar una coma. E hicimos la única cuenta que faltaba: encadenar las dos ventanas para saber dónde está el precio **hoy** respecto a enero de 2019.",
+    stats: [
+      { n: "{acima} de {total}", k: "productos siguen más caros que en enero de 2019" },
+      { n: "{caiu}", k: "productos sí bajaron durante la ventana 2023-2026" },
+      { n: "{aindaCaro} de esos {caiu}", k: "bajaron, pero siguen por encima del precio de 2019" },
+      { n: "{abaixo}", k: "productos están realmente por debajo del nivel de 2019" },
+    ],
+    buscar: "Buscar producto…",
+    filtros: { enganosos: "Bajó, pero sigue caro", acima: "Por encima de 2019", todos: "Todos" },
+    colunas: { produto: "Producto", janelaA: "Ventana 2019-2022", janelaB: "Ventana 2023-2026", acumulado: "Precio hoy vs. ene/2019" },
+    vazio: "Ningún producto encontrado.",
+    veredito:
+      'El aceite de soja aparece como "más barato con Lula" (−14,2%). Es verdad — y aun así cuesta **135% más** que en 2019. El arroz bajó 1,9% y sigue 47,6% por encima. Una caída después de un disparo no devuelve el precio: devuelve una fracción de él. Por eso el gráfico mejora y la sensación en la caja del supermercado no acompaña.',
+    calculo:
+      'Cálculo: nivel de precio acumulado = ((1 + variación de la 1.ª ventana) × (1 + variación de la 2.ª ventana) − 1). Variaciones extraídas de la sección "Producto a producto" de mercadodamentira.com.br (sep/2026), que cita IPCA/IBGE. Al encadenar períodos consecutivos, los índices se multiplican — no se suman.',
+  },
+  schema: {
+    descricao: "Verificación estadística de la propaganda electoral brasileña sobre el costo de vida, con datos del IBGE y la FAO.",
+    checagens: [
+      { claim: "El desempleo cayó de más del 14% al 5,4% gracias a la gestión actual.", rating: "Engañoso: compara el pico de la pandemia con el dato actual" },
+      { claim: "La comida subió 4 veces más con el gobierno anterior que con el actual.", rating: "Dato correcto, causa engañosa: omite el ciclo global de alimentos" },
+      { claim: "Decenas de productos se abarataron con el gobierno actual.", rating: "Sin contexto: 109 de 112 productos siguen por encima del precio de ene/2019" },
+      { claim: "El fin de la jornada 6x1 está entre las entregas del gobierno actual.", rating: "Engañoso: la enmienda aún no fue votada en el pleno del Senado" },
+      { claim: "El IBGE estaría falsificando los datos de empleo e inflación.", rating: "Falso: no hay evidencia de manipulación del IPCA ni de la PNAD" },
+    ],
+  },
+  meta: {
+    title: "Mercado da Verdade — el dato es real, el contexto fue recortado",
+    desc: "Verificación número por número de mercadodamentira.com.br. Los datos oficiales son reales — lo que se eligió fue la vara: 109 de 112 productos siguen por encima de 2019.",
+    keywords: [
+      "verificación de datos", "Brasil", "alfabetización estadística", "cherry picking",
+      "IPCA", "IBGE", "inflación de alimentos", "desempleo", "costo de vida Brasil",
+      "elecciones Brasil 2026", "periodismo de datos", "estadísticas engañosas",
+    ],
   },
   // <<SECOES>>
 };

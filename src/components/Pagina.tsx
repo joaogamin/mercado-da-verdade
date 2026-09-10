@@ -12,70 +12,46 @@ import Metodologia from "@/components/Metodologia";
 import Compartilhe from "@/components/Compartilhe";
 import Autor from "@/components/Autor";
 import Footer from "@/components/Footer";
-import { SITE_URL } from "@/lib/site";
-import type { Locale } from "@/i18n/config";
-import { getDicionario } from "@/i18n";
+import { SITE_URL, VERIFICADO_EM } from "@/lib/site";
+import { urlDoLocale, type Locale } from "@/i18n/config";
+import { getDicionario, type Dicionario } from "@/i18n";
 
-const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[] = [
-  {
-    claim: "O desemprego caiu de mais de 14% para 5,4% por causa da gestão atual.",
-    rating: "Enganoso: compara o pico da pandemia com o dado atual",
-    valor: 2,
-    url: "#desemprego",
-  },
-  {
-    claim: "A comida subiu 4x mais no governo anterior do que no atual.",
-    rating: "Correto no dado, enganoso na causa: omite o ciclo global de alimentos",
-    valor: 3,
-    url: "#alimentos",
-  },
-  {
-    claim: "Dezenas de produtos ficaram mais baratos no governo atual.",
-    rating: "Sem contexto: 109 dos 112 produtos seguem acima do preço de jan/2019",
-    valor: 3,
-    url: "#auditoria",
-  },
-  {
-    claim: "O fim da escala 6x1 está entre as entregas do governo atual.",
-    rating: "Enganoso: a PEC ainda não foi votada no Plenário do Senado",
-    valor: 2,
-    url: "#seis-por-um",
-  },
-  {
-    claim: "O IBGE estaria fraudando os dados de emprego e inflação.",
-    rating: "Falso: não há evidência de manipulação do IPCA ou da PNAD",
-    valor: 1,
-    url: "#ibge",
-  },
+// Nota e ancora de cada checagem nao dependem do idioma: so o texto depende.
+const AVALIACOES: { valor: number; ancora: string }[] = [
+  { valor: 2, ancora: "#desemprego" },
+  { valor: 3, ancora: "#alimentos" },
+  { valor: 3, ancora: "#auditoria" },
+  { valor: 2, ancora: "#seis-por-um" },
+  { valor: 1, ancora: "#ibge" },
 ];
 
-const VERIFICADO_EM = "2026-09-09";
-
-function jsonLd() {
+function jsonLd(t: Dicionario, locale: Locale) {
+  const url = urlDoLocale(SITE_URL, locale);
   const autor = {
     "@type": "Organization",
     name: "Mercado da Verdade",
     url: SITE_URL,
     sameAs: ["https://www.linkedin.com/in/jgamin/"],
   };
+
   return [
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "Mercado da Verdade",
-      url: SITE_URL,
-      inLanguage: "pt-BR",
+      url,
+      inLanguage: locale,
       sameAs: ["https://www.linkedin.com/in/jgamin/"],
       publisher: autor,
       dateModified: VERIFICADO_EM,
-      description:
-        "Checagem estatística da propaganda eleitoral sobre custo de vida no Brasil, com dados do IBGE e da FAO.",
+      description: t.schema.descricao,
     },
-    ...CHECAGENS.map((c) => ({
+    ...t.schema.checagens.map((c, i) => ({
       "@context": "https://schema.org",
       "@type": "ClaimReview",
       datePublished: VERIFICADO_EM,
-      url: `${SITE_URL}/${c.url}`,
+      inLanguage: locale,
+      url: `${url}${AVALIACOES[i].ancora}`,
       author: autor,
       claimReviewed: c.claim,
       itemReviewed: {
@@ -92,7 +68,7 @@ function jsonLd() {
       },
       reviewRating: {
         "@type": "Rating",
-        ratingValue: c.valor,
+        ratingValue: AVALIACOES[i].valor,
         bestRating: 5,
         worstRating: 1,
         alternateName: c.rating,
@@ -108,24 +84,24 @@ export default function Pagina({ locale }: { locale: Locale }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(t, locale)) }}
       />
       <Header t={t} locale={locale} />
       <main>
         <Hero t={t} />
         <Regua t={t} locale={locale} />
         <Alimentos t={t} />
-        <Auditoria />
+        <Auditoria t={t} locale={locale} />
         <Desemprego t={t} locale={locale} />
         <Comparativo t={t} />
         <Escala t={t} locale={locale} />
         <Ibge t={t} />
         <Verdade t={t} />
-        <Metodologia />
-        <Compartilhe />
-        <Autor />
+        <Metodologia t={t} />
+        <Compartilhe t={t} locale={locale} />
+        <Autor t={t} />
       </main>
-      <Footer />
+      <Footer t={t} locale={locale} />
     </>
   );
 }

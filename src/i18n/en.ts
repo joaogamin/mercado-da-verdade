@@ -9,13 +9,13 @@ export const en: Dicionario = {
     idioma: "Language",
     links: [
       { href: "#regua", rotulo: "The yardstick" },
-      { href: "#alimentos", rotulo: "Food prices" },
+      { href: "#alimentos", rotulo: "Food" },
       { href: "#auditoria", rotulo: "Item by item" },
       { href: "#desemprego", rotulo: "Unemployment" },
-      { href: "#comparativo", rotulo: "The comparison" },
+      { href: "#comparativo", rotulo: "Comparison" },
       { href: "#seis-por-um", rotulo: "6x1 shift" },
-      { href: "#ibge", rotulo: "The statistics office" },
-      { href: "#verdade", rotulo: "What checks out" },
+      { href: "#ibge", rotulo: "IBGE" },
+      { href: "#verdade", rotulo: "What holds up" },
     ],
   },
   hero: {
@@ -241,6 +241,106 @@ export const en: Dicionario = {
       "The improvement in the labour market is real and the slowdown in prices is real. What is not real is the causal link the campaign builds between the two, nor the idea that food prices went back to what they were. You can acknowledge the result without buying the explanation.",
     fontes:
       "Sources: IBGE/PNAD Contínua (unemployment, informality, underutilisation and real earnings, 2026 releases); Law 15,270/2025; Law 14,663/2023; FAO — Food Price Index, August 2026; and the product table published on mercadodamentira.com.br itself.",
+  },
+  metodologia: {
+    eyebrow: "Methodology",
+    titulo: "How we arrived at these numbers.",
+    itens: [
+      { t: "We used their own figures", d: "The table was extracted from the original site's own “Item by item” section in September 2026. No variation was altered. We only removed 4 duplicate labels (the same IPCA item appeared under a short and a full name), leaving 112 products. The only new column is the cumulative one." },
+      { t: "We archived the original", d: "A copy of the site under review was saved to the Internet Archive on 9 September 2026. If they edit it or take the page down, the version we audited stays public and verifiable — the link is in the sources below." },
+      { t: "We chained, we did not add", d: "To find where a price stands today relative to Jan 2019, two consecutive periods multiply: (1+a)×(1+b)−1. Adding the two variations would give a wrong number." },
+      { t: "We compared start with start", d: "For unemployment and income we used the value of the quarter each government took office and the quarter it handed over — rather than the worst and best points of the series." },
+      { t: "We tested against a global series", d: "The FAO food index works as a control: if the same movement appears worldwide, it cannot be credited to or charged against a Brazilian government." },
+      { t: "We say when they are right", d: "Three of the six rows in the original comparison hold up. They are marked as correct, each with its legal source." },
+      { t: "We date everything", d: "Cyclical indicators change. Every block carries its verification date, and the page states the overall last update." },
+    ],
+    tituloFontes: "Primary sources",
+    fontes: [
+      { t: "IBGE · IPCA (Table 7060)", u: "https://sidra.ibge.gov.br/tabela/7060" },
+      { t: "IBGE · PNAD Contínua", u: "https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html" },
+      { t: "FAO · Food Price Index", u: "https://www.fao.org/worldfoodsituation/foodpricesindex/en/" },
+      { t: "Senate · Amendment 221/2019", u: "https://www25.senado.leg.br/web/atividade/materias/-/materia/174386" },
+      { t: "Law 15,270/2025 (income tax)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm" },
+      { t: "Law 14,663/2023 (minimum wage)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm" },
+      { t: "Archived copy of the original site (9 Sep 2026)", u: "https://web.archive.org/web/20260909203458/https://mercadodamentira.com.br/" },
+    ],
+  },
+  compartilhe: {
+    eyebrow: "Share",
+    titulo: "This calculation needs to travel.",
+    lead:
+      "A bent yardstick travels fast because it is simple. Context travels slowly because it needs explaining. If this check helped you understand the number, it will help someone else too.",
+    textoCompartilhado:
+      "109 of the 112 items the campaign uses as proof are still pricier than in January 2019. And the calculation uses their own figures.",
+    whatsapp: "WhatsApp",
+    postarNoX: "Post on X",
+    copiarLink: "Copy link",
+    linkCopiado: "Link copied",
+    nota: "The text comes pre-filled with the key figure. Write your own if you prefer — the link is the same.",
+  },
+  autor: {
+    eyebrow: "Who made this check",
+    nome: "João Pedro Gamin",
+    bio1:
+      "I built this site on my own, with no ties to any party, campaign, news outlet or public body. The motivation was simple: the numbers in the original material were true, and yet the conclusion did not hold. That is a problem of method, and method can be demonstrated.",
+    bio2:
+      "All the code and the dataset are open. If you find a mistake of mine, open an issue in the repository — the correction is published as plainly as the original claim.",
+    tituloNumeros: "THIS PROJECT IN NUMBERS",
+    numeros: [
+      { n: "112", k: "products audited" },
+      { n: "9", k: "primary sources" },
+      { n: "5", k: "claims checked" },
+      { n: "100%", k: "of the code open" },
+    ],
+  },
+  footer: {
+    marca: "MERCADO DA",
+    marcaDestaque: "VERDADE",
+    disclaimer:
+      "An independent project with named authorship, built on my own time. **Not connected to any party, campaign, coalition, candidate or public body**, and not electoral advertising. We have no relationship with those responsible for mercadodamentira.com.br, whose content is cited here solely for critical analysis and fact-checking.",
+    correcoes:
+      "All data comes from public, official sources listed in each block, and the source code and product dataset are open: anyone can redo the calculations. Found a mistake of ours? Open an issue in the repository. The correction is published as plainly as the original claim — that is the difference between fact-checking and propaganda.",
+    ultimaVerificacao: "Indicators last verified: {data}.",
+    github: "Code and data on GitHub",
+  },
+  auditoria: {
+    eyebrow: "Item by item",
+    titulo: '"Cheaper" does not mean cheap.',
+    lead:
+      "We took the **{total} items** from the original site's own table, with their figures, without changing a comma. And we did the one calculation that was missing: chaining the two windows to find where the price stands **today** relative to January 2019.",
+    stats: [
+      { n: "{acima} of {total}", k: "items are still pricier than in January 2019" },
+      { n: "{caiu}", k: "items did fall during the 2023-2026 window" },
+      { n: "{aindaCaro} of those {caiu}", k: "fell, yet remain above their 2019 price" },
+      { n: "{abaixo}", k: "items are genuinely below their 2019 level" },
+    ],
+    buscar: "Search for an item…",
+    filtros: { enganosos: "Fell, but still costly", acima: "Above 2019", todos: "All" },
+    colunas: { produto: "Item", janelaA: "2019-2022 window", janelaB: "2023-2026 window", acumulado: "Price today vs. Jan 2019" },
+    vazio: "No item found.",
+    veredito:
+      'Soybean oil appears as "cheaper under Lula" (−14.2%). True — and it still costs **135% more** than in 2019. Rice fell 1.9% and remains 47.6% above. A fall after a surge does not give the price back: it gives back a fraction of it. That is why the chart improves while the feeling at the checkout does not follow.',
+    calculo:
+      'Calculation: cumulative price level = ((1 + first-window change) × (1 + second-window change) − 1). Variations taken from the "Item by item" section of mercadodamentira.com.br (Sep 2026), which cites IPCA/IBGE. When chaining consecutive periods, indices multiply — they do not add.',
+  },
+  schema: {
+    descricao: "Statistical fact-check of Brazilian campaign material on the cost of living, using IBGE and FAO data.",
+    checagens: [
+      { claim: "Unemployment fell from over 14% to 5.4% because of the current government.", rating: "Misleading: compares the pandemic peak with the current figure" },
+      { claim: "Food prices rose 4x more under the previous government than the current one.", rating: "Correct data, misleading cause: omits the global food cycle" },
+      { claim: "Dozens of products became cheaper under the current government.", rating: "Lacks context: 109 of 112 items remain above their Jan 2019 price" },
+      { claim: "Ending the 6x1 work shift is among the current government's delivered policies.", rating: "Misleading: the amendment has not yet been voted on the Senate floor" },
+      { claim: "IBGE is falsifying employment and inflation data.", rating: "False: there is no evidence of manipulation of the IPCA or the PNAD" },
+    ],
+  },
+  meta: {
+    title: "Mercado da Verdade — the data is real, the context was cut out",
+    desc: "A number-by-number check of mercadodamentira.com.br. Brazil's official data is real — the yardstick is what was chosen: 109 of 112 items are still above their 2019 price.",
+    keywords: [
+      "fact-checking", "Brazil", "statistical literacy", "cherry picking", "IPCA", "IBGE",
+      "food inflation", "unemployment", "cost of living Brazil", "Brazilian election 2026",
+      "data journalism", "misleading statistics",
+    ],
   },
   // <<SECOES>>
 };

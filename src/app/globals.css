@@ -305,3 +305,7 @@ tr[hidden] { display: none; }
   color: var(--accent);
   white-space: nowrap;
 }
+
+/* A marca nao quebra: com 8 itens de menu, rotulos mais longos em outros
+   idiomas empurravam "MERCADO DA VERDADE" para duas linhas. */
+.marca-header { white-space: nowrap; }

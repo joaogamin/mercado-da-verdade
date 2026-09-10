@@ -246,6 +246,106 @@ export const ptBR = {
     fontes:
       "Fontes: IBGE/PNAD Contínua (desocupação, informalidade, subutilização e rendimento real, divulgações de 2026); Lei 15.270/2025; Lei 14.663/2023; FAO — Índice de Preços de Alimentos, agosto de 2026; e a própria base de produtos publicada em mercadodamentira.com.br.",
   },
+  metodologia: {
+    eyebrow: "Metodologia",
+    titulo: "Como a gente chegou nesses números.",
+    itens: [
+      { t: "Usamos os números deles", d: "A tabela foi extraída da própria seção “Produto por produto” do site original, em setembro de 2026. Nenhuma variação foi alterada. Removemos apenas 4 rótulos repetidos (o mesmo item do IPCA aparecia com nome curto e nome completo), ficando 112 produtos. A única coluna nova é o acumulado." },
+      { t: "Arquivamos a peça original", d: "Uma cópia do site checado foi salva no Internet Archive em 9 de setembro de 2026. Se eles editarem ou tirarem a página do ar, a versão que auditamos continua pública e conferível — o link está nas fontes abaixo." },
+      { t: "Encadeamos, não somamos", d: "Para saber onde o preço está hoje em relação a jan/2019, os dois períodos consecutivos se multiplicam: (1+a)×(1+b)−1. Somar as duas variações daria um número errado." },
+      { t: "Comparamos começo com começo", d: "Para desemprego e renda, usamos o valor do trimestre em que cada governo assumiu e do trimestre em que entregou — em vez do pior e do melhor ponto da série." },
+      { t: "Testamos contra uma série global", d: "O índice de alimentos da FAO funciona como controle: se o mesmo movimento aparece no mundo inteiro, ele não pode ser creditado nem debitado a um governo brasileiro." },
+      { t: "Dizemos quando eles estão certos", d: "Três das seis linhas do comparativo original se sustentam. Estão marcadas como corretas, com a fonte legal de cada uma." },
+      { t: "Datamos tudo", d: "Indicadores conjunturais mudam. Cada bloco traz a data de verificação, e a página informa a última atualização geral." },
+    ],
+    tituloFontes: "Fontes primárias",
+    fontes: [
+      { t: "IBGE · IPCA (Tabela 7060)", u: "https://sidra.ibge.gov.br/tabela/7060" },
+      { t: "IBGE · PNAD Contínua", u: "https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html" },
+      { t: "FAO · Índice de Preços de Alimentos", u: "https://www.fao.org/worldfoodsituation/foodpricesindex/en/" },
+      { t: "Senado · PEC 221/2019", u: "https://www25.senado.leg.br/web/atividade/materias/-/materia/174386" },
+      { t: "Planalto · Lei 15.270/2025 (IRPF)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm" },
+      { t: "Planalto · Lei 14.663/2023 (salário mínimo)", u: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm" },
+      { t: "Arquivo do site original (09/09/2026)", u: "https://web.archive.org/web/20260909203458/https://mercadodamentira.com.br/" },
+    ],
+  },
+  compartilhe: {
+    eyebrow: "Compartilhe",
+    titulo: "Essa conta precisa circular.",
+    lead:
+      "A régua torta viaja rápido porque é simples. O contexto viaja devagar porque exige explicação. Se esta checagem te ajudou a entender o número, ela ajuda outra pessoa também.",
+    textoCompartilhado:
+      "109 dos 112 produtos que a campanha usa como prova seguem mais caros que em janeiro de 2019. E a conta é feita com os números deles.",
+    whatsapp: "WhatsApp",
+    postarNoX: "Postar no X",
+    copiarLink: "Copiar link",
+    linkCopiado: "Link copiado",
+    nota: "O texto já vai pronto com o dado principal. Se preferir, escreva o seu — o link é o mesmo.",
+  },
+  autor: {
+    eyebrow: "Quem fez esta checagem",
+    nome: "João Pedro Gamin",
+    bio1:
+      "Fiz este site por conta própria, sem vínculo com partido, campanha, veículo ou órgão público. A motivação foi simples: os números da peça original eram verdadeiros, e mesmo assim a conclusão não se sustentava. Isso é um problema de método, e método dá para demonstrar.",
+    bio2:
+      "Todo o código e a base de dados estão abertos. Se você achar um erro meu, abra uma issue no repositório — a correção é publicada com a mesma clareza da afirmação original.",
+    tituloNumeros: "ESTE PROJETO EM NÚMEROS",
+    numeros: [
+      { n: "112", k: "produtos auditados" },
+      { n: "9", k: "fontes primárias" },
+      { n: "5", k: "afirmações checadas" },
+      { n: "100%", k: "do código aberto" },
+    ],
+  },
+  footer: {
+    marca: "MERCADO DA",
+    marcaDestaque: "VERDADE",
+    disclaimer:
+      "Projeto independente e de autoria identificada, feito por conta própria. **Não é ligado a nenhum partido, campanha, coligação, candidato ou órgão público**, e não é propaganda eleitoral. Não temos qualquer vínculo com os responsáveis pelo site mercadodamentira.com.br, cujo conteúdo é citado aqui apenas para fins de análise crítica e checagem.",
+    correcoes:
+      "Todos os dados vêm de fontes públicas e oficiais, listadas em cada bloco, e o código-fonte e a base de produtos são abertos: qualquer pessoa pode refazer as contas. Encontrou um erro nosso? Abra uma issue no repositório. A correção é publicada com a mesma clareza da afirmação original — é essa a diferença entre checagem e propaganda.",
+    ultimaVerificacao: "Última verificação dos indicadores: {data}.",
+    github: "Código e dados no GitHub",
+  },
+  auditoria: {
+    eyebrow: "Produto a produto",
+    titulo: '"Mais barato" não quer dizer barato.',
+    lead:
+      "Pegamos os **{total} produtos** da tabela do site original, com os números deles, sem mudar uma vírgula. E fizemos a única conta que faltava: encadear as duas janelas para saber onde o preço está **hoje** em relação a janeiro de 2019.",
+    stats: [
+      { n: "{acima} de {total}", k: "produtos continuam mais caros que em janeiro de 2019" },
+      { n: "{caiu}", k: "produtos caíram durante a janela 2023-2026" },
+      { n: "{aindaCaro} desses {caiu}", k: "caíram, mas seguem acima do preço de 2019" },
+      { n: "{abaixo}", k: "produtos estão de fato abaixo do nível de 2019" },
+    ],
+    buscar: "Buscar produto…",
+    filtros: { enganosos: "Caiu, mas ainda caro", acima: "Acima de 2019", todos: "Todos" },
+    colunas: { produto: "Produto", janelaA: "Janela 2019-2022", janelaB: "Janela 2023-2026", acumulado: "Preço hoje vs. jan/2019" },
+    vazio: "Nenhum produto encontrado.",
+    veredito:
+      'O óleo de soja aparece como "mais barato com Lula" (−14,2%). Verdade — e ainda assim ele custa **135% a mais** que em 2019. O arroz caiu 1,9% e segue 47,6% acima. Uma queda depois de uma disparada não devolve o preço: devolve uma fração dele. É por isso que o gráfico melhora e a sensação no caixa do mercado não acompanha.',
+    calculo:
+      'Cálculo: nível de preço acumulado = ((1 + variação da 1ª janela) × (1 + variação da 2ª janela) − 1). Variações extraídas da seção "Produto por produto" de mercadodamentira.com.br (set/2026), que cita IPCA/IBGE. Ao encadear períodos consecutivos, os índices se multiplicam — não se somam.',
+  },
+  schema: {
+    descricao: "Checagem estatística da propaganda eleitoral sobre custo de vida no Brasil, com dados do IBGE e da FAO.",
+    checagens: [
+      { claim: "O desemprego caiu de mais de 14% para 5,4% por causa da gestão atual.", rating: "Enganoso: compara o pico da pandemia com o dado atual" },
+      { claim: "A comida subiu 4x mais no governo anterior do que no atual.", rating: "Correto no dado, enganoso na causa: omite o ciclo global de alimentos" },
+      { claim: "Dezenas de produtos ficaram mais baratos no governo atual.", rating: "Sem contexto: 109 dos 112 produtos seguem acima do preço de jan/2019" },
+      { claim: "O fim da escala 6x1 está entre as entregas do governo atual.", rating: "Enganoso: a PEC ainda não foi votada no Plenário do Senado" },
+      { claim: "O IBGE estaria fraudando os dados de emprego e inflação.", rating: "Falso: não há evidência de manipulação do IPCA ou da PNAD" },
+    ],
+  },
+  meta: {
+    title: "Mercado da Verdade — o dado é real, o contexto foi cortado",
+    desc: "Checagem número a número do site mercadodamentira.com.br. Os dados do IBGE são reais — a régua é que foi escolhida: 109 dos 112 produtos seguem acima de 2019.",
+    keywords: [
+      "mercado da verdade", "checagem de dados", "fact-checking", "IPCA", "IBGE",
+      "inflação de alimentos", "desemprego PNAD", "cherry picking estatístico",
+      "custo de vida Brasil", "eleições 2026", "escala 6x1", "literacia estatística",
+    ],
+  },
   // <<SECOES>>
 };
 

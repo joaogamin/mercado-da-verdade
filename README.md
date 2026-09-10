@@ -1,6 +1,6 @@
 # Mercado da Verdade
 
-**https://mercadodaverdade.com.br** · [github.com/joaogamin/mercado-da-verdade](https://github.com/joaogamin/mercado-da-verdade)
+**https://www.mercadodaverdade.com.br** · [EN](https://www.mercadodaverdade.com.br/en/) · [ES](https://www.mercadodaverdade.com.br/es/) · [github.com/joaogamin/mercado-da-verdade](https://github.com/joaogamin/mercado-da-verdade)
 
 Landing page de checagem estatística que responde ao site de propaganda eleitoral
 `mercadodamentira.com.br`, replicando sua estrutura e linguagem visual com o eixo
@@ -22,6 +22,31 @@ seguem acima do nível de 2019**. O óleo de soja, vendido como "mais barato", a
 +135%. Uma queda depois de uma disparada não devolve o preço.
 
 Como o cálculo usa os números deles, o argumento é reproduzível por qualquer pessoa.
+
+## Idiomas
+
+O site existe em português (`/`), inglês (`/en/`) e espanhol (`/es/`).
+
+O português fica na raiz porque é o público principal e a URL já estava indexada.
+Como o site é exportado estaticamente, não há servidor para negociar idioma por
+header: o roteamento é por caminho, e o atributo `lang` do `<html>` varia usando
+**dois root layouts irmãos** via route groups — `src/app/(br)` e
+`src/app/(intl)/[locale]`.
+
+Todo o texto vive em `src/i18n/pt-BR.ts`, `en.ts` e `es.ts`. O tipo é derivado do
+português (`type Dicionario = typeof ptBR`), então **faltar uma chave em outro
+idioma reprova o build** — é a rede que impede uma seção meio traduzida chegar em
+produção.
+
+Marcação dentro das strings (`src/i18n/rich.tsx`): `**negrito**`, `*itálico*` e
+`[rótulo](url)`. Nada de HTML cru vindo do dicionário.
+
+Números e datas são formatados por idioma com `Intl` (`src/i18n/numeros.ts`):
+`133,3` em pt-BR e es, `133.3` em en.
+
+Os 112 produtos aparecem traduzidos com o nome original entre parênteses —
+`Soybean oil (óleo de soja)` — porque a tabela cita o IPCA e o rótulo brasileiro é
+o que permite conferir cada linha contra a fonte.
 
 ## Stack
 

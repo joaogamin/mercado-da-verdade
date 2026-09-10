@@ -43,7 +43,7 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
       color: "#fff", borderBottom: "3px solid var(--brand)",
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 66, gap: 16 }}>
-        <a href="#topo" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
+        <a href="#topo" className="marca-header" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
           <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--accent)", display: "block", textTransform: "uppercase" }}>
             {n.tagline}
           </span>

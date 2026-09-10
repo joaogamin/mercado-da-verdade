@@ -2,35 +2,43 @@ import Bandeira from "@/components/Bandeira";
 import { LOCALES, SIGLA_DO_LOCALE, NOME_DO_LOCALE, caminhoDoLocale, type Locale } from "@/i18n/config";
 import type { Dicionario } from "@/i18n";
 
-// Server component: o menu mobile usa <details>, que e nativo do HTML.
-// Isso evita marcar o header como client component so para abrir um menu.
+// Server component: menu e seletor de idioma usam <details>, que e nativo do
+// HTML. Isso evita marcar o header como client component so para abrir menus.
 
 const linkStyle: React.CSSProperties = {
   color: "rgba(255,255,255,.82)", textDecoration: "none", fontSize: 11.5,
-  letterSpacing: ".06em", textTransform: "uppercase",
+  letterSpacing: ".06em", textTransform: "uppercase", whiteSpace: "nowrap",
 };
 
-function SeletorIdioma({ locale, rotulo }: { locale: Locale; rotulo: string }) {
+/**
+ * Dropdown do idioma. Mostra sempre o idioma atual no gatilho e abre a lista
+ * completa — ocupa cerca de um terco da largura dos tres botoes lado a lado,
+ * que empurravam a navegacao para uma segunda linha em telas intermediarias.
+ */
+function DropdownIdioma({ locale, rotulo }: { locale: Locale; rotulo: string }) {
   return (
-    <div className="idiomas" role="group" aria-label={rotulo}>
-      {LOCALES.map((l) => {
-        const atual = l === locale;
-        return (
+    <details className="idioma-drop">
+      <summary aria-label={`${rotulo}: ${NOME_DO_LOCALE[locale]}`}>
+        <Bandeira locale={locale} />
+        <span>{SIGLA_DO_LOCALE[locale]}</span>
+        <span className="idioma-chev" aria-hidden="true">▾</span>
+      </summary>
+      <div>
+        {LOCALES.map((l) => (
           <a
             key={l}
             href={caminhoDoLocale(l)}
             hrefLang={l}
             lang={l}
-            aria-current={atual ? "true" : undefined}
-            title={NOME_DO_LOCALE[l]}
-            className={atual ? "idioma idioma--atual" : "idioma"}
+            aria-current={l === locale ? "true" : undefined}
+            className={l === locale ? "idioma-item idioma-item--atual" : "idioma-item"}
           >
             <Bandeira locale={l} />
-            <span>{SIGLA_DO_LOCALE[l]}</span>
+            <span>{NOME_DO_LOCALE[l]}</span>
           </a>
-        );
-      })}
-    </div>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -42,7 +50,7 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
       position: "sticky", top: 0, zIndex: 50, background: "var(--deep)",
       color: "#fff", borderBottom: "3px solid var(--brand)",
     }}>
-      <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 66, gap: 16 }}>
+      <div className="wrap header-barra">
         <a href="#topo" className="marca-header" style={{ color: "#fff", textDecoration: "none", lineHeight: 1 }}>
           <span className="mono" style={{ fontSize: 9.5, letterSpacing: ".22em", color: "var(--accent)", display: "block", textTransform: "uppercase" }}>
             {n.tagline}
@@ -52,22 +60,24 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
           </span>
         </a>
 
-        <nav className="nav-desk" style={{ display: "flex", gap: 18, flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center" }}>
+        <nav className="nav-desk">
           {n.links.map((l) => (
             <a key={l.href} href={l.href} className="mono" style={linkStyle}>{l.rotulo}</a>
           ))}
-          <SeletorIdioma locale={locale} rotulo={n.idioma} />
         </nav>
 
-        <details className="nav-mob">
-          <summary aria-label={n.abrirMenu} className="mono">☰</summary>
-          <div>
-            <SeletorIdioma locale={locale} rotulo={n.idioma} />
-            {n.links.map((l) => (
-              <a key={l.href} href={l.href} className="mono">{l.rotulo}</a>
-            ))}
-          </div>
-        </details>
+        <div className="header-acoes">
+          <DropdownIdioma locale={locale} rotulo={n.idioma} />
+
+          <details className="nav-mob">
+            <summary aria-label={n.abrirMenu} className="mono">☰</summary>
+            <div>
+              {n.links.map((l) => (
+                <a key={l.href} href={l.href} className="mono">{l.rotulo}</a>
+              ))}
+            </div>
+          </details>
+        </div>
       </div>
     </header>
   );

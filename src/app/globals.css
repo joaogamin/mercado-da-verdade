@@ -244,7 +244,7 @@ a { color: var(--brand); }
 }
 .nav-mob a { color: #fff; text-decoration: none; font-size: 13px; text-transform: uppercase; }
 
-@media (max-width: 760px) {
+@media (max-width: 1120px) {
   .nav-desk { display: none !important; }
   .nav-mob { display: block; }
 }
@@ -270,29 +270,6 @@ tr[hidden] { display: none; }
   border-color: var(--accent);
 }
 
-/* ---------- seletor de idioma ---------- */
-.idiomas { display: flex; gap: 6px; align-items: center; }
-.idioma {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 9px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.8);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  line-height: 1;
-}
-.idioma svg { display: block; border: 1px solid rgba(0, 0, 0, 0.25); }
-.idioma--atual {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--ink);
-}
-.nav-mob .idiomas { margin-bottom: 6px; }
 
 /* ---------- links dentro de texto vindo do dicionario ---------- */
 .rico-link {
@@ -306,6 +283,84 @@ tr[hidden] { display: none; }
   white-space: nowrap;
 }
 
-/* A marca nao quebra: com 8 itens de menu, rotulos mais longos em outros
-   idiomas empurravam "MERCADO DA VERDADE" para duas linhas. */
-.marca-header { white-space: nowrap; }
+
+/* ---------- barra do header ---------- */
+/* A navegacao nunca quebra para uma segunda linha: abaixo de 1120px ela da
+   lugar ao menu sanduiche. Antes, com flex-wrap, telas intermediarias
+   empilhavam os links e jogavam o seletor de idioma para baixo. */
+.header-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 66px;
+}
+.marca-header { white-space: nowrap; flex: 0 0 auto; }
+.nav-desk {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 16px;
+  min-width: 0;
+}
+.header-acoes { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+
+/* ---------- dropdown de idioma ---------- */
+.idioma-drop { position: relative; }
+.idioma-drop > summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 11px;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+.idioma-drop > summary::-webkit-details-marker { display: none; }
+.idioma-drop[open] > summary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.idioma-chev { font-size: 10px; opacity: 0.75; }
+.idioma-drop > div {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 190px;
+  background: var(--deep);
+  border: 2px solid var(--brand);
+  display: grid;
+  z-index: 60;
+}
+.idioma-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.idioma-item:hover { background: rgba(255, 255, 255, 0.08); }
+.idioma-item--atual { background: var(--accent); color: var(--ink); }
+.idioma-drop svg { display: block; border: 1px solid rgba(0, 0, 0, 0.25); }
+
+/* Area de toque minima de 44px nos controles do header, conforme
+   recomendacao de acessibilidade para alvos tocaveis. */
+.idioma-drop > summary,
+.nav-mob > summary {
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.idioma-item { min-height: 44px; }

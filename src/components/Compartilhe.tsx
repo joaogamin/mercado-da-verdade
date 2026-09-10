@@ -1,4 +1,4 @@
-import { SITE_URL } from "@/app/layout";
+import { SITE_URL } from "@/lib/site";
 
 const TEXTO =
   "109 dos 112 produtos que a campanha usa como prova seguem mais caros que em janeiro de 2019. E a conta é feita com os números deles.";

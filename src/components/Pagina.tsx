@@ -12,7 +12,8 @@ import Metodologia from "@/components/Metodologia";
 import Compartilhe from "@/components/Compartilhe";
 import Autor from "@/components/Autor";
 import Footer from "@/components/Footer";
-import { SITE_URL } from "./layout";
+import { SITE_URL } from "@/lib/site";
+import type { Locale } from "@/i18n/config";
 
 const CHECAGENS: { claim: string; rating: string; valor: number; url: string }[] = [
   {
@@ -99,7 +100,8 @@ function jsonLd() {
   ];
 }
 
-export default function Home() {
+export default function Pagina({ locale }: { locale: Locale }) {
+  void locale; // usado a partir da fase de traducao
   return (
     <>
       <script

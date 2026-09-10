@@ -124,5 +124,123 @@ export const en: Dicionario = {
     fontes:
       "Sources: IBGE/PNAD Contínua quarterly — Q1 2019 (12.7%), Q4 2019 (11.0%), Q1 2021 (14.9%, the maximum of the series begun in 2012), Q4 2022 (7.9%), Q4 2023 (7.4%), Q4 2024 (6.2%) and the quarter ending June 2026 (5.4%).",
   },
+  comparativo: {
+    eyebrow: "Line by line",
+    titulo: "Their comparison table, audited.",
+    lead:
+      'We took the table they call "the comparison that says it all" and checked every row. Three of the six hold up without reservation — and we say so plainly. The other three depend on context that was left out.',
+    colunaA: '"Bolsonaro" column:',
+    colunaB: '"Lula" column:',
+    selos: { enganoso: "Misleading", parcial: "Correct, no context", correto: "Correct" },
+    linhas: [
+      {
+        ind: "Food at the supermarket", a: "+54.24%", b: "+13.66%",
+        txt: "Both figures match the IPCA. What the table does not say is that the first window contains the pandemic, the logistics collapse and the war in Ukraine, and ends at the all-time record of the global food index. Beyond that, today's price is the result of both windows combined: food rose in each of them.",
+      },
+      {
+        ind: "Unemployment", a: "14%+", b: "5.4%",
+        txt: "It compares the series peak (14.9% in Q1 2021, the height of lockdowns) with the current value. The previous government inherited 12.7% and handed over 7.9%; the current one inherited 7.9% and reached 5.4%. The 5.4% is real and is the lowest on record — it is the 14.9% peak that is nobody's bottom line.",
+      },
+      {
+        ind: "Average income", a: "−R$ 33", b: "+R$ 476",
+        txt: "Real income did fall until 2021 and recovered afterwards — it is now at its highest on record (R$ 3,652 in the quarter to Jan 2026). But the fall coincides with the destruction of jobs during the pandemic, and the rise starts from a depressed base. Part of the recovery is ground regained, not new ground.",
+      },
+      {
+        ind: "Income tax", a: "4 years of frozen brackets", b: "Exemption up to R$ 5,000",
+        txt: "This checks out. The income tax brackets were not adjusted between 2019 and 2022, and Law 15,270/2025 raised the exemption to those earning up to R$ 5,000, in force since January 2026, benefiting roughly 15 million people. An honest caveat: the bracket freeze began in 2015, before the previous government.",
+      },
+      {
+        ind: "Minimum wage", a: "R$ 1,212 (2022)", b: "R$ 1,621 (2026)",
+        txt: "The figures are correct. The comparison is nominal, but in this case the real gain exists too: Law 14,663/2023 restored the valorisation policy (inflation plus GDP growth from two years earlier), and the 2026 adjustment delivered a gain above inflation.",
+      },
+      {
+        ind: "Minimum wage purchasing power", a: "+R$ 214", b: "+R$ 409",
+        txt: "This is the same valorisation policy measured as cumulative real gain. A difference of method, not of external context: here the comparison measures a policy choice, which is exactly what a comparison between governments ought to measure.",
+      },
+    ],
+    veredito:
+      "The campaign material does not fabricate numbers — it selects the yardstick. Where the comparison measures a policy choice (income tax, minimum wage), it is legitimate and we confirm it. Where it measures a global cycle (food, unemployment, income), attributing the result to the government is the error.",
+    fontes:
+      "Sources: IBGE (IPCA Table 7060, PNAD Contínua); Law 15,270/2025 (income tax exemption up to R$ 5,000, in force Jan 2026); Law 14,663/2023 (minimum wage valorisation policy); Federal Senate and Ministry of Finance.",
+  },
+  escala: {
+    eyebrow: "Block 3 · The 6x1 shift",
+    titulo: "A bill still being voted on is not a delivered policy.",
+    lead:
+      'Fairness first: the card on the original site says, in plain words, "proposal under debate in Congress". The problem is not the card\u0027s text — it is **where it was placed**: inside a section titled *"What Lula has done"*, next to measures that really are already in force.',
+    narrativaTitulo: '"End of the 6x1 shift" listed among things already done.',
+    narrativaP:
+      "The card sits between the income tax exemption (law in force), the debt renegotiation programme and the fall in poverty. A quick read — which is how almost everyone reads a website — registers all of it as delivered.",
+    contextoTitulo: "The hardest stage is still ahead: two rounds on the Senate floor.",
+    contextoP1:
+      "Constitutional amendment 221/2019 (with 8/2025 attached) genuinely advanced in 2026 and is closer than ever. But it needs **49 votes in two rounds in the Senate**, and the floor vote **still has no date**, with the opposition filibustering.",
+    contextoP2:
+      "Until that happens, the 6x1 shift remains legal and in force for everyone working under it today.",
+    etapas: [
+      { t: "Admissibility in the Chamber's constitutional committee", d: "22 April 2026" },
+      { t: "Approved by the Chamber in two rounds", d: "27 May 2026" },
+      { t: "Arrives at the Senate", d: "28 May 2026" },
+      { t: "Approved by the Senate's constitutional committee", d: "2 September 2026" },
+      { t: "Senate floor — first round (49 votes)", d: "no date set" },
+      { t: "Senate floor — second round (49 votes)", d: "has not happened" },
+      { t: "Promulgation — becomes constitutional law", d: "has not happened" },
+    ],
+    veredito:
+      "A promise in progress presented in place of a delivery. The advance is real and recent — and selling the future as the present is exactly what erodes trust when the vote stalls.",
+    fontes:
+      "Sources: Federal Senate — amendment 221/2019 (committee approval on 2 Sep 2026 and referral to the floor); Chamber of Deputies — approval in two rounds on 27 May 2026; Agência Brasil, September 2026. Status verified on {data}.",
+  },
+  ibge: {
+    eyebrow: "Block 4 · The credibility of the statistics office",
+    titulo: "The error is not in the spreadsheet. And the IBGE's problem is real too.",
+    lead:
+      "One story circulating online says IBGE — Brazil's national statistics office — is falsifying the numbers. Another, from the campaign, says questioning IBGE is an attack on democracy. Both are simplifications, and both get in the way of understanding what is actually happening.",
+    tagNao: "What does NOT hold up",
+    naoTitulo: '"The numbers are made up."',
+    naoP1:
+      "There is no evidence whatsoever of manipulation of the IPCA (consumer price index) or the PNAD (labour force survey). Both are surveys with public methodology, open microdata, an auditable sample and career civil servants running them. Any researcher can recompute the indices from the microdata — and universities, banks and independent institutes do exactly that routinely, arriving at the same results.",
+    naoP2:
+      "The **2025 re-weighting of the PNAD**, done to incorporate the 2022 Census, is a standard technical procedure, announced in advance and applied **retroactively across the whole series** — including the previous government's years. It creates no artificial improvement: it recalibrates past and present with the same ruler.",
+    naoP3:
+      "And the IPCA weights still come from the previous household budget survey: the update only takes effect from 2027. In other words, the index used in this comparison **was not altered** by this government.",
+    tagSim: "What IS worrying",
+    simTitulo: "The institutional safeguards have eroded — and that is documented.",
+    simP1:
+      "On **19 January 2026**, Rebeca Palis, the coordinator responsible for calculating GDP, was dismissed. At least three members of her team gave up their positions in solidarity.",
+    simP2:
+      "In **February and March 2026**, the public prosecutor attached to the federal audit court requested the removal of IBGE's president, Márcio Pochmann, citing the risk of political use of GDP data in an election year and concern over changes to collection and processing methodologies.",
+    simP3:
+      "None of this shows that any figure was falsified. It shows that the safeguards which make falsification difficult have become more fragile — and that is a legitimate reason for vigilance, not for panic.",
+    veredito:
+      "Accusing IBGE of fraud is unfair to the people who produce the data and distracts from the real problem. The data is reliable; it is the yardstick applied to it in the campaign material that is chosen. At the same time, the institute's governance crisis is real and deserves scrutiny — not least because the best defence of the numbers is the independence of those who calculate them.",
+    fontes:
+      "Sources: IBGE — technical note on the 2025 PNAD re-weighting and post-2022-Census population projections; IBGE/POF on the update of IPCA weights; Correio Braziliense and Gazeta do Povo (March 2026) on the prosecutor's filing at the audit court and the dismissals in the national accounts directorate.",
+  },
+  verdade: {
+    eyebrow: "Honest in both directions",
+    titulo: "What the campaign gets right — and what nobody is telling you.",
+    lead:
+      "A fact-checking site that only ever finds fault on the other side is not fact-checking, it is propaganda by another name. So let us be explicit about what checks out.",
+    colunaAcertos: "✓ What checks out",
+    colunaOmissoes: "! What both sides leave out",
+    acertos: [
+      { t: "5.4% is the lowest unemployment on record", d: "The record in the PNAD series, which began in 2012, is real. There is no trick in the number itself." },
+      { t: "Informal work is falling", d: "37.5% in the quarter to Jan 2026, the lowest since July 2020. The counter-argument that 'the jobs are all informal' does not hold up in the data." },
+      { t: "Average income is at its highest on record", d: "R$ 3,652 in usual real earnings, up 5.4% in a year. It is genuinely a record." },
+      { t: "The R$ 5,000 income tax exemption is in force", d: "Law 15,270/2025, applied to payroll since 1 January 2026, benefiting roughly 15 million people." },
+      { t: "The minimum wage gained in real terms", d: "The valorisation policy was restored by Law 14,663/2023 and the 2026 minimum (R$ 1,621) rose above inflation." },
+      { t: "Labour underutilisation fell sharply", d: "13.8% in the quarter to April 2026, against more than 30% at the height of the pandemic. The labour market improvement is broad, not an artefact of definition." },
+    ],
+    omissoes: [
+      { t: "Prices did not come back, they just stopped running", d: "109 of the 112 items in their own table are still pricier than in January 2019. Low inflation means prices rose slowly — not that they came down." },
+      { t: "Coffee is up 156% since 2019", d: "And it rose 48.7% in the current window, by the site's own figures. Some everyday items still weigh far more on the household budget." },
+      { t: "The global tide has turned again", d: "The FAO food index reached 133.3 points in August 2026, the highest since late 2022. The tailwind of 2023-2024 is not permanent." },
+      { t: "The global cycle explains both sides", d: "The same logic that absolves this government of the 2021-2022 surge absolves the previous one. Anyone using the context argument has to apply it in both directions." },
+    ],
+    ponto:
+      "The improvement in the labour market is real and the slowdown in prices is real. What is not real is the causal link the campaign builds between the two, nor the idea that food prices went back to what they were. You can acknowledge the result without buying the explanation.",
+    fontes:
+      "Sources: IBGE/PNAD Contínua (unemployment, informality, underutilisation and real earnings, 2026 releases); Law 15,270/2025; Law 14,663/2023; FAO — Food Price Index, August 2026; and the product table published on mercadodamentira.com.br itself.",
+  },
   // <<SECOES>>
 };

@@ -124,5 +124,123 @@ export const es: Dicionario = {
     fontes:
       "Fuentes: IBGE/PNAD Contínua trimestral — 1.er trim. 2019 (12,7%), 4.º trim. 2019 (11,0%), 1.er trim. 2021 (14,9%, máximo de la serie iniciada en 2012), 4.º trim. 2022 (7,9%), 4.º trim. 2023 (7,4%), 4.º trim. 2024 (6,2%) y trimestre cerrado en junio de 2026 (5,4%).",
   },
+  comparativo: {
+    eyebrow: "Línea por línea",
+    titulo: "Su tabla comparativa, auditada.",
+    lead:
+      'Tomamos la tabla que ellos llaman "la comparación que lo resume todo" y verificamos cada línea. Tres de las seis se sostienen sin reparos — y lo decimos con todas las letras. Las otras tres dependen de un contexto que quedó afuera.',
+    colunaA: 'Columna "Bolsonaro":',
+    colunaB: 'Columna "Lula":',
+    selos: { enganoso: "Engañoso", parcial: "Correcto, sin contexto", correto: "Correcto" },
+    linhas: [
+      {
+        ind: "Comida en el supermercado", a: "+54,24%", b: "+13,66%",
+        txt: "Ambas cifras coinciden con el IPCA. Lo que la tabla no dice es que la primera ventana contiene la pandemia, el colapso logístico y la guerra en Ucrania, y termina en el récord histórico del índice mundial de alimentos. Además, el precio de hoy es el resultado de las dos ventanas sumadas: la comida acumula alza en ambas.",
+      },
+      {
+        ind: "Desempleo", a: "14%+", b: "5,4%",
+        txt: "Compara el pico de la serie (14,9% en el 1.er trim. de 2021, auge de los confinamientos) con el valor actual. El gobierno anterior recibió 12,7% y entregó 7,9%; el actual recibió 7,9% y llegó a 5,4%. El 5,4% es real y es el menor de la serie — el pico de 14,9% es el que no es el saldo de nadie.",
+      },
+      {
+        ind: "Ingreso medio", a: "−R$ 33", b: "+R$ 476",
+        txt: "El ingreso real efectivamente cayó hasta 2021 y se recuperó después — hoy está en el nivel más alto de la serie (R$ 3.652 en el trimestre hasta ene/2026). Pero la caída coincide con la destrucción de puestos en la pandemia y el alza parte de una base deprimida. Una parte de la recuperación es terreno retomado, no terreno nuevo.",
+      },
+      {
+        ind: "Impuesto a la renta", a: "4 años de tabla congelada", b: "Exención hasta R$ 5 mil",
+        txt: "Es correcto. La tabla del impuesto no se corrigió entre 2019 y 2022, y la Ley 15.270/2025 amplió la exención a quienes ganan hasta R$ 5 mil, vigente desde enero de 2026, con cerca de 15 millones de beneficiados. Salvedad honesta de contexto: el congelamiento de la tabla empezó en 2015, antes del gobierno anterior.",
+      },
+      {
+        ind: "Salario mínimo", a: "R$ 1.212 (2022)", b: "R$ 1.621 (2026)",
+        txt: "Los valores son correctos. La comparación es nominal, pero en este caso la ganancia real también existe: la Ley 14.663/2023 restableció la política de valorización (inflación más el PIB de dos años antes), y el ajuste de 2026 trajo ganancia por encima de la inflación.",
+      },
+      {
+        ind: "Poder de compra del mínimo", a: "+R$ 214", b: "+R$ 409",
+        txt: "Es la misma política de valorización medida como ganancia real acumulada. Diferencia de método, no de contexto externo: aquí la comparación mide una decisión de política pública, que es exactamente lo que una comparación entre gobiernos debería medir.",
+      },
+    ],
+    veredito:
+      "La pieza no fabrica números — selecciona la vara de medir. Donde la comparación mide una decisión de política pública (impuesto a la renta, salario mínimo), es legítima y nosotros la confirmamos. Donde mide un ciclo global (comida, desempleo, ingreso), atribuir el resultado a la gestión es el error.",
+    fontes:
+      "Fuentes: IBGE (IPCA Tabla 7060, PNAD Contínua); Ley 15.270/2025 (exención del impuesto a la renta hasta R$ 5 mil, vigente ene/2026); Ley 14.663/2023 (política de valorización del salario mínimo); Senado Federal y Ministerio de Hacienda.",
+  },
+  escala: {
+    eyebrow: "Bloque 3 · La jornada 6x1",
+    titulo: "Una propuesta en votación no es una entrega.",
+    lead:
+      'Hay que ser justos: la ficha del sitio original dice, con todas las letras, "propuesta en debate en el Congreso". El problema no está en el texto de la ficha — está en **dónde fue colocada**: dentro de la sección titulada *"Lo que Lula hizo"*, junto a medidas que de hecho ya están vigentes.',
+    narrativaTitulo: '"Fin de la jornada 6x1" en la lista de lo ya hecho.',
+    narrativaP:
+      "La ficha aparece entre la exención del impuesto a la renta (ley vigente), el programa de renegociación de deudas y la caída de la pobreza. La lectura rápida — que es como casi todo el mundo lee un sitio — registra todo como entregado.",
+    contextoTitulo: "Falta la etapa más difícil: dos rondas en el pleno del Senado.",
+    contextoP1:
+      "La enmienda constitucional 221/2019 (con la 8/2025 adjunta) avanzó de verdad en 2026 y está más cerca que nunca. Pero necesita **49 votos en dos rondas en el Senado**, y la votación en el pleno **aún no tiene fecha**, con la oposición obstruyendo.",
+    contextoP2:
+      "Hasta que eso ocurra, la jornada 6x1 sigue siendo legal y vigente para quien trabaja bajo ella hoy.",
+    etapas: [
+      { t: "Admisibilidad en la comisión de constitución de la Cámara", d: "22 de abril de 2026" },
+      { t: "Aprobada por la Cámara en dos rondas", d: "27 de mayo de 2026" },
+      { t: "Llega al Senado", d: "28 de mayo de 2026" },
+      { t: "Aprobada en la comisión de constitución del Senado", d: "2 de septiembre de 2026" },
+      { t: "Pleno del Senado — 1.ª ronda (49 votos)", d: "sin fecha fijada" },
+      { t: "Pleno del Senado — 2.ª ronda (49 votos)", d: "no ocurrió" },
+      { t: "Promulgación — se vuelve norma constitucional", d: "no ocurrió" },
+    ],
+    veredito:
+      "Una promesa en curso presentada en lugar de una entrega. El avance es real y reciente — y vender futuro como presente es justamente lo que erosiona la confianza cuando la votación se traba.",
+    fontes:
+      "Fuentes: Senado Federal — enmienda 221/2019 (aprobación en comisión el 02/09/2026 y envío al pleno); Cámara de Diputados — aprobación en dos rondas el 27/05/2026; Agência Brasil, septiembre de 2026. Situación verificada el {data}.",
+  },
+  ibge: {
+    eyebrow: "Bloque 4 · La credibilidad del IBGE",
+    titulo: "El error no está en la planilla. Y el problema del IBGE también es real.",
+    lead:
+      "Circula en las redes que el IBGE — el instituto nacional de estadística de Brasil — estaría falsificando los números. Circula en la propaganda que cuestionar al IBGE es golpismo. Las dos cosas son simplificaciones — y las dos estorban a quien quiere entender lo que está pasando.",
+    tagNao: "Lo que NO se sostiene",
+    naoTitulo: '"Los números son inventados."',
+    naoP1:
+      "No hay evidencia alguna de manipulación del IPCA (índice de precios) ni de la PNAD (encuesta de empleo). Son encuestas con metodología pública, microdatos abiertos, muestra auditable y ejecución por funcionarios de carrera. Cualquier investigador puede recalcular los índices a partir de los microdatos — y eso lo hacen rutinariamente universidades, bancos e institutos independientes, que llegan a los mismos resultados.",
+    naoP2:
+      "La **reponderación de la PNAD en 2025**, hecha para incorporar el Censo 2022, es un procedimiento técnico estándar, anunciado con antelación y aplicado **retroactivamente a toda la serie** — incluidos los años del gobierno anterior. No crea mejora artificial: recalibra el pasado y el presente con la misma vara.",
+    naoP3:
+      "Y los pesos del IPCA siguen los de la encuesta de presupuestos familiares anterior: la actualización solo debe regir a partir de 2027. Es decir, el índice usado en esa comparación **no fue alterado** por este gobierno.",
+    tagSim: "Lo que SÍ es preocupante",
+    simTitulo: "El blindaje institucional se desgastó — y eso está documentado.",
+    simP1:
+      "El **19 de enero de 2026**, Rebeca Palis, coordinadora responsable del cálculo del PIB, fue destituida. Al menos tres integrantes del equipo dejaron sus cargos en solidaridad.",
+    simP2:
+      "En **febrero y marzo de 2026**, el Ministerio Público ante el tribunal de cuentas pidió la separación del presidente del IBGE, Márcio Pochmann, alegando riesgo de uso político de los datos del PIB en año electoral y preocupación por cambios en las metodologías de recolección y tratamiento.",
+    simP3:
+      "Nada de eso demuestra que una cifra haya sido falsificada. Demuestra que las salvaguardas que hacen difícil la falsificación quedaron más frágiles — y eso es motivo legítimo de vigilancia, no de pánico.",
+    veredito:
+      "Acusar al IBGE de fraude es injusto con quien produce los datos y desvía la atención del problema real. El dato es confiable; lo que se elige es la vara aplicada sobre él en la propaganda. Al mismo tiempo, la crisis de gobernanza del instituto es real y merece seguimiento — entre otras cosas porque la mejor defensa de los números es la autonomía de quien los calcula.",
+    fontes:
+      "Fuentes: IBGE — nota técnica sobre la reponderación de la PNAD en 2025 y Proyecciones de Población posteriores al Censo 2022; IBGE/POF sobre la actualización de los pesos del IPCA; Correio Braziliense y Gazeta do Povo (marzo de 2026) sobre la presentación del Ministerio Público ante el tribunal de cuentas y las destituciones en la dirección de cuentas nacionales.",
+  },
+  verdade: {
+    eyebrow: "Honestidad en los dos sentidos",
+    titulo: "Lo que la propaganda acierta — y lo que nadie te está contando.",
+    lead:
+      "Un sitio de verificación que solo encuentra errores del otro lado no es verificación, es propaganda con otro nombre. Así que seamos explícitos sobre lo que sí se confirma.",
+    colunaAcertos: "✓ Lo que se confirma",
+    colunaOmissoes: "! Lo que queda afuera de los dos lados",
+    acertos: [
+      { t: "5,4% es el menor desempleo de la serie", d: "El récord de la PNAD, iniciada en 2012, es real. No hay truco en el número en sí." },
+      { t: "La informalidad está bajando", d: "37,5% en el trimestre hasta ene/2026, el menor nivel desde julio de 2020. El contraargumento de que 'los empleos son todos informales' no se sostiene en los datos." },
+      { t: "El ingreso medio está en el nivel más alto de la serie", d: "R$ 3.652 de ingreso real habitual, +5,4% en un año. Es récord de hecho." },
+      { t: "La exención del impuesto hasta R$ 5 mil está vigente", d: "Ley 15.270/2025, aplicada en la nómina desde el 1.º de enero de 2026, con cerca de 15 millones de beneficiados." },
+      { t: "El salario mínimo tuvo ganancia real", d: "La política de valorización fue restablecida por la Ley 14.663/2023 y el mínimo de 2026 (R$ 1.621) subió por encima de la inflación." },
+      { t: "La subutilización cayó mucho", d: "13,8% en el trimestre hasta abril de 2026, contra más del 30% en el auge de la pandemia. La mejora del mercado laboral es amplia, no un artificio de definición." },
+    ],
+    omissoes: [
+      { t: "El precio no volvió, solo dejó de correr", d: "109 de los 112 productos de su propia tabla siguen más caros que en enero de 2019. Inflación baja significa que el precio subió despacio — no que bajó." },
+      { t: "El café acumula +156% desde 2019", d: "Y subió 48,7% en la ventana actual, según los números del propio sitio. Algunos artículos del día a día siguen pesando mucho más en el presupuesto." },
+      { t: "La marea global cambió de nuevo", d: "El índice de alimentos de la FAO llegó a 133,3 puntos en agosto de 2026, el mayor desde fines de 2022. El viento a favor de 2023-2024 no es permanente." },
+      { t: "El ciclo global explica los dos lados", d: "La misma lógica que exime a este gobierno del alza de 2021-2022 exime al anterior. Quien usa el argumento del contexto debe aplicarlo en las dos direcciones." },
+    ],
+    ponto:
+      "La mejora del mercado laboral es real y la desaceleración de los precios es real. Lo que no es real es la relación de causa que la pieza construye entre una cosa y la otra, ni la idea de que el precio de la comida volvió a lo que era. Se puede reconocer el resultado sin comprar la explicación.",
+    fontes:
+      "Fuentes: IBGE/PNAD Contínua (desocupación, informalidad, subutilización e ingreso real, publicaciones de 2026); Ley 15.270/2025; Ley 14.663/2023; FAO — Índice de Precios de los Alimentos, agosto de 2026; y la propia base de productos publicada en mercadodamentira.com.br.",
+  },
   // <<SECOES>>
 };

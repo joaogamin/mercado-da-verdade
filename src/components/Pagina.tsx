@@ -117,10 +117,10 @@ export default function Pagina({ locale }: { locale: Locale }) {
         <Alimentos t={t} />
         <Auditoria />
         <Desemprego t={t} locale={locale} />
-        <Comparativo />
-        <Escala />
-        <Ibge />
-        <Verdade />
+        <Comparativo t={t} />
+        <Escala t={t} locale={locale} />
+        <Ibge t={t} />
+        <Verdade t={t} />
         <Metodologia />
         <Compartilhe />
         <Autor />

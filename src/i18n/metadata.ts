@@ -23,19 +23,25 @@ function alternativas(): Record<string, string> {
 
 export function criarMetadata(
   locale: Locale,
-  m: { title: string; desc: string; keywords: string[] },
+  m: { title: string; desc: string; keywords?: string[] },
+  /** Caminho da pagina, com barras nas duas pontas. Omitido = home do idioma. */
+  caminho?: string,
+  /** hreflang proprio da pagina. Omitido = usa as homes dos tres idiomas. */
+  idiomas?: Record<string, string>,
 ): Metadata {
-  const url = urlDoLocale(SITE_URL, locale);
+  const url = caminho ? SITE_URL + caminho : urlDoLocale(SITE_URL, locale);
   const og = ogDoLocale(locale);
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: m.title, template: "%s · Mercado da Verdade" },
+    // Paginas internas usam titulo absoluto: o sufixo " · Mercado da Verdade"
+    // empurraria o <title> para alem dos ~60 caracteres que o Google mostra.
+    title: caminho ? { absolute: m.title } : { default: m.title, template: "%s · Mercado da Verdade" },
     description: m.desc,
     applicationName: "Mercado da Verdade",
     keywords: m.keywords,
     authors: [{ name: "João Pedro Gamin" }],
-    alternates: { canonical: url, languages: alternativas() },
+    alternates: { canonical: url, languages: idiomas ?? alternativas() },
     openGraph: {
       type: "website",
       locale: OG_LOCALE[locale],

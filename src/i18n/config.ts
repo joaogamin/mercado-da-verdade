@@ -44,3 +44,13 @@ export function paraLocale(valor: string): Locale {
   if ((LOCALES as readonly string[]).includes(valor)) return valor as Locale;
   throw new Error(`Locale desconhecido: ${valor}`);
 }
+
+/**
+ * Segmento de URL das paginas de checagem, por idioma:
+ * /checagem/desemprego/ · /en/check/unemployment/ · /es/verificacion/desempleo/
+ */
+export const SEGMENTO_CHECAGEM: Record<Locale, string> = {
+  "pt-BR": "checagem",
+  en: "check",
+  es: "verificacion",
+};

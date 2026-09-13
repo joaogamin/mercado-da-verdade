@@ -43,7 +43,17 @@ function DropdownIdioma({ locale, rotulo }: { locale: Locale; rotulo: string }) 
   );
 }
 
-export default function Header({ t, locale }: { t: Dicionario; locale: Locale }) {
+export default function Header({
+  t,
+  locale,
+  base = "",
+}: {
+  t: Dicionario;
+  locale: Locale;
+  /** Prefixo das ancoras. Vazio na home; caminho da home nas paginas internas,
+   *  onde "#desemprego" sozinho nao levaria a lugar nenhum. */
+  base?: string;
+}) {
   const n = t.nav;
 
   return (
@@ -64,7 +74,7 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
 
         <nav className="nav-desk">
           {n.links.map((l) => (
-            <a key={l.href} href={l.href} className="mono" style={linkStyle}>{l.rotulo}</a>
+            <a key={l.href} href={`${base}${l.href}`} className="mono" style={linkStyle}>{l.rotulo}</a>
           ))}
         </nav>
 
@@ -75,7 +85,7 @@ export default function Header({ t, locale }: { t: Dicionario; locale: Locale })
             <summary aria-label={n.abrirMenu} className="mono">☰</summary>
             <div>
               {n.links.map((l) => (
-                <a key={l.href} href={l.href} className="mono">{l.rotulo}</a>
+                <a key={l.href} href={`${base}${l.href}`} className="mono">{l.rotulo}</a>
               ))}
             </div>
           </details>

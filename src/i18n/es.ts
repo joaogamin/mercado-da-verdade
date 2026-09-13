@@ -351,5 +351,18 @@ export const es: Dicionario = {
       "elecciones Brasil 2026", "periodismo de datos", "estadísticas engañosas",
     ],
   },
+  checagem: {
+    rotulo: "Verificación",
+    voltar: "Todas las verificaciones",
+    afirmacao: "La afirmación verificada",
+    verificadoEm: "Verificado el {data}",
+    outras: "Otras verificaciones",
+    indiceEyebrow: "Las verificaciones",
+    indiceTitulo: "Cinco afirmaciones, una por una.",
+    indiceLead:
+      "Cada una tiene su propia página, con la prueba de lo que afirma la pieza original, el contexto que falta y las fuentes primarias. **Los datos son verdaderos en todas ellas** — lo que cambia es lo que quedó afuera.",
+    verDetalhe: "Ver la verificación completa →",
+    selos: { "1": "Falso", "2": "Engañoso", "3": "Sin contexto" },
+  },
   // <<SECOES>>
 };

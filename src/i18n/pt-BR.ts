@@ -355,6 +355,19 @@ export const ptBR = {
       "custo de vida Brasil", "eleições 2026", "escala 6x1", "literacia estatística",
     ],
   },
+  checagem: {
+    rotulo: "Checagem",
+    voltar: "Todas as checagens",
+    afirmacao: "A afirmação checada",
+    verificadoEm: "Verificado em {data}",
+    outras: "Outras checagens",
+    indiceEyebrow: "As checagens",
+    indiceTitulo: "Cinco afirmações, uma a uma.",
+    indiceLead:
+      "Cada uma tem página própria, com a prova do que a peça original afirma, o contexto que falta e as fontes primárias. **Os dados são verdadeiros em todas elas** — o que muda é o que foi deixado de fora.",
+    verDetalhe: "Ver a checagem completa →",
+    selos: { "1": "Falso", "2": "Enganoso", "3": "Sem contexto" },
+  },
   // <<SECOES>>
 };
 

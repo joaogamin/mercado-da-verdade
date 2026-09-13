@@ -351,5 +351,18 @@ export const en: Dicionario = {
       "data journalism", "misleading statistics",
     ],
   },
+  checagem: {
+    rotulo: "Fact-check",
+    voltar: "All fact-checks",
+    afirmacao: "The claim under review",
+    verificadoEm: "Verified on {data}",
+    outras: "Other fact-checks",
+    indiceEyebrow: "The fact-checks",
+    indiceTitulo: "Five claims, one by one.",
+    indiceLead:
+      "Each one has its own page, with proof of what the original piece claims, the missing context and the primary sources. **The data is true in every one of them** — what changes is what was left out.",
+    verDetalhe: "Read the full check →",
+    selos: { "1": "False", "2": "Misleading", "3": "Lacks context" },
+  },
   // <<SECOES>>
 };

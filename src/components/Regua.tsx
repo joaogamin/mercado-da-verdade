@@ -2,13 +2,8 @@ import { Rico } from "@/i18n/rich";
 import type { Dicionario } from "@/i18n";
 import { formatarNumero } from "@/i18n/numeros";
 import type { Locale } from "@/i18n/config";
+import { FAO } from "@/data/series";
 
-// Indice de Precos de Alimentos da FAO (media anual, base 2014-2016 = 100).
-// Serie GLOBAL: nenhum governo brasileiro a controla. E o teste de placebo da comparacao.
-const FAO: [string, number][] = [
-  ["2019", 95.1], ["2020", 98.1], ["2021", 125.7], ["2022", 143.7],
-  ["2023", 124.0], ["2024", 122.0], ["2025", 127.2], ["2026*", 133.3],
-];
 
 const W = 940, H = 320, PL = 46, PR = 20, PT = 28, PB = 46;
 const max = 165, min = 80;

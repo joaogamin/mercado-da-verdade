@@ -2,6 +2,7 @@ import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import type { Locale } from "@/i18n/config";
 import "@/app/globals.css";
+import "@/app/teasers.css";
 
 // Ha um root layout por idioma (src/app/(br) e src/app/(intl)), porque o
 // atributo lang do <html> precisa mudar por rota e o site e exportado

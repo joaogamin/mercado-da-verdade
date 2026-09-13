@@ -2,17 +2,8 @@ import { Rico } from "@/i18n/rich";
 import type { Dicionario } from "@/i18n";
 import { formatarNumero } from "@/i18n/numeros";
 import type { Locale } from "@/i18n/config";
+import { PNAD as P } from "@/data/series";
 
-// PNAD Continua trimestral (IBGE). t = trimestres decorridos desde o 1o tri/2019.
-const P: { t: number; v: number; mark?: "ini" | "pico" | "troca" | "hoje" }[] = [
-  { t: 0, v: 12.7, mark: "ini" },
-  { t: 3, v: 11.0 },
-  { t: 8, v: 14.9, mark: "pico" },
-  { t: 15, v: 7.9, mark: "troca" },
-  { t: 19, v: 7.4 },
-  { t: 23, v: 6.2 },
-  { t: 29, v: 5.4, mark: "hoje" },
-];
 
 const W = 940, H = 340, PL = 44, PR = 22, PT = 34, PB = 48;
 const TMAX = 29, VMAX = 16, VMIN = 4;

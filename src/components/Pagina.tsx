@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Regua from "@/components/Regua";
-import IndiceChecagens from "@/components/IndiceChecagens";
+import Teasers from "@/components/Teasers";
 import Metodologia from "@/components/Metodologia";
 import Entrada from "@/components/Entrada";
 import Compartilhe from "@/components/Compartilhe";
@@ -67,7 +67,7 @@ export default function Pagina({ locale }: { locale: Locale }) {
       <main>
         <Hero t={t} />
         <Regua t={t} locale={locale} />
-        <IndiceChecagens t={t} locale={locale} />
+        <Teasers t={t} locale={locale} />
         <Metodologia t={t} />
         <Entrada t={t} />
         <Compartilhe t={t} locale={locale} />

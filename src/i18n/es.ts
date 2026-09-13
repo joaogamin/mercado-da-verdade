@@ -402,5 +402,13 @@ export const es: Dicionario = {
     csv: "Planilla (CSV)",
     json: "Datos (JSON)",
   },
+  teaser: {
+    rotuloPnad: "Desempleo · PNAD/IBGE",
+    rotuloFao: "Precio mundial de los alimentos · FAO",
+    rotuloProdutos: "En el carrito de hoy, contra enero de 2019",
+    etapas: "{feitas} de {total} etapas cumplidas",
+    placar: "Marcador de su tabla",
+    linhas: "líneas",
+  },
   // <<SECOES>>
 };

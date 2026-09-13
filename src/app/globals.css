@@ -671,58 +671,6 @@ tr[hidden] { display: none; }
 .chk-selo--mini { font-size: 9.5px; padding: 4px 8px; }
 .chk-outra-txt { display: block; margin-top: 10px; font-size: 15.5px; line-height: 1.4; }
 
-/* ---------- indice das checagens na home ---------- */
-.idx-grade {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2px;
-  margin-top: 34px;
-}
-.idx-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--brand-dd);
-  border-top: 4px solid var(--accent);
-  padding: 22px 22px 20px;
-  text-decoration: none;
-  color: #fff;
-}
-.idx-card:hover { background: var(--brand-d); }
-.idx-topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
-.idx-selo {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 5px 9px;
-}
-.idx-data { font-size: 11px; color: rgba(255, 255, 255, 0.5); }
-.idx-claim {
-  font-family: var(--body);
-  font-weight: 700;
-  text-transform: none;
-  font-size: 17px;
-  line-height: 1.32;
-  letter-spacing: 0;
-  margin: 0 0 12px;
-  color: #fff;
-}
-.idx-destaque {
-  flex: 1;
-  margin: 0 0 16px;
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--accent);
-}
-.idx-link {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-}
-.idx-card:hover .idx-link { color: var(--accent); }
 
 /* ---------- prova: trecho da peca original ---------- */
 .prova-texto {

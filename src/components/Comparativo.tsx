@@ -1,6 +1,6 @@
 import type { Dicionario } from "@/i18n";
+import { VEREDITOS_COMPARATIVO as VEREDITOS, type Veredito } from "@/data/series";
 
-type Veredito = "enganoso" | "parcial" | "correto";
 
 const CORES: Record<Veredito, string> = {
   enganoso: "#c0161c",
@@ -8,8 +8,6 @@ const CORES: Record<Veredito, string> = {
   correto: "#0e8a2f",
 };
 
-// O veredito de cada linha e fixo: nao depende do idioma, so o rotulo depende.
-const VEREDITOS: Veredito[] = ["parcial", "enganoso", "parcial", "correto", "correto", "correto"];
 
 export default function Comparativo({ t }: { t: Dicionario }) {
   const c = t.comparativo;

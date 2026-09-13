@@ -3,9 +3,8 @@ import type { Dicionario } from "@/i18n";
 import { formatarData } from "@/i18n/numeros";
 import { VERIFICADO_EM } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
+import { ETAPAS_CONCLUIDAS as CONCLUIDA } from "@/data/series";
 
-// Quais etapas ja aconteceram nao depende do idioma: e a mesma tramitacao.
-const CONCLUIDA = [true, true, true, true, false, false, false];
 
 export default function Escala({ t, locale }: { t: Dicionario; locale: Locale }) {
   const e = t.escala;

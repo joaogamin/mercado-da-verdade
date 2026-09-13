@@ -4,7 +4,8 @@ import { PRODUTOS, TOTAL, ACIMA_DE_2019, CAIU_NO_LULA, CAIU_MAS_AINDA_CARO, type
 import { Rico } from "@/i18n/rich";
 import type { Dicionario } from "@/i18n";
 import { formatarPercentual } from "@/i18n/numeros";
-import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
+import { nomeProduto } from "@/i18n/produto";
 
 const CONTAGENS: Record<string, string> = {
   "{total}": String(TOTAL),
@@ -18,15 +19,6 @@ function comContagens(texto: string): string {
   return Object.entries(CONTAGENS).reduce((s, [k, v]) => s.split(k).join(v), texto);
 }
 
-/**
- * Fora do portugues, mostra o nome traduzido com o original entre parenteses:
- * a tabela cita o IPCA, entao o rotulo brasileiro e o que permite conferir
- * cada linha contra a fonte.
- */
-function nomeProduto(p: Produto, locale: Locale): string {
-  if (locale === DEFAULT_LOCALE) return p.n[0].toUpperCase() + p.n.slice(1);
-  return `${locale === "en" ? p.en : p.es} (${p.n})`;
-}
 
 function Linha({ rotulo, valor, locale, forte }: { rotulo: string; valor: number; locale: Locale; forte?: boolean }) {
   return (

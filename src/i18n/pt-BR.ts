@@ -406,6 +406,14 @@ export const ptBR = {
     csv: "Planilha (CSV)",
     json: "Dados (JSON)",
   },
+  teaser: {
+    rotuloPnad: "Desemprego · PNAD/IBGE",
+    rotuloFao: "Preço global dos alimentos · FAO",
+    rotuloProdutos: "No carrinho de hoje, contra janeiro de 2019",
+    etapas: "{feitas} de {total} etapas cumpridas",
+    placar: "Placar da tabela deles",
+    linhas: "linhas",
+  },
   // <<SECOES>>
 };
 

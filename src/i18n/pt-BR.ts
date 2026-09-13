@@ -378,6 +378,34 @@ export const ptBR = {
     },
     selos: { "1": "Falso", "2": "Enganoso", "3": "Sem contexto" },
   },
+  prova: {
+    titulo: "A prova",
+    legenda: "Trecho da peça original, como arquivado em {data}. A imagem está em português porque é a página checada.",
+    verArquivo: "Ver a página inteira no Internet Archive ↗",
+    textos: {
+      desemprego: "A linha do desemprego na tabela da peça original: \u201C14%+ desemprego recorde\u201D contra \u201C5,4% menor da história\u201D.",
+      alimentos: "A peça compara 13,2% de inflação de alimentos ao ano na janela anterior com 3,0% ao ano na atual, e conclui: \u201Ca comida subiu 4x mais no governo Bolsonaro\u201D.",
+      precos: "A seção \u201Cproduto por produto\u201D do site original, com a variação de cada item nas duas janelas e o selo \u201Cmais barato com Lula\u201D.",
+      "escala-6x1": "O card \u201Cfim da escala 6x1\u201D dentro da seção intitulada \u201Co que o Lula fez\u201D, ao lado de medidas que já estão em vigor.",
+      comparativo: "A tabela \u201Co comparativo que resume tudo\u201D, com as seis linhas que este site audita uma a uma.",
+    },
+  },
+  entrada: {
+    eyebrow: "Sugira uma checagem",
+    titulo: "Viu um número que não fecha?",
+    lead:
+      "Este site começou com uma peça só. Se você encontrou outra afirmação com dado real e conclusão torta — de qualquer lado —, mande. **Quanto mais específico, melhor**: onde viu, o print ou o link, e qual número te pareceu estranho.",
+    botao: "Sugerir uma checagem",
+    nota:
+      "Abre uma issue pública no repositório do projeto. Exige conta no GitHub — é o preço de manter tudo auditável, sem formulário de terceiro no meio.",
+  },
+  dados: {
+    titulo: "Baixe a base",
+    lead:
+      "A tabela dos {total} produtos, com as duas janelas e o acumulado calculado. Mesmos números da página, em formato aberto.",
+    csv: "Planilha (CSV)",
+    json: "Dados (JSON)",
+  },
   // <<SECOES>>
 };
 

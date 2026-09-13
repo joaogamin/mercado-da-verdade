@@ -1,0 +1,904 @@
+{
+  "fonte": "IPCA/IBGE, via a tabela publicada em mercadodamentira.com.br (set/2026)",
+  "arquivo": "https://web.archive.org/web/20260909203458/https://mercadodamentira.com.br/",
+  "nota": "acumulado_vs_jan2019_pct = ((1 + var_2019_2022/100) * (1 + var_2023_2026/100) - 1) * 100",
+  "gerado_em": "2026-09-13",
+  "produtos": [
+    {
+      "produto_pt": "Manga",
+      "produto_en": "Mango",
+      "produto_es": "Mango",
+      "var_2019_2022_pct": 105.6,
+      "var_2023_2026_pct": 104.6,
+      "acumulado_vs_jan2019_pct": 320.7
+    },
+    {
+      "produto_pt": "Repolho",
+      "produto_en": "Cabbage",
+      "produto_es": "Repollo",
+      "var_2019_2022_pct": 101.4,
+      "var_2023_2026_pct": 57.2,
+      "acumulado_vs_jan2019_pct": 216.6
+    },
+    {
+      "produto_pt": "Melancia",
+      "produto_en": "Watermelon",
+      "produto_es": "Sandía",
+      "var_2019_2022_pct": 117.1,
+      "var_2023_2026_pct": 29.7,
+      "acumulado_vs_jan2019_pct": 181.6
+    },
+    {
+      "produto_pt": "Leite longa vida",
+      "produto_en": "UHT milk",
+      "produto_es": "Leche larga vida",
+      "var_2019_2022_pct": 130.5,
+      "var_2023_2026_pct": 19.4,
+      "acumulado_vs_jan2019_pct": 175.2
+    },
+    {
+      "produto_pt": "Feijão macáçar (fradinho)",
+      "produto_en": "Black-eyed pea",
+      "produto_es": "Frijol caupí",
+      "var_2019_2022_pct": 149,
+      "var_2023_2026_pct": 9.9,
+      "acumulado_vs_jan2019_pct": 173.7
+    },
+    {
+      "produto_pt": "Feijão carioca (rajado)",
+      "produto_en": "Carioca bean",
+      "produto_es": "Frijol carioca",
+      "var_2019_2022_pct": 130.9,
+      "var_2023_2026_pct": 12.9,
+      "acumulado_vs_jan2019_pct": 160.7
+    },
+    {
+      "produto_pt": "Alface",
+      "produto_en": "Lettuce",
+      "produto_es": "Lechuga",
+      "var_2019_2022_pct": 85.1,
+      "var_2023_2026_pct": 40.1,
+      "acumulado_vs_jan2019_pct": 159.3
+    },
+    {
+      "produto_pt": "Café moído",
+      "produto_en": "Ground coffee",
+      "produto_es": "Café molido",
+      "var_2019_2022_pct": 72.7,
+      "var_2023_2026_pct": 48.7,
+      "acumulado_vs_jan2019_pct": 156.8
+    },
+    {
+      "produto_pt": "Pimentão",
+      "produto_en": "Bell pepper",
+      "produto_es": "Pimiento",
+      "var_2019_2022_pct": 113.7,
+      "var_2023_2026_pct": 19.8,
+      "acumulado_vs_jan2019_pct": 156
+    },
+    {
+      "produto_pt": "Óleo de soja",
+      "produto_en": "Soybean oil",
+      "produto_es": "Aceite de soja",
+      "var_2019_2022_pct": 174.3,
+      "var_2023_2026_pct": -14.2,
+      "acumulado_vs_jan2019_pct": 135.3
+    },
+    {
+      "produto_pt": "Mamão",
+      "produto_en": "Papaya",
+      "produto_es": "Papaya",
+      "var_2019_2022_pct": 117.5,
+      "var_2023_2026_pct": 6.2,
+      "acumulado_vs_jan2019_pct": 131
+    },
+    {
+      "produto_pt": "Mandioca (aipim)",
+      "produto_en": "Cassava",
+      "produto_es": "Yuca",
+      "var_2019_2022_pct": 90.9,
+      "var_2023_2026_pct": 12.6,
+      "acumulado_vs_jan2019_pct": 115
+    },
+    {
+      "produto_pt": "Couve",
+      "produto_en": "Collard greens",
+      "produto_es": "Berza",
+      "var_2019_2022_pct": 51.1,
+      "var_2023_2026_pct": 38.7,
+      "acumulado_vs_jan2019_pct": 109.6
+    },
+    {
+      "produto_pt": "Brócolis",
+      "produto_en": "Broccoli",
+      "produto_es": "Brócoli",
+      "var_2019_2022_pct": 53.4,
+      "var_2023_2026_pct": 35.8,
+      "acumulado_vs_jan2019_pct": 108.3
+    },
+    {
+      "produto_pt": "Carnes",
+      "produto_en": "Meat",
+      "produto_es": "Carnes",
+      "var_2019_2022_pct": 73.7,
+      "var_2023_2026_pct": 17,
+      "acumulado_vs_jan2019_pct": 103.2
+    },
+    {
+      "produto_pt": "curimatã",
+      "produto_en": "Curimatã (river fish)",
+      "produto_es": "Curimatá (pez de río)",
+      "var_2019_2022_pct": 67,
+      "var_2023_2026_pct": 21.2,
+      "acumulado_vs_jan2019_pct": 102.4
+    },
+    {
+      "produto_pt": "Banana-da-terra",
+      "produto_en": "Plantain",
+      "produto_es": "Plátano",
+      "var_2019_2022_pct": 60.1,
+      "var_2023_2026_pct": 25.9,
+      "acumulado_vs_jan2019_pct": 101.6
+    },
+    {
+      "produto_pt": "Cheiro-verde",
+      "produto_en": "Parsley and chives",
+      "produto_es": "Perejil y cebollín",
+      "var_2019_2022_pct": 42.4,
+      "var_2023_2026_pct": 41.3,
+      "acumulado_vs_jan2019_pct": 101.2
+    },
+    {
+      "produto_pt": "Feijão mulatinho",
+      "produto_en": "Mulatinho bean",
+      "produto_es": "Frijol mulatinho",
+      "var_2019_2022_pct": 73.4,
+      "var_2023_2026_pct": 12.4,
+      "acumulado_vs_jan2019_pct": 94.9
+    },
+    {
+      "produto_pt": "Batata-inglesa",
+      "produto_en": "Potato",
+      "produto_es": "Papa",
+      "var_2019_2022_pct": 64,
+      "var_2023_2026_pct": 15.2,
+      "acumulado_vs_jan2019_pct": 88.9
+    },
+    {
+      "produto_pt": "Gasolina",
+      "produto_en": "Petrol",
+      "produto_es": "Gasolina",
+      "var_2019_2022_pct": 39.9,
+      "var_2023_2026_pct": 31.4,
+      "acumulado_vs_jan2019_pct": 83.8
+    },
+    {
+      "produto_pt": "Combustível",
+      "produto_en": "Fuel",
+      "produto_es": "Combustible",
+      "var_2019_2022_pct": 44.6,
+      "var_2023_2026_pct": 26.9,
+      "acumulado_vs_jan2019_pct": 83.5
+    },
+    {
+      "produto_pt": "Banana prata",
+      "produto_en": "Silver banana",
+      "produto_es": "Banana plata",
+      "var_2019_2022_pct": 67.4,
+      "var_2023_2026_pct": 8.5,
+      "acumulado_vs_jan2019_pct": 81.6
+    },
+    {
+      "produto_pt": "Alho",
+      "produto_en": "Garlic",
+      "produto_es": "Ajo",
+      "var_2019_2022_pct": 62,
+      "var_2023_2026_pct": 11.2,
+      "acumulado_vs_jan2019_pct": 80.1
+    },
+    {
+      "produto_pt": "Sorvete",
+      "produto_en": "Ice cream",
+      "produto_es": "Helado",
+      "var_2019_2022_pct": 45.4,
+      "var_2023_2026_pct": 23.6,
+      "acumulado_vs_jan2019_pct": 79.7
+    },
+    {
+      "produto_pt": "Carne-seca e de sol",
+      "produto_en": "Dried salted beef",
+      "produto_es": "Carne seca y salada",
+      "var_2019_2022_pct": 48.6,
+      "var_2023_2026_pct": 20.1,
+      "acumulado_vs_jan2019_pct": 78.5
+    },
+    {
+      "produto_pt": "Frango em pedaços",
+      "produto_en": "Chicken pieces",
+      "produto_es": "Pollo en trozos",
+      "var_2019_2022_pct": 76.5,
+      "var_2023_2026_pct": 0.9,
+      "acumulado_vs_jan2019_pct": 78.1
+    },
+    {
+      "produto_pt": "Banana d'água",
+      "produto_en": "Water banana",
+      "produto_es": "Banana de agua",
+      "var_2019_2022_pct": 67.5,
+      "var_2023_2026_pct": 5.4,
+      "acumulado_vs_jan2019_pct": 76.5
+    },
+    {
+      "produto_pt": "Gás encanado",
+      "produto_en": "Piped gas",
+      "produto_es": "Gas por tubería",
+      "var_2019_2022_pct": 65.8,
+      "var_2023_2026_pct": 5.8,
+      "acumulado_vs_jan2019_pct": 75.4
+    },
+    {
+      "produto_pt": "Ovo de galinha",
+      "produto_en": "Chicken eggs",
+      "produto_es": "Huevo de gallina",
+      "var_2019_2022_pct": 63.3,
+      "var_2023_2026_pct": 5.7,
+      "acumulado_vs_jan2019_pct": 72.6
+    },
+    {
+      "produto_pt": "Açúcar refinado",
+      "produto_en": "Refined sugar",
+      "produto_es": "Azúcar refinada",
+      "var_2019_2022_pct": 83,
+      "var_2023_2026_pct": -6,
+      "acumulado_vs_jan2019_pct": 72
+    },
+    {
+      "produto_pt": "Gás de botijão",
+      "produto_en": "Bottled cooking gas",
+      "produto_es": "Gas en garrafa",
+      "var_2019_2022_pct": 62.3,
+      "var_2023_2026_pct": 5.1,
+      "acumulado_vs_jan2019_pct": 70.6
+    },
+    {
+      "produto_pt": "Iogurte e bebidas lácteas",
+      "produto_en": "Yoghurt and dairy drinks",
+      "produto_es": "Yogur y bebidas lácteas",
+      "var_2019_2022_pct": 34.1,
+      "var_2023_2026_pct": 26.3,
+      "acumulado_vs_jan2019_pct": 69.4
+    },
+    {
+      "produto_pt": "Leite de coco",
+      "produto_en": "Coconut milk",
+      "produto_es": "Leche de coco",
+      "var_2019_2022_pct": 36.2,
+      "var_2023_2026_pct": 22.7,
+      "acumulado_vs_jan2019_pct": 67.1
+    },
+    {
+      "produto_pt": "Carne de porco",
+      "produto_en": "Pork",
+      "produto_es": "Carne de cerdo",
+      "var_2019_2022_pct": 51.8,
+      "var_2023_2026_pct": 8.1,
+      "acumulado_vs_jan2019_pct": 64.1
+    },
+    {
+      "produto_pt": "Sardinha em conserva",
+      "produto_en": "Canned sardines",
+      "produto_es": "Sardina en conserva",
+      "var_2019_2022_pct": 46.5,
+      "var_2023_2026_pct": 11.9,
+      "acumulado_vs_jan2019_pct": 63.9
+    },
+    {
+      "produto_pt": "Açúcar cristal",
+      "produto_en": "Raw sugar",
+      "produto_es": "Azúcar cristal",
+      "var_2019_2022_pct": 86.2,
+      "var_2023_2026_pct": -12.1,
+      "acumulado_vs_jan2019_pct": 63.7
+    },
+    {
+      "produto_pt": "Fígado",
+      "produto_en": "Liver",
+      "produto_es": "Hígado",
+      "var_2019_2022_pct": 67,
+      "var_2023_2026_pct": -2,
+      "acumulado_vs_jan2019_pct": 63.7
+    },
+    {
+      "produto_pt": "Café solúvel",
+      "produto_en": "Instant coffee",
+      "produto_es": "Café soluble",
+      "var_2019_2022_pct": 32.9,
+      "var_2023_2026_pct": 23.2,
+      "acumulado_vs_jan2019_pct": 63.7
+    },
+    {
+      "produto_pt": "Frango inteiro",
+      "produto_en": "Whole chicken",
+      "produto_es": "Pollo entero",
+      "var_2019_2022_pct": 62.7,
+      "var_2023_2026_pct": 0.4,
+      "acumulado_vs_jan2019_pct": 63.4
+    },
+    {
+      "produto_pt": "Margarina",
+      "produto_en": "Margarine",
+      "produto_es": "Margarina",
+      "var_2019_2022_pct": 59.1,
+      "var_2023_2026_pct": 2.2,
+      "acumulado_vs_jan2019_pct": 62.6
+    },
+    {
+      "produto_pt": "Pepino em conserva",
+      "produto_en": "Pickled cucumber",
+      "produto_es": "Pepino en conserva",
+      "var_2019_2022_pct": 45.5,
+      "var_2023_2026_pct": 11.7,
+      "acumulado_vs_jan2019_pct": 62.5
+    },
+    {
+      "produto_pt": "Milho-verde em conserva",
+      "produto_en": "Canned sweetcorn",
+      "produto_es": "Maíz dulce en conserva",
+      "var_2019_2022_pct": 65.6,
+      "var_2023_2026_pct": -2.2,
+      "acumulado_vs_jan2019_pct": 62
+    },
+    {
+      "produto_pt": "Salsicha em conserva",
+      "produto_en": "Canned sausage",
+      "produto_es": "Salchicha en conserva",
+      "var_2019_2022_pct": 55.1,
+      "var_2023_2026_pct": 3.9,
+      "acumulado_vs_jan2019_pct": 61.1
+    },
+    {
+      "produto_pt": "Queijo",
+      "produto_en": "Cheese",
+      "produto_es": "Queso",
+      "var_2019_2022_pct": 44.7,
+      "var_2023_2026_pct": 10,
+      "acumulado_vs_jan2019_pct": 59.2
+    },
+    {
+      "produto_pt": "Pão de queijo",
+      "produto_en": "Cheese bread",
+      "produto_es": "Pan de queso",
+      "var_2019_2022_pct": 30.7,
+      "var_2023_2026_pct": 20.7,
+      "acumulado_vs_jan2019_pct": 57.8
+    },
+    {
+      "produto_pt": "Pera",
+      "produto_en": "Pear",
+      "produto_es": "Pera",
+      "var_2019_2022_pct": 44.7,
+      "var_2023_2026_pct": 6.8,
+      "acumulado_vs_jan2019_pct": 54.5
+    },
+    {
+      "produto_pt": "Maionese",
+      "produto_en": "Mayonnaise",
+      "produto_es": "Mayonesa",
+      "var_2019_2022_pct": 41,
+      "var_2023_2026_pct": 9.5,
+      "acumulado_vs_jan2019_pct": 54.4
+    },
+    {
+      "produto_pt": "Uva",
+      "produto_en": "Grapes",
+      "produto_es": "Uva",
+      "var_2019_2022_pct": 27.2,
+      "var_2023_2026_pct": 21.1,
+      "acumulado_vs_jan2019_pct": 54
+    },
+    {
+      "produto_pt": "Pão de forma",
+      "produto_en": "Sliced bread",
+      "produto_es": "Pan de molde",
+      "var_2019_2022_pct": 37,
+      "var_2023_2026_pct": 12.2,
+      "acumulado_vs_jan2019_pct": 53.7
+    },
+    {
+      "produto_pt": "Pão francês",
+      "produto_en": "Bread roll",
+      "produto_es": "Pan francés",
+      "var_2019_2022_pct": 30.8,
+      "var_2023_2026_pct": 17.1,
+      "acumulado_vs_jan2019_pct": 53.2
+    },
+    {
+      "produto_pt": "Pão doce",
+      "produto_en": "Sweet bread",
+      "produto_es": "Pan dulce",
+      "var_2019_2022_pct": 25.7,
+      "var_2023_2026_pct": 21,
+      "acumulado_vs_jan2019_pct": 52.1
+    },
+    {
+      "produto_pt": "cavala",
+      "produto_en": "Mackerel",
+      "produto_es": "Caballa",
+      "var_2019_2022_pct": 52.6,
+      "var_2023_2026_pct": -0.9,
+      "acumulado_vs_jan2019_pct": 51.2
+    },
+    {
+      "produto_pt": "Leite em pó",
+      "produto_en": "Powdered milk",
+      "produto_es": "Leche en polvo",
+      "var_2019_2022_pct": 38.4,
+      "var_2023_2026_pct": 8.3,
+      "acumulado_vs_jan2019_pct": 49.9
+    },
+    {
+      "produto_pt": "Azeite de oliva",
+      "produto_en": "Olive oil",
+      "produto_es": "Aceite de oliva",
+      "var_2019_2022_pct": 22.3,
+      "var_2023_2026_pct": 22.3,
+      "acumulado_vs_jan2019_pct": 49.6
+    },
+    {
+      "produto_pt": "Cimento",
+      "produto_en": "Cement",
+      "produto_es": "Cemento",
+      "var_2019_2022_pct": 29.2,
+      "var_2023_2026_pct": 14.8,
+      "acumulado_vs_jan2019_pct": 48.3
+    },
+    {
+      "produto_pt": "Pneu",
+      "produto_en": "Tyre",
+      "produto_es": "Neumático",
+      "var_2019_2022_pct": 65.1,
+      "var_2023_2026_pct": -10.4,
+      "acumulado_vs_jan2019_pct": 47.9
+    },
+    {
+      "produto_pt": "Detergente",
+      "produto_en": "Detergent",
+      "produto_es": "Detergente",
+      "var_2019_2022_pct": 36.5,
+      "var_2023_2026_pct": 8.2,
+      "acumulado_vs_jan2019_pct": 47.7
+    },
+    {
+      "produto_pt": "Arroz",
+      "produto_en": "Rice",
+      "produto_es": "Arroz",
+      "var_2019_2022_pct": 50.5,
+      "var_2023_2026_pct": -1.9,
+      "acumulado_vs_jan2019_pct": 47.6
+    },
+    {
+      "produto_pt": "Bolo",
+      "produto_en": "Cake",
+      "produto_es": "Pastel",
+      "var_2019_2022_pct": 24.5,
+      "var_2023_2026_pct": 17.1,
+      "acumulado_vs_jan2019_pct": 45.8
+    },
+    {
+      "produto_pt": "Biscoito",
+      "produto_en": "Biscuits",
+      "produto_es": "Galletas",
+      "var_2019_2022_pct": 35,
+      "var_2023_2026_pct": 7.8,
+      "acumulado_vs_jan2019_pct": 45.5
+    },
+    {
+      "produto_pt": "Farinha de trigo",
+      "produto_en": "Wheat flour",
+      "produto_es": "Harina de trigo",
+      "var_2019_2022_pct": 72.2,
+      "var_2023_2026_pct": -16,
+      "acumulado_vs_jan2019_pct": 44.6
+    },
+    {
+      "produto_pt": "Sal",
+      "produto_en": "Salt",
+      "produto_es": "Sal",
+      "var_2019_2022_pct": 30.4,
+      "var_2023_2026_pct": 9.3,
+      "acumulado_vs_jan2019_pct": 42.5
+    },
+    {
+      "produto_pt": "Automóvel novo",
+      "produto_en": "New car",
+      "produto_es": "Automóvil nuevo",
+      "var_2019_2022_pct": 29,
+      "var_2023_2026_pct": 9.9,
+      "acumulado_vs_jan2019_pct": 41.8
+    },
+    {
+      "produto_pt": "Cebola",
+      "produto_en": "Onion",
+      "produto_es": "Cebolla",
+      "var_2019_2022_pct": 72.1,
+      "var_2023_2026_pct": -17.7,
+      "acumulado_vs_jan2019_pct": 41.6
+    },
+    {
+      "produto_pt": "Maçã",
+      "produto_en": "Apple",
+      "produto_es": "Manzana",
+      "var_2019_2022_pct": 42.2,
+      "var_2023_2026_pct": -0.9,
+      "acumulado_vs_jan2019_pct": 40.9
+    },
+    {
+      "produto_pt": "Linguiça",
+      "produto_en": "Pork sausage",
+      "produto_es": "Chorizo fresco",
+      "var_2019_2022_pct": 40.6,
+      "var_2023_2026_pct": -0.7,
+      "acumulado_vs_jan2019_pct": 39.6
+    },
+    {
+      "produto_pt": "Feijão preto",
+      "produto_en": "Black beans",
+      "produto_es": "Frijol negro",
+      "var_2019_2022_pct": 45.9,
+      "var_2023_2026_pct": -4.5,
+      "acumulado_vs_jan2019_pct": 39.3
+    },
+    {
+      "produto_pt": "Ar-condicionado",
+      "produto_en": "Air conditioner",
+      "produto_es": "Aire acondicionado",
+      "var_2019_2022_pct": 29.3,
+      "var_2023_2026_pct": 7.5,
+      "acumulado_vs_jan2019_pct": 39
+    },
+    {
+      "produto_pt": "Colchão",
+      "produto_en": "Mattress",
+      "produto_es": "Colchón",
+      "var_2019_2022_pct": 35.3,
+      "var_2023_2026_pct": 1.3,
+      "acumulado_vs_jan2019_pct": 37.1
+    },
+    {
+      "produto_pt": "Manteiga",
+      "produto_en": "Butter",
+      "produto_es": "Mantequilla",
+      "var_2019_2022_pct": 33.7,
+      "var_2023_2026_pct": 2.2,
+      "acumulado_vs_jan2019_pct": 36.6
+    },
+    {
+      "produto_pt": "tainha",
+      "produto_en": "Mullet",
+      "produto_es": "Lisa",
+      "var_2019_2022_pct": 47.3,
+      "var_2023_2026_pct": -7.5,
+      "acumulado_vs_jan2019_pct": 36.3
+    },
+    {
+      "produto_pt": "Leite condensado",
+      "produto_en": "Condensed milk",
+      "produto_es": "Leche condensada",
+      "var_2019_2022_pct": 40.1,
+      "var_2023_2026_pct": -3.2,
+      "acumulado_vs_jan2019_pct": 35.6
+    },
+    {
+      "produto_pt": "Inhame",
+      "produto_en": "Yam",
+      "produto_es": "Ñame",
+      "var_2019_2022_pct": 26.3,
+      "var_2023_2026_pct": 7.1,
+      "acumulado_vs_jan2019_pct": 35.3
+    },
+    {
+      "produto_pt": "Salsicha",
+      "produto_en": "Sausage",
+      "produto_es": "Salchicha",
+      "var_2019_2022_pct": 37,
+      "var_2023_2026_pct": -1.3,
+      "acumulado_vs_jan2019_pct": 35.2
+    },
+    {
+      "produto_pt": "Macarrão",
+      "produto_en": "Pasta",
+      "produto_es": "Pasta",
+      "var_2019_2022_pct": 37.6,
+      "var_2023_2026_pct": -2.8,
+      "acumulado_vs_jan2019_pct": 33.7
+    },
+    {
+      "produto_pt": "Maracujá",
+      "produto_en": "Passion fruit",
+      "produto_es": "Maracuyá",
+      "var_2019_2022_pct": 36.4,
+      "var_2023_2026_pct": -2.1,
+      "acumulado_vs_jan2019_pct": 33.5
+    },
+    {
+      "produto_pt": "Carne de carneiro",
+      "produto_en": "Mutton",
+      "produto_es": "Carne de cordero",
+      "var_2019_2022_pct": 23.3,
+      "var_2023_2026_pct": 8.3,
+      "acumulado_vs_jan2019_pct": 33.5
+    },
+    {
+      "produto_pt": "Presunto",
+      "produto_en": "Ham",
+      "produto_es": "Jamón",
+      "var_2019_2022_pct": 28.8,
+      "var_2023_2026_pct": 3.3,
+      "acumulado_vs_jan2019_pct": 33.1
+    },
+    {
+      "produto_pt": "tilápia",
+      "produto_en": "Tilapia",
+      "produto_es": "Tilapia",
+      "var_2019_2022_pct": 20.2,
+      "var_2023_2026_pct": 8.8,
+      "acumulado_vs_jan2019_pct": 30.8
+    },
+    {
+      "produto_pt": "Computador",
+      "produto_en": "Computer",
+      "produto_es": "Computadora",
+      "var_2019_2022_pct": 21.3,
+      "var_2023_2026_pct": 7.2,
+      "acumulado_vs_jan2019_pct": 30
+    },
+    {
+      "produto_pt": "Bicicleta",
+      "produto_en": "Bicycle",
+      "produto_es": "Bicicleta",
+      "var_2019_2022_pct": 35.2,
+      "var_2023_2026_pct": -4.4,
+      "acumulado_vs_jan2019_pct": 29.3
+    },
+    {
+      "produto_pt": "Sabão em pó",
+      "produto_en": "Washing powder",
+      "produto_es": "Detergente en polvo",
+      "var_2019_2022_pct": 31.1,
+      "var_2023_2026_pct": -1.4,
+      "acumulado_vs_jan2019_pct": 29.3
+    },
+    {
+      "produto_pt": "Fubá de milho",
+      "produto_en": "Cornmeal",
+      "produto_es": "Harina de maíz",
+      "var_2019_2022_pct": 48.4,
+      "var_2023_2026_pct": -13.2,
+      "acumulado_vs_jan2019_pct": 28.8
+    },
+    {
+      "produto_pt": "tambaqui",
+      "produto_en": "Tambaqui (river fish)",
+      "produto_es": "Tambaquí (pez de río)",
+      "var_2019_2022_pct": 18.7,
+      "var_2023_2026_pct": 7.3,
+      "acumulado_vs_jan2019_pct": 27.4
+    },
+    {
+      "produto_pt": "Refrigerador",
+      "produto_en": "Refrigerator",
+      "produto_es": "Refrigerador",
+      "var_2019_2022_pct": 42.6,
+      "var_2023_2026_pct": -10.7,
+      "acumulado_vs_jan2019_pct": 27.3
+    },
+    {
+      "produto_pt": "Ventilador",
+      "produto_en": "Fan",
+      "produto_es": "Ventilador",
+      "var_2019_2022_pct": 25.5,
+      "var_2023_2026_pct": -0.3,
+      "acumulado_vs_jan2019_pct": 25.1
+    },
+    {
+      "produto_pt": "Flocos de milho",
+      "produto_en": "Cornflakes",
+      "produto_es": "Copos de maíz",
+      "var_2019_2022_pct": 17.7,
+      "var_2023_2026_pct": 6.3,
+      "acumulado_vs_jan2019_pct": 25.1
+    },
+    {
+      "produto_pt": "Máquina de lavar",
+      "produto_en": "Washing machine",
+      "produto_es": "Lavadora",
+      "var_2019_2022_pct": 30.2,
+      "var_2023_2026_pct": -4.8,
+      "acumulado_vs_jan2019_pct": 24
+    },
+    {
+      "produto_pt": "Mortadela",
+      "produto_en": "Mortadella",
+      "produto_es": "Mortadela",
+      "var_2019_2022_pct": 23.9,
+      "var_2023_2026_pct": -0.2,
+      "acumulado_vs_jan2019_pct": 23.7
+    },
+    {
+      "produto_pt": "Banana maçã",
+      "produto_en": "Apple banana",
+      "produto_es": "Banana manzana",
+      "var_2019_2022_pct": 28.2,
+      "var_2023_2026_pct": -3.7,
+      "acumulado_vs_jan2019_pct": 23.5
+    },
+    {
+      "produto_pt": "Farinha de mandioca",
+      "produto_en": "Cassava flour",
+      "produto_es": "Harina de yuca",
+      "var_2019_2022_pct": 18.5,
+      "var_2023_2026_pct": 4.2,
+      "acumulado_vs_jan2019_pct": 23.5
+    },
+    {
+      "produto_pt": "Brinquedo",
+      "produto_en": "Toys",
+      "produto_es": "Juguete",
+      "var_2019_2022_pct": 16,
+      "var_2023_2026_pct": 6.1,
+      "acumulado_vs_jan2019_pct": 23.1
+    },
+    {
+      "produto_pt": "Sabão em barra",
+      "produto_en": "Bar soap",
+      "produto_es": "Jabón en barra",
+      "var_2019_2022_pct": 29.3,
+      "var_2023_2026_pct": -5.4,
+      "acumulado_vs_jan2019_pct": 22.3
+    },
+    {
+      "produto_pt": "Salame",
+      "produto_en": "Salami",
+      "produto_es": "Salame",
+      "var_2019_2022_pct": 34.4,
+      "var_2023_2026_pct": -9.1,
+      "acumulado_vs_jan2019_pct": 22.2
+    },
+    {
+      "produto_pt": "Fogão",
+      "produto_en": "Cooker",
+      "produto_es": "Cocina",
+      "var_2019_2022_pct": 29.9,
+      "var_2023_2026_pct": -6.3,
+      "acumulado_vs_jan2019_pct": 21.7
+    },
+    {
+      "produto_pt": "Goiaba",
+      "produto_en": "Guava",
+      "produto_es": "Guayaba",
+      "var_2019_2022_pct": 11.1,
+      "var_2023_2026_pct": 9.2,
+      "acumulado_vs_jan2019_pct": 21.3
+    },
+    {
+      "produto_pt": "salmão",
+      "produto_en": "Salmon",
+      "produto_es": "Salmón",
+      "var_2019_2022_pct": 14.5,
+      "var_2023_2026_pct": 4.7,
+      "acumulado_vs_jan2019_pct": 19.9
+    },
+    {
+      "produto_pt": "corvina",
+      "produto_en": "Croaker",
+      "produto_es": "Corvina",
+      "var_2019_2022_pct": 9.2,
+      "var_2023_2026_pct": 7.4,
+      "acumulado_vs_jan2019_pct": 17.3
+    },
+    {
+      "produto_pt": "sardinha",
+      "produto_en": "Sardine",
+      "produto_es": "Sardina",
+      "var_2019_2022_pct": 10.2,
+      "var_2023_2026_pct": 3.5,
+      "acumulado_vs_jan2019_pct": 14.1
+    },
+    {
+      "produto_pt": "Automóvel usado",
+      "produto_en": "Used car",
+      "produto_es": "Automóvil usado",
+      "var_2019_2022_pct": 22.8,
+      "var_2023_2026_pct": -8.3,
+      "acumulado_vs_jan2019_pct": 12.6
+    },
+    {
+      "produto_pt": "merluza",
+      "produto_en": "Hake",
+      "produto_es": "Merluza",
+      "var_2019_2022_pct": 17.2,
+      "var_2023_2026_pct": -4.4,
+      "acumulado_vs_jan2019_pct": 12
+    },
+    {
+      "produto_pt": "serra",
+      "produto_en": "Spanish mackerel",
+      "produto_es": "Sierra",
+      "var_2019_2022_pct": 6,
+      "var_2023_2026_pct": 1.4,
+      "acumulado_vs_jan2019_pct": 7.5
+    },
+    {
+      "produto_pt": "pescada",
+      "produto_en": "Weakfish",
+      "produto_es": "Pescadilla",
+      "var_2019_2022_pct": 6.5,
+      "var_2023_2026_pct": 0.8,
+      "acumulado_vs_jan2019_pct": 7.4
+    },
+    {
+      "produto_pt": "Camarão",
+      "produto_en": "Shrimp",
+      "produto_es": "Camarón",
+      "var_2019_2022_pct": 3.5,
+      "var_2023_2026_pct": 2.5,
+      "acumulado_vs_jan2019_pct": 6.1
+    },
+    {
+      "produto_pt": "dourada",
+      "produto_en": "Dorado",
+      "produto_es": "Dorada",
+      "var_2019_2022_pct": 4.3,
+      "var_2023_2026_pct": 0.4,
+      "acumulado_vs_jan2019_pct": 4.7
+    },
+    {
+      "produto_pt": "Televisor",
+      "produto_en": "Television",
+      "produto_es": "Televisor",
+      "var_2019_2022_pct": 16.2,
+      "var_2023_2026_pct": -10.8,
+      "acumulado_vs_jan2019_pct": 3.7
+    },
+    {
+      "produto_pt": "Tomate",
+      "produto_en": "Tomato",
+      "produto_es": "Tomate",
+      "var_2019_2022_pct": 6.3,
+      "var_2023_2026_pct": -2.8,
+      "acumulado_vs_jan2019_pct": 3.3
+    },
+    {
+      "produto_pt": "Doce de frutas em pasta",
+      "produto_en": "Fruit paste",
+      "produto_es": "Dulce de frutas en pasta",
+      "var_2019_2022_pct": 32.9,
+      "var_2023_2026_pct": -22.3,
+      "acumulado_vs_jan2019_pct": 3.3
+    },
+    {
+      "produto_pt": "Celular",
+      "produto_en": "Mobile phone",
+      "produto_es": "Teléfono móvil",
+      "var_2019_2022_pct": 7.9,
+      "var_2023_2026_pct": -10.8,
+      "acumulado_vs_jan2019_pct": -3.8
+    },
+    {
+      "produto_pt": "Laranja baía",
+      "produto_en": "Navel orange",
+      "produto_es": "Naranja de ombligo",
+      "var_2019_2022_pct": 16.6,
+      "var_2023_2026_pct": -21.8,
+      "acumulado_vs_jan2019_pct": -8.8
+    },
+    {
+      "produto_pt": "Abacate",
+      "produto_en": "Avocado",
+      "produto_es": "Aguacate",
+      "var_2019_2022_pct": -21.8,
+      "var_2023_2026_pct": -26.9,
+      "acumulado_vs_jan2019_pct": -42.8
+    }
+  ]
+}

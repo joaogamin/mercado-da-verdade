@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Regua from "@/components/Regua";
 import IndiceChecagens from "@/components/IndiceChecagens";
 import Metodologia from "@/components/Metodologia";
+import Entrada from "@/components/Entrada";
 import Compartilhe from "@/components/Compartilhe";
 import Autor from "@/components/Autor";
 import Footer from "@/components/Footer";
@@ -68,6 +69,7 @@ export default function Pagina({ locale }: { locale: Locale }) {
         <Regua t={t} locale={locale} />
         <IndiceChecagens t={t} locale={locale} />
         <Metodologia t={t} />
+        <Entrada t={t} />
         <Compartilhe t={t} locale={locale} />
         <Autor t={t} />
       </main>

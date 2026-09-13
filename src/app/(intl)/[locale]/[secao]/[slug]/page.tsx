@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     { title: m.title, desc: m.desc },
     m.caminho,
     idiomasDaChecagem(SITE_URL, c, SEGMENTO_CHECAGEM, LOCALES, DEFAULT_LOCALE),
+    `/og/${l}/${c.slug[l]}.png`,
   );
 }
 

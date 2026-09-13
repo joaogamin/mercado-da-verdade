@@ -1,0 +1,43 @@
+name: Sugerir uma checagem
+description: Viu uma afirmação com dado real e conclusão torta? Mande aqui.
+title: "[checagem] "
+labels: ["checagem sugerida"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Quanto mais específico, mais rápido dá para verificar.
+        Afirmações de qualquer lado do espectro são bem-vindas — o critério é o método, não o autor.
+  - type: textarea
+    id: afirmacao
+    attributes:
+      label: Qual é a afirmação?
+      description: Transcreva o mais literalmente possível.
+      placeholder: 'Ex.: "O desemprego caiu de 14% para 5,4% por causa da gestão atual."'
+    validations:
+      required: true
+  - type: input
+    id: onde
+    attributes:
+      label: Onde você viu?
+      placeholder: "Ex.: post no Instagram, site de campanha, entrevista na TV"
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link ou print
+      description: Se for print, arraste a imagem para cá depois de criar a issue.
+      placeholder: "https://..."
+  - type: textarea
+    id: suspeita
+    attributes:
+      label: Qual número te pareceu estranho, e por quê?
+      placeholder: "Ex.: o número parece certo, mas compara períodos muito diferentes."
+  - type: checkboxes
+    id: ciente
+    attributes:
+      label: Antes de enviar
+      options:
+        - label: Entendo que a checagem avalia o método, e pode concluir que a afirmação está correta.
+          required: true

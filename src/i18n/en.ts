@@ -374,5 +374,33 @@ export const en: Dicionario = {
     },
     selos: { "1": "False", "2": "Misleading", "3": "Lacks context" },
   },
+  prova: {
+    titulo: "The evidence",
+    legenda: "Excerpt from the original piece, as archived on {data}. The image is in Portuguese because that is the page under review.",
+    verArquivo: "See the full page on the Internet Archive ↗",
+    textos: {
+      desemprego: "The unemployment row in the original table: \u201C14%+ record unemployment\u201D against \u201C5.4% the lowest in history\u201D.",
+      alimentos: "The piece compares 13.2% annual food inflation in the earlier window with 3.0% a year in the current one, concluding: \u201Cfood rose 4x more under Bolsonaro\u201D.",
+      precos: "The \u201Citem by item\u201D section of the original site, with each product's variation across both windows and the \u201Ccheaper under Lula\u201D badge.",
+      "escala-6x1": "The \u201Cend of the 6x1 shift\u201D card inside the section titled \u201Cwhat Lula has done\u201D, next to measures already in force.",
+      comparativo: "The table they call \u201Cthe comparison that says it all\u201D, with the six rows this site audits one by one.",
+    },
+  },
+  entrada: {
+    eyebrow: "Suggest a check",
+    titulo: "Found a number that does not add up?",
+    lead:
+      "This site started with a single campaign piece. If you have come across another claim with real data and a bent conclusion — from any side — send it over. **The more specific the better**: where you saw it, the link or screenshot, and which figure looked off.",
+    botao: "Suggest a fact-check",
+    nota:
+      "Opens a public issue in the project repository. It requires a GitHub account — that is the price of keeping everything auditable, with no third-party form in between.",
+  },
+  dados: {
+    titulo: "Download the dataset",
+    lead:
+      "The {total}-product table, with both windows and the cumulative figure calculated. The same numbers as on the page, in an open format.",
+    csv: "Spreadsheet (CSV)",
+    json: "Data (JSON)",
+  },
   // <<SECOES>>
 };

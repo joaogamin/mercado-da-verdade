@@ -1,4 +1,5 @@
 import type { Dicionario } from "@/i18n";
+import { TOTAL } from "@/data/produtos";
 
 export default function Metodologia({ t }: { t: Dicionario }) {
   const m = t.metodologia;
@@ -29,6 +30,15 @@ export default function Metodologia({ t }: { t: Dicionario }) {
               {f.t} ↗
             </a>
           ))}
+        </div>
+
+        <div className="dados-bloco">
+          <h3 style={{ fontSize: 21, marginBottom: 4 }}>{t.dados.titulo}</h3>
+          <p className="dados-lead">{t.dados.lead.replace("{total}", String(TOTAL))}</p>
+          <div className="dados-links">
+            <a href="/dados/produtos.csv" download className="dados-link">{t.dados.csv} ↓</a>
+            <a href="/dados/produtos.json" download className="dados-link">{t.dados.json} ↓</a>
+          </div>
         </div>
       </div>
     </section>

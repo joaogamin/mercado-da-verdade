@@ -13,6 +13,9 @@ isolam a pandemia e o pico global de alimentos de um lado só.
 ## O achado principal
 
 `src/data/produtos.ts` traz os 112 produtos extraídos da tabela do site original.
+A base sai também em [CSV](/dados/produtos.csv) e [JSON](/dados/produtos.json),
+gerados no `prebuild` por `scripts/gerar-dados.mjs` para nunca divergirem da
+que o site usa.
 As colunas `b` e `l` são as variações publicadas por eles, sem alteração; `a` é o
 **acumulado encadeado** — `((1+b)×(1+l)−1)` — que mostra onde o preço está hoje em
 relação a janeiro de 2019.
@@ -22,6 +25,37 @@ seguem acima do nível de 2019**. O óleo de soja, vendido como "mais barato", a
 +135%. Uma queda depois de uma disparada não devolve o preço.
 
 Como o cálculo usa os números deles, o argumento é reproduzível por qualquer pessoa.
+
+## Estrutura
+
+O site é um hub, não uma página só. A home é o índice; cada análise tem página
+própria:
+
+```
+/                              índice: herói, a régua (método), hub, metodologia
+/checagem/<slug>/              5 checagens + o comparativo auditado + o que confere
+/en/check/<slug>/              o mesmo em inglês
+/es/verificacion/<slug>/       o mesmo em espanhol
+```
+
+São 24 páginas (3 homes + 7 análises × 3 idiomas). `src/i18n/checagens.ts` é a
+fonte única: id, slug por idioma, nota e data de verificação. Acrescentar uma
+checagem nova é acrescentar uma entrada lá, a seção correspondente no
+dicionário e um componente de seção.
+
+Duas das sete análises não julgam uma afirmação específica (o comparativo
+auditado e "o que confere") e por isso **não geram `ClaimReview`** — a tipagem
+obriga a tratar esse caso em todo lugar que consome o índice.
+
+Cada checagem exibe a **prova**: o trecho da peça original capturado da cópia
+no Internet Archive (`public/prova/`), com link para o arquivo. A afirmação
+sobre o IBGE não tem prova porque circula nas redes, não está na peça.
+
+## Contribuir
+
+Viu uma afirmação com dado real e conclusão torta? Abra uma issue pelo
+[template de checagem](https://github.com/joaogamin/mercado-da-verdade/issues/new?template=checagem.yml).
+Afirmações de qualquer lado do espectro são bem-vindas — o critério é o método.
 
 ## Idiomas
 

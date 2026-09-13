@@ -374,5 +374,33 @@ export const es: Dicionario = {
     },
     selos: { "1": "Falso", "2": "Engañoso", "3": "Sin contexto" },
   },
+  prova: {
+    titulo: "La prueba",
+    legenda: "Fragmento de la pieza original, tal como fue archivada el {data}. La imagen está en portugués porque es la página verificada.",
+    verArquivo: "Ver la página completa en el Internet Archive ↗",
+    textos: {
+      desemprego: "La línea del desempleo en la tabla original: \u201C14%+ desempleo récord\u201D contra \u201C5,4% el menor de la historia\u201D.",
+      alimentos: "La pieza compara 13,2% de inflación de alimentos al año en la ventana anterior con 3,0% al año en la actual, y concluye: \u201Cla comida subió 4 veces más con Bolsonaro\u201D.",
+      precos: "La sección \u201Cproducto a producto\u201D del sitio original, con la variación de cada ítem en las dos ventanas y el sello \u201Cmás barato con Lula\u201D.",
+      "escala-6x1": "La ficha \u201Cfin de la jornada 6x1\u201D dentro de la sección titulada \u201Clo que Lula hizo\u201D, junto a medidas que ya están vigentes.",
+      comparativo: "La tabla \u201Cla comparación que lo resume todo\u201D, con las seis líneas que este sitio audita una por una.",
+    },
+  },
+  entrada: {
+    eyebrow: "Sugiere una verificación",
+    titulo: "¿Viste un número que no cierra?",
+    lead:
+      "Este sitio empezó con una sola pieza. Si encontraste otra afirmación con dato real y conclusión torcida — de cualquier lado —, mándala. **Cuanto más específico, mejor**: dónde lo viste, el enlace o la captura, y qué número te pareció raro.",
+    botao: "Sugerir una verificación",
+    nota:
+      "Abre una issue pública en el repositorio del proyecto. Requiere cuenta de GitHub — es el precio de mantener todo auditable, sin formulario de terceros de por medio.",
+  },
+  dados: {
+    titulo: "Descarga la base",
+    lead:
+      "La tabla de {total} productos, con las dos ventanas y el acumulado calculado. Los mismos números de la página, en formato abierto.",
+    csv: "Planilla (CSV)",
+    json: "Datos (JSON)",
+  },
   // <<SECOES>>
 };

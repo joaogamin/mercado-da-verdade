@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Compartilhe from "@/components/Compartilhe";
+import Prova from "@/components/Prova";
 import Alimentos from "@/components/Alimentos";
 import Auditoria from "@/components/Auditoria";
 import Desemprego from "@/components/Desemprego";
@@ -99,6 +100,8 @@ export default function PaginaChecagem({ locale, checagem }: { locale: Locale; c
             {info.ehAfirmacao && <p className="chk-rating">{info.resumo}</p>}
           </div>
         </section>
+
+        <Prova t={t} locale={locale} id={checagem.id} />
 
         <Secao t={t} locale={locale} />
 

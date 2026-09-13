@@ -28,9 +28,11 @@ export function criarMetadata(
   caminho?: string,
   /** hreflang proprio da pagina. Omitido = usa as homes dos tres idiomas. */
   idiomas?: Record<string, string>,
+  /** Imagem de compartilhamento propria. Omitida = a do idioma. */
+  imagem?: string,
 ): Metadata {
   const url = caminho ? SITE_URL + caminho : urlDoLocale(SITE_URL, locale);
-  const og = ogDoLocale(locale);
+  const og = imagem ?? ogDoLocale(locale);
 
   return {
     metadataBase: new URL(SITE_URL),

@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     { title: m.title, desc: m.desc },
     m.caminho,
     idiomasDaChecagem(SITE_URL, c, SEGMENTO_CHECAGEM, LOCALES, DEFAULT_LOCALE),
+    `/og/${"pt-BR"}/${c.slug["pt-BR"]}.png`,
   );
 }
 

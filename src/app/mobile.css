@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Ajustes de celular, carregados por ultimo.
+   Saidos de uma auditoria das 24 paginas em 320-430px: alvos de toque abaixo
+   de 44px e texto informativo abaixo de 12px.
+   ========================================================================== */
+
+/* ---- alvos de toque: minimo de 44px em qualquer largura ---- */
+.marca-header { min-height: 44px; }
+.nav-mob > summary { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-bottom: 0;
+}
+.fonte-link { display: inline-flex; align-items: center; min-height: 44px; }
+.prova-legenda a { display: inline-flex; align-items: center; min-height: 44px; }
+.fbtn { min-height: 44px; }
+
+@media (max-width: 600px) {
+  /* ---- texto informativo: nada abaixo de 12px ---- */
+  .chk-selo,
+  .chk-selo--mini,
+  .chk-rotulo,
+  .tz-selo,
+  .tz-data,
+  .tz-rotulo,
+  .tz-duas-tag,
+  .card-tag,
+  .verdict-label,
+  .stat-k,
+  .pcard-rot,
+  .pcard-badge,
+  .idx-data {
+    font-size: 12px;
+  }
+  .pcard-val span { font-size: 12px; }
+
+  /* Selos e rotulos em caixa alta ficam longos a 12px: menos espacamento
+     entre letras evita quebra feia de linha. */
+  .chk-selo, .tz-selo, .card-tag, .verdict-label { letter-spacing: 0.08em; }
+  .stat-k, .pcard-rot, .tz-rotulo { letter-spacing: 0.06em; }
+
+  /* O link da prova vai para uma linha propria: fica facil de tocar. */
+  .prova-legenda a { display: flex; margin-top: 4px; }
+}
+
+/* A tagline do logo nao cabe legivel ao lado da marca em telas estreitas;
+   a marca continua inteira. */
+@media (max-width: 480px) {
+  .marca-tag { display: none; }
+  .marca-nome { font-size: 19px; }
+}
+
+/* link do GitHub no rodape: tinha 43px de altura */
+.rodape-link { min-height: 44px; }

@@ -8,7 +8,7 @@ export default function Hero({ t }: { t: Dicionario }) {
     <section id="topo" className="hero-sec" style={{ background: "var(--brand)", color: "#fff", padding: "68px 0 0", overflow: "hidden" }}>
       <div className="wrap">
         <span className="mono"
-          style={{ display: "inline-block", background: "var(--accent)", color: "var(--ink)", fontSize: 11.5,
+          style={{ display: "inline-block", background: "var(--accent)", color: "var(--ink)", fontSize: 12,
             fontWeight: 700, letterSpacing: ".16em", padding: "7px 12px", textTransform: "uppercase" }}>
           {h.selo}
         </span>

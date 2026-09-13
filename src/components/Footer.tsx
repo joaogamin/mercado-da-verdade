@@ -35,7 +35,7 @@ export default function Footer({ t, locale }: { t: Dicionario; locale: Locale })
             href="https://github.com/joaogamin/mercado-da-verdade"
             target="_blank"
             rel="noopener noreferrer"
-            className="mono"
+            className="mono rodape-link"
             style={{
               display: "inline-flex", alignItems: "center", gap: 9,
               background: "transparent", color: "#fff", textDecoration: "none",

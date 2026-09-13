@@ -22,7 +22,7 @@ export default function Metodologia({ t }: { t: Dicionario }) {
         <h3 style={{ fontSize: 21, margin: "40px 0 14px" }}>{m.tituloFontes}</h3>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
           {m.fontes.map((f) => (
-            <a key={f.t} href={f.u} target="_blank" rel="noopener noreferrer" className="mono"
+            <a key={f.t} href={f.u} target="_blank" rel="noopener noreferrer" className="mono fonte-link"
               style={{
                 background: "var(--gray)", border: "2px solid var(--line)", padding: "10px 14px",
                 fontSize: 12.5, color: "var(--ink)", textDecoration: "none",

@@ -63,7 +63,7 @@ export default function Regua({ t, locale }: { t: Dicionario; locale: Locale }) 
             <text x={x(3.1) + 7} y={PT + 186} className="mono" fontSize="11.5" fill="#c0161c" fontWeight="700">{r.guerra1}</text>
             <text x={x(3.1) + 7} y={PT + 200} className="mono" fontSize="11.5" fill="#c0161c" fontWeight="700">{r.guerra2}</text>
           </svg>
-          <p className="mono" style={{ fontSize: 11.5, color: "var(--muted)", padding: "4px 12px 0" }}>{r.nota}</p>
+          <p className="mono" style={{ fontSize: 12, color: "var(--muted)", padding: "4px 12px 0" }}>{r.nota}</p>
         </figure>
 
         <div className="duo">

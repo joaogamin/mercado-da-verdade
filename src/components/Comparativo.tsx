@@ -27,7 +27,7 @@ export default function Comparativo({ t }: { t: Dicionario }) {
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "baseline", justifyContent: "space-between" }}>
                   <h3 style={{ fontSize: 26 }}>{l.ind}</h3>
                   <span className="mono" style={{
-                    background: CORES[v], color: "#fff", fontSize: 11, fontWeight: 700,
+                    background: CORES[v], color: "#fff", fontSize: 12, fontWeight: 700,
                     letterSpacing: ".12em", textTransform: "uppercase", padding: "5px 10px",
                   }}>
                     {c.selos[v]}

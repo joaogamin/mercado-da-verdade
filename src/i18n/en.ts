@@ -9,7 +9,6 @@ export const en: Dicionario = {
     inicio: "Home",
     idioma: "Language",
     links: [
-      { href: "#regua", rotulo: "The yardstick" },
       { href: "#alimentos", rotulo: "Food" },
       { href: "#auditoria", rotulo: "Prices" },
       { href: "#desemprego", rotulo: "Unemployment" },

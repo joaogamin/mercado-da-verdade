@@ -13,7 +13,6 @@ export const ptBR = {
     inicio: "Início",
     idioma: "Idioma",
     links: [
-      { href: "#regua", rotulo: "A régua" },
       { href: "#alimentos", rotulo: "Alimentos" },
       { href: "#auditoria", rotulo: "Preços" },
       { href: "#desemprego", rotulo: "Desemprego" },

@@ -12,11 +12,13 @@ import type { Dicionario } from "@/i18n";
 /**
  * Para onde cada item do menu leva agora que o site tem paginas proprias.
  * As chaves sao os hrefs antigos do dicionario — os rotulos continuam os
- * mesmos, so o destino mudou. "A regua" e a unica que segue sendo seccao da
- * home; as demais abrem a pagina da checagem.
+ * mesmos, so o destino mudou: cada item abre a pagina da checagem.
+ *
+ * "A regua" saiu do menu: era o unico item que so rolava a home, e ao clicar
+ * nele o destaque continuava em "Inicio", o que parecia defeito. A seccao
+ * segue na home, logo abaixo do heroi.
  */
 const DESTINO: Record<string, { tipo: "ancora"; id: string } | { tipo: "checagem"; id: string }> = {
-  "#regua": { tipo: "ancora", id: "regua" },
   "#alimentos": { tipo: "checagem", id: "alimentos" },
   "#auditoria": { tipo: "checagem", id: "precos" },
   "#desemprego": { tipo: "checagem", id: "desemprego" },

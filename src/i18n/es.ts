@@ -358,10 +358,20 @@ export const es: Dicionario = {
     verificadoEm: "Verificado el {data}",
     outras: "Otras verificaciones",
     indiceEyebrow: "Las verificaciones",
-    indiceTitulo: "Cinco afirmaciones, una por una.",
+    indiceTitulo: "Cada afirmación, una por una.",
     indiceLead:
       "Cada una tiene su propia página, con la prueba de lo que afirma la pieza original, el contexto que falta y las fuentes primarias. **Los datos son verdaderos en todas ellas** — lo que cambia es lo que quedó afuera.",
     verDetalhe: "Ver la verificación completa →",
+    analise: "Análisis",
+    destaques: {
+      desemprego: "El pico de 14,9% fue en el 1.er trim. de 2021, en plena pandemia",
+      alimentos: "El índice mundial de alimentos de la FAO marcó récord en mar/2022",
+      precos: "109 de los 112 productos siguen por encima del precio de ene/2019",
+      "escala-6x1": "La enmienda aún no fue votada en el pleno del Senado",
+      "comparativo": "Tres de las seis líneas de su tabla se sostienen — y lo confirmamos",
+      "o-que-confere": "El desempleo del 5,4% es real, la informalidad baja y el ingreso está en récord",
+      ibge: "Ninguna evidencia de manipulación del IPCA ni de la PNAD",
+    },
     selos: { "1": "Falso", "2": "Engañoso", "3": "Sin contexto" },
   },
   // <<SECOES>>

@@ -1,32 +1,25 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Regua from "@/components/Regua";
-import Alimentos from "@/components/Alimentos";
-import Auditoria from "@/components/Auditoria";
-import Desemprego from "@/components/Desemprego";
-import Comparativo from "@/components/Comparativo";
-import Escala from "@/components/Escala";
-import Ibge from "@/components/Ibge";
-import Verdade from "@/components/Verdade";
+import IndiceChecagens from "@/components/IndiceChecagens";
 import Metodologia from "@/components/Metodologia";
 import Compartilhe from "@/components/Compartilhe";
 import Autor from "@/components/Autor";
 import Footer from "@/components/Footer";
 import { SITE_URL, VERIFICADO_EM } from "@/lib/site";
-import { urlDoLocale, type Locale } from "@/i18n/config";
+import { SEGMENTO_CHECAGEM, urlDoLocale, type Locale } from "@/i18n/config";
+import { CHECAGENS, caminhoDaChecagem } from "@/i18n/checagens";
 import { getDicionario, type Dicionario } from "@/i18n";
+import { textoDaChecagem } from "@/i18n/checagemTexto";
 
-// Nota e ancora de cada checagem nao dependem do idioma: so o texto depende.
-const AVALIACOES: { valor: number; ancora: string }[] = [
-  { valor: 2, ancora: "#desemprego" },
-  { valor: 3, ancora: "#alimentos" },
-  { valor: 3, ancora: "#auditoria" },
-  { valor: 2, ancora: "#seis-por-um" },
-  { valor: 1, ancora: "#ibge" },
-];
-
+/**
+ * A home e o indice: cada checagem tem pagina propria e leva consigo o seu
+ * ClaimReview. Aqui ficam WebSite e um ItemList apontando para elas — o
+ * Google espera um ClaimReview por pagina, nao cinco empilhados.
+ */
 function jsonLd(t: Dicionario, locale: Locale) {
   const url = urlDoLocale(SITE_URL, locale);
+  const segmento = SEGMENTO_CHECAGEM[locale];
   const autor = {
     "@type": "Organization",
     name: "Mercado da Verdade",
@@ -46,34 +39,17 @@ function jsonLd(t: Dicionario, locale: Locale) {
       dateModified: VERIFICADO_EM,
       description: t.schema.descricao,
     },
-    ...t.schema.checagens.map((c, i) => ({
+    {
       "@context": "https://schema.org",
-      "@type": "ClaimReview",
-      datePublished: VERIFICADO_EM,
-      inLanguage: locale,
-      url: `${url}${AVALIACOES[i].ancora}`,
-      author: autor,
-      claimReviewed: c.claim,
-      itemReviewed: {
-        "@type": "Claim",
-        // author = quem fez a afirmacao (a peca original), exigido pelo Google
-        // para o ClaimReview ser elegivel; nao confundir com o autor da checagem.
-        author: {
-          "@type": "Organization",
-          name: "mercadodamentira.com.br",
-          url: "https://mercadodamentira.com.br/",
-        },
-        datePublished: "2026-09-01",
-        appearance: { "@type": "CreativeWork", url: "https://mercadodamentira.com.br/" },
-      },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: AVALIACOES[i].valor,
-        bestRating: 5,
-        worstRating: 1,
-        alternateName: c.rating,
-      },
-    })),
+      "@type": "ItemList",
+      name: t.checagem.indiceTitulo,
+      itemListElement: CHECAGENS.map((c, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: textoDaChecagem(t, c).titulo,
+        url: SITE_URL + caminhoDaChecagem(locale, c, segmento),
+      })),
+    },
   ];
 }
 
@@ -90,13 +66,7 @@ export default function Pagina({ locale }: { locale: Locale }) {
       <main>
         <Hero t={t} />
         <Regua t={t} locale={locale} />
-        <Alimentos t={t} />
-        <Auditoria t={t} locale={locale} />
-        <Desemprego t={t} locale={locale} />
-        <Comparativo t={t} />
-        <Escala t={t} locale={locale} />
-        <Ibge t={t} />
-        <Verdade t={t} />
+        <IndiceChecagens t={t} locale={locale} />
         <Metodologia t={t} />
         <Compartilhe t={t} locale={locale} />
         <Autor t={t} />

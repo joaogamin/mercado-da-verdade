@@ -358,10 +358,20 @@ export const en: Dicionario = {
     verificadoEm: "Verified on {data}",
     outras: "Other fact-checks",
     indiceEyebrow: "The fact-checks",
-    indiceTitulo: "Five claims, one by one.",
+    indiceTitulo: "Every claim, one by one.",
     indiceLead:
       "Each one has its own page, with proof of what the original piece claims, the missing context and the primary sources. **The data is true in every one of them** — what changes is what was left out.",
     verDetalhe: "Read the full check →",
+    analise: "Analysis",
+    destaques: {
+      desemprego: "The 14.9% peak came in Q1 2021, at the height of the pandemic",
+      alimentos: "The FAO global food index hit its all-time record in Mar 2022",
+      precos: "109 of the 112 items are still above their January 2019 price",
+      "escala-6x1": "The amendment has not yet been voted on the Senate floor",
+      "comparativo": "Three of the six rows in their table hold up — and we confirm them",
+      "o-que-confere": "Unemployment at 5.4% is real, informality is falling and income is at a record",
+      ibge: "No evidence whatsoever of manipulation of the IPCA or the PNAD",
+    },
     selos: { "1": "False", "2": "Misleading", "3": "Lacks context" },
   },
   // <<SECOES>>

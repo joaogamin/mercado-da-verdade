@@ -362,10 +362,20 @@ export const ptBR = {
     verificadoEm: "Verificado em {data}",
     outras: "Outras checagens",
     indiceEyebrow: "As checagens",
-    indiceTitulo: "Cinco afirmações, uma a uma.",
+    indiceTitulo: "Cada afirmação, uma a uma.",
     indiceLead:
       "Cada uma tem página própria, com a prova do que a peça original afirma, o contexto que falta e as fontes primárias. **Os dados são verdadeiros em todas elas** — o que muda é o que foi deixado de fora.",
     verDetalhe: "Ver a checagem completa →",
+    analise: "Análise",
+    destaques: {
+      desemprego: "O pico de 14,9% foi no 1º tri de 2021, no auge da pandemia",
+      alimentos: "O índice global de alimentos da FAO bateu recorde em mar/2022",
+      precos: "109 dos 112 produtos seguem acima do preço de janeiro de 2019",
+      "escala-6x1": "A PEC ainda não foi votada no Plenário do Senado",
+      "comparativo": "Três das seis linhas da tabela deles se sustentam — e nós confirmamos",
+      "o-que-confere": "O desemprego de 5,4% é real, a informalidade cai e a renda está em recorde",
+      ibge: "Nenhuma evidência de manipulação do IPCA ou da PNAD",
+    },
     selos: { "1": "Falso", "2": "Enganoso", "3": "Sem contexto" },
   },
   // <<SECOES>>

@@ -11,10 +11,14 @@ import type { Locale } from "./config";
  */
 export type Checagem = {
   id: string;
-  /** Indice em t.schema.checagens */
-  i: number;
-  /** 1 a 5, usado no reviewRating do ClaimReview */
-  nota: number;
+  /**
+   * Indice em t.schema.checagens. Ausente nas analises que nao sao a checagem
+   * de uma afirmacao especifica (o comparativo auditado, o que confere) — elas
+   * tem pagina propria mas nao geram ClaimReview.
+   */
+  i?: number;
+  /** 1 a 5, usado no reviewRating. Ausente junto com `i`. */
+  nota?: number;
   /** Id da seccao na home antiga — mantido nos cards do indice para nao
    *  quebrar links ja compartilhados como /#desemprego */
   ancora: string;
@@ -43,7 +47,18 @@ export const CHECAGENS: Checagem[] = [
     id: "ibge", i: 4, nota: 1, ancora: "ibge", verificadoEm: "2026-09-09",
     slug: { "pt-BR": "ibge", en: "ibge", es: "ibge" },
   },
+  {
+    id: "comparativo", ancora: "comparativo", verificadoEm: "2026-09-09",
+    slug: { "pt-BR": "comparativo", en: "comparison", es: "comparacion" },
+  },
+  {
+    id: "o-que-confere", ancora: "verdade", verificadoEm: "2026-09-09",
+    slug: { "pt-BR": "o-que-confere", en: "what-holds-up", es: "lo-que-es-cierto" },
+  },
 ];
+
+/** Só as que geram ClaimReview — usado onde a nota é obrigatória. */
+export const AFIRMACOES = CHECAGENS.filter((c) => c.i !== undefined);
 
 export function checagemPorSlug(locale: Locale, slug: string): Checagem | undefined {
   return CHECAGENS.find((c) => c.slug[locale] === slug);

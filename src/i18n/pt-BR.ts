@@ -10,6 +10,7 @@ export const ptBR = {
     marca: "Mercado da",
     marcaDestaque: "Verdade",
     abrirMenu: "Abrir menu",
+    inicio: "Início",
     idioma: "Idioma",
     links: [
       { href: "#regua", rotulo: "A régua" },

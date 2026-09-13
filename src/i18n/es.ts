@@ -6,6 +6,7 @@ export const es: Dicionario = {
     marca: "Mercado da",
     marcaDestaque: "Verdade",
     abrirMenu: "Abrir menú",
+    inicio: "Inicio",
     idioma: "Idioma",
     links: [
       { href: "#regua", rotulo: "La vara" },

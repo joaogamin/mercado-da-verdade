@@ -79,7 +79,7 @@ export default function PaginaChecagem({ locale, checagem }: { locale: Locale; c
       {jsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       )}
-      <Header t={t} locale={locale} base={inicio} />
+      <Header t={t} locale={locale} atual={checagem} />
 
       <main>
         <section className="sec sec--tight" style={{ background: "var(--brand)", color: "#fff" }}>

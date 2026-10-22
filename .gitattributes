@@ -1,0 +1,4 @@
+# Dados e fixtures dos municipios sao prova: os bytes nao podem mudar no
+# checkout (o sha256 do manifesto.json esta carimbado no .ots).
+dados/municipios/** -text
+municipios/fontes/**/fixtures/** -text

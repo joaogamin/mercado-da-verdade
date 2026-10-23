@@ -12,7 +12,7 @@ const mapa = (...es: Empenho[]) => new Map(es.map((e) => [e.id, structuredClone(
 const cobertura = (numeros: number[]) => [{ ano: 2025, entidade: "prefeitura", de: "2025-03-01", ate: "2025-03-31", numeros }];
 const base = { campos: ["credor.nome", "empenhado", "especificacao"], coleta: "c2", em: "2026-11-01T03:00:00Z" };
 
-test("carga inicial nao gera um evento por empenho", () => {
+test("empenho novo nao vira evento (so contagem no resumo)", () => {
   const ev = comparar(new Map(), mapa(emp(1), emp(2)), { ...base, coberturas: cobertura([1, 2]), ausentes: [] });
   assert.deepEqual(ev, []);
 });
@@ -41,6 +41,13 @@ test("alteracao em campo sensivel registra antes e depois", () => {
   const ev = comparar(mapa(emp(1)), mapa(emp(1, { empenhado: 90_00, credor: { nome: "OUTRA LTDA", documento: "04.210.265/0001-75", tipo: "PJ" } })),
     { ...base, coberturas: cobertura([1]), ausentes: [] });
   assert.deepEqual(ev.map((e) => [e.campo, e.antes, e.depois]), [["credor.nome", "EMPRESA X LTDA", "OUTRA LTDA"], ["empenhado", 10000, 9000]]);
+});
+
+test("mesmo valor com chaves em outra ordem nao e alteracao (base em disco × parser)", () => {
+  const doDisco = emp(1, { detalhe: { licitacao: { ano: 2025, modalidade: "Inexigibilidade", numero: 126 } } as Empenho["detalhe"] });
+  const doParser = emp(1, { detalhe: { licitacao: { ano: 2025, numero: 126, modalidade: "Inexigibilidade" } } as Empenho["detalhe"] });
+  const ev = comparar(mapa(doDisco), mapa(doParser), { ...base, campos: ["licitacao"], coberturas: [], ausentes: [] });
+  assert.deepEqual(ev, []);
 });
 
 test("detalhe coletado pela primeira vez nao e alteracao; o portal dizer que nao existe e remocao", () => {

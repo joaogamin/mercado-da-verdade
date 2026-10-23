@@ -117,6 +117,12 @@ async function main(): Promise<number> {
     const estado = await lerEstado(cfg.slug, arg);
     if (op.desde) {
       if (!ETAPAS.includes(op.desde as NomeEtapa)) throw new Error(`etapa invalida: ${op.desde}`);
+      // Renormalizar uma coleta antiga por cima de coletas posteriores reaplicaria
+      // observacoes velhas sobre as novas. Para refazer a historia, a dobra inteira.
+      const posteriores = (await readdir(caminhos(cfg.slug).coletas)).filter((c) => c > estado.id);
+      if (["coletar", "arquivar", "normalizar", "comparar"].includes(op.desde) && posteriores.length) {
+        throw new Error(`a coleta ${estado.id} tem ${posteriores.length} coleta(s) posterior(es): use "atualizar --escopo reprocessar" para refazer a normalizacao`);
+      }
       reabrirDesde(estado, op.desde as NomeEtapa);
     }
     log(`retomando ${estado.id}`);

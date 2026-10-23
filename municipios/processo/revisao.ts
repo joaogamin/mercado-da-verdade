@@ -42,17 +42,21 @@ export function gerarRevisao(o: {
   const conta = (t: string) => o.eventos.filter((e) => e.tipo === t).length;
   add("## O que mudou", "",
     `- Empenhos na base: **${o.base.empenhos.size.toLocaleString("pt-BR")}**`,
-    `- Novos: ${conta("novo")} · alterados: ${conta("alterado")} · removidos do portal: ${conta("removido")} · reapareceram: ${conta("reaparecido")}`,
+    `- Novos: ${Number(estado.etapas.comparar.resumo?.novos ?? 0).toLocaleString("pt-BR")} · alterados: ${conta("alterado")} · removidos do portal: ${conta("removido")} · reapareceram: ${conta("reaparecido")}`,
     `- Detalhes coletados nesta execução: ${Number(estado.etapas.coletar.resumo?.detalhes ?? 0).toLocaleString("pt-BR")}`,
     ...(Number(estado.etapas.coletar.resumo?.adiados ?? 0) > 0
       ? [`- Ficaram para a próxima coleta (prazo da execução): ${Number(estado.etapas.coletar.resumo?.adiados).toLocaleString("pt-BR")}`]
       : []),
     "");
 
-  add("## Conferência com o balancete oficial", "", "| Exercício | Nossa soma (empenhado) | Balancete do portal | Diferença | Empenhos com detalhe |", "|---|---|---|---|---|");
+  add("## Conferência com o balancete oficial", "", "| Exercício | Medida | Nossa soma | Balancete do portal | Diferença | Entra no portão? |", "|---|---|---|---|---|---|");
   for (const x of o.conferencia.exercicios) {
-    add(`| ${x.ano} | ${reais(x.nosso.empenhado)} | ${x.oficial ? reais(x.oficial.empenhado) : "—"} | ${pct(x.diferencaPct.empenhado)} | ${x.cobertura.comDetalhe.toLocaleString("pt-BR")} de ${x.cobertura.total.toLocaleString("pt-BR")} (${pct(x.cobertura.pct)}) |`);
+    if (!x.comparacoes.length) add(`| ${x.ano} | — | ${reais(x.nosso.pagoNoExercicio)} (pago no exercício) | sem balancete | — | — |`);
+    for (const c of x.comparacoes) {
+      add(`| ${x.ano} | ${c.rotulo} | ${reais(c.nosso)} | ${reais(c.oficial)} | ${pct(c.diferencaPct)} | ${c.comparavel ? (c.id === "pago-exercicio" ? "sim" : "informativo") : "não: " + c.explicacao.split(";")[0]} |`);
+    }
   }
+  add("", ...o.conferencia.exercicios.map((x) => `- ${x.ano}: detalhe coletado para ${x.cobertura.comDetalhe.toLocaleString("pt-BR")} de ${x.cobertura.total.toLocaleString("pt-BR")} empenhos (${pct(x.cobertura.pct)})`));
   const qualidade = o.conferencia.exercicios.flatMap((x) => x.qualidade.map((q) => `${x.ano}: ${q}`));
   if (qualidade.length) add("", "Qualidade dos dados do portal:", ...qualidade.map((q) => `- ${q}`));
   add("");

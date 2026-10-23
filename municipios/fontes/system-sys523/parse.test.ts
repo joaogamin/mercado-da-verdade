@@ -41,10 +41,9 @@ test("lista de empenhos: 29 linhas, empenhado confere e a divergencia do rodape 
   assert.equal(valor.total.empenhado, 43299955);
   // O rodape do proprio portal nao e a soma das linhas no liquidado e no pago:
   // fica registrado como divergencia (ver diario de 22/10/2026).
-  assert.deepEqual(divergencias, [
-    "liquidado: soma das linhas 40244289 × Total Geral do portal 46355621",
-    "pago: soma das linhas 40244289 × Total Geral do portal 46355621",
-  ]);
+  assert.equal(divergencias!.length, 2);
+  assert.match(divergencias![0], /^liquidado: soma das linhas R\$\s402\.442,89 × Total Geral do portal R\$\s463\.556,21$/);
+  assert.match(divergencias![1], /^pago: soma das linhas R\$\s402\.442,89 × Total Geral do portal R\$\s463\.556,21$/);
   const folha = valor.itens.find((i) => i.numero === 3509)!;
   assert.equal(folha.credor.tipo, "folha");
   assert.equal(folha.data, "2025-03-10");
@@ -52,6 +51,22 @@ test("lista de empenhos: 29 linhas, empenhado confere e a divergencia do rodape 
   assert.equal(mei.credor.tipo, "PJ");
   assert.equal(mei.credor.nome, "JOÃO EDUARDO VINCK ***.928.160-**");
   assert.ok(valor.itens.some((i) => i.credor.tipo === "PF"));
+});
+
+test("lista: 'Pago em Restos' em branco no exercicio corrente vira zero e fica registrado; outro campo vazio e erro", () => {
+  const cab = '"Empenho","Data","Credor","CNPJ/CPF","Valor Empenhado","Valor Liquidado","Valor Pago","Valor Pago em Restos"';
+  const nb = String.fromCharCode(0xa0); // NBSP, como o portal usa depois do R$
+  // o portal entrega ISO-8859-1
+  const csv = (restos: string, pago = `R$${nb}80,00`) => new Uint8Array(Buffer.from([
+    cab,
+    `"2026 / 13823","27/08/2026","STARK COMÉRCIO DE FERRAMENTAS LTDA","23.621.473/0001-01","R$${nb}80,00","R$${nb}80,00","${pago}","${restos}"`,
+    `"","","","Total Geral:","R$${nb}80,00","R$${nb}80,00","R$${nb}80,00","R$${nb}0,00"`,
+  ].join("\n"), "latin1"));
+  const { valor, avisos, divergencias } = lerListaEmpenhos(csv(""));
+  assert.equal(valor.itens[0].pagoRestos, 0);
+  assert.deepEqual(avisos, []);
+  assert.match(divergencias!.join(), /1 linhas com "Pago em Restos" em branco/);
+  assert.throws(() => lerListaEmpenhos(csv(`R$${nb}0,00`, "")), /valor monetario invalido/);
 });
 
 test("balancete por orgao de 2025: dotacao atualizada igual a inicial", () => {

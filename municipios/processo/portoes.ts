@@ -11,7 +11,20 @@ import { RAIZ } from "./caminhos.ts";
 
 export type Portao = { nome: string; ok: boolean; detalhe: string };
 
-/** Procura CPF completo em todo arquivo de texto versionado ou publicado. */
+/** Todas as strings de um valor JSON (numeros ficam de fora). */
+function textosDoJson(v: unknown, out: string[] = []): string[] {
+  if (typeof v === "string") out.push(v);
+  else if (Array.isArray(v)) for (const x of v) textosDoJson(x, out);
+  else if (v && typeof v === "object") for (const x of Object.values(v)) textosDoJson(x, out);
+  return out;
+}
+
+/**
+ * Procura CPF completo em todo arquivo versionado ou publicado. Nos JSON so
+ * olha os textos: um valor em centavos acima de R$ 100 mi tem 11 digitos e
+ * pareceria um CPF (ex.: 58015975075). O pipeline nunca guarda documento
+ * como numero.
+ */
 export async function varrerPrivacidade(dirs: string[]): Promise<string[]> {
   const achados: string[] = [];
   const visitar = async (dir: string) => {
@@ -20,7 +33,11 @@ export async function varrerPrivacidade(dirs: string[]): Promise<string[]> {
       const c = join(dir, e.name);
       if (e.isDirectory()) { if (e.name !== "brutos") await visitar(c); continue; }
       if (!/\.(json|ndjson|md|csv|html|txt)$/i.test(e.name)) continue;
-      const cpfs = encontrarCpfs(await readFile(c, "utf8"));
+      const conteudo = await readFile(c, "utf8");
+      const textos = /\.json$/i.test(e.name) ? textosDoJson(JSON.parse(conteudo))
+        : /\.ndjson$/i.test(e.name) ? conteudo.split("\n").filter((l) => l.trim()).flatMap((l) => textosDoJson(JSON.parse(l)))
+          : [conteudo];
+      const cpfs = textos.flatMap((t) => encontrarCpfs(t));
       if (cpfs.length) achados.push(`${relative(RAIZ, c)}: ${cpfs.length} ocorrência(s)`);
     }
   };
@@ -46,15 +63,15 @@ export function avaliarPortoes(o: {
     detalhe: o.privacidade.length ? `CPF completo encontrado: ${o.privacidade.join("; ")}` : "nenhum CPF completo nos dados versionados ou publicados",
   });
 
-  const conferidos = o.conferencia.exercicios.filter((x) => x.diferencaPct.empenhado !== null);
-  const fora = conferidos.filter((x) => Math.abs(x.diferencaPct.empenhado!) > p.divergenciaMaximaPct);
+  const conferidos = o.conferencia.exercicios.filter((x) => x.diferencaPct !== null);
+  const fora = conferidos.filter((x) => Math.abs(x.diferencaPct!) > p.divergenciaMaximaPct);
   portoes.push({
     nome: "Conferência",
     ok: fora.length === 0,
     detalhe: fora.length
-      ? fora.map((x) => `${x.ano}: nossa soma difere ${x.diferencaPct.empenhado}% do balancete`).join("; ")
+      ? fora.map((x) => `${x.ano}: o pago dentro do exercício difere ${x.diferencaPct}% do balancete`).join("; ")
       : conferidos.length
-        ? `nossa soma de empenhado dentro de ±${p.divergenciaMaximaPct}% do balancete oficial (${conferidos.map((x) => x.ano).join(", ")})`
+        ? `pago dentro do exercício confere com o balancete oficial, dentro de ±${p.divergenciaMaximaPct}% (${conferidos.map((x) => `${x.ano}: ${x.diferencaPct}%`).join(", ")})`
         : "sem balancete oficial na base ainda: nada a conferir (escopo sem balancete)",
   });
 

@@ -20,8 +20,9 @@ export function documentoPublico(doc: string): string {
 }
 
 // CPF solto em texto: 11 digitos seguidos ou no formato 000.000.000-00, sem
-// digito colado dos dois lados (para nao pegar pedaco de CNPJ ou de numero maior).
-const CPF_EM_TEXTO = /(?<![\d.\/-])(\d{3})\.?(\d{3})\.?(\d{3})-?(\d{2})(?![\d\/-])/g;
+// letra ou digito colado dos dois lados — para nao pegar pedaco de CNPJ, de
+// numero maior ou de um hash hexadecimal (sha256 com 11 digitos seguidos).
+const CPF_EM_TEXTO = /(?<![\w.\/-])(\d{3})\.?(\d{3})\.?(\d{3})-?(\d{2})(?![\w\/-])/g;
 
 /** Mascara qualquer CPF que apareca dentro de um texto (ex.: nome de MEI). */
 export function mascararCpfsNoTexto(texto: string): { texto: string; mascarou: boolean } {

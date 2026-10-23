@@ -47,3 +47,11 @@ test("privacidade: CPF dentro de nome de MEI, cru ou formatado", () => {
   assert.equal(mascararCpfsNoTexto("***.456.789-**").mascarou, false);
   assert.deepEqual(encontrarCpfs(`x ${cpf} y`), [cpf]);
 });
+
+test("privacidade: hash hexadecimal com 11 digitos seguidos nao e CPF", () => {
+  // trecho real de um sha256 que disparou o portao na coleta de marco/2025
+  assert.deepEqual(encontrarCpfs("04ea688dd2eda10858dada848c7ca12e"), []);
+  assert.deepEqual(encontrarCpfs(`ab${cpf}cd`), []);
+  assert.deepEqual(encontrarCpfs(`"documento":"${cpf}"`), [cpf]);
+  assert.deepEqual(encontrarCpfs(`CPF: ${cpf}.`), [cpf]);
+});

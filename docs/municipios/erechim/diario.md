@@ -89,3 +89,45 @@ Só se acrescenta: uma correção é uma entrada nova, nunca uma edição de ent
 **Ritmo e limite do Actions.** Cerca de 2,3 s por detalhe, ou ~13 h por ano completo. Um job do GitHub Actions
 dura até 6 h, então a coleta ganhou `--prazo`: ela para de pedir detalhes, publica o que tem, e o resto entra na
 incremental seguinte.
+
+---
+
+## 23/10/2026: lista completa de 2025 e 2026 e a primeira conferência de verdade
+
+**Feito.**
+- Coletados março de 2025 com detalhe completo (1.503 empenhos) e a lista inteira de 2025 e 2026: 36.410 empenhos,
+  balancetes e API.
+- A carga de detalhes dos demais 34.907 empenhos fica para as próximas incrementais (`--prazo`).
+
+**A conferência fecha ao centavo, e isso revelou o que cada tela mede.**
+- O "valor pago" de cada empenho na lista é o **total pago em qualquer ano**: inclui os restos pagos depois.
+  O balancete conta só o pago dentro do exercício.
+- Descontado o "pago em restos", em 2025 a soma da lista dá **R$ 536.447.146,90**, idêntica ao balancete.
+  Em 2026 (em curso), a diferença é de 0,03%, e o liquidado bate ao centavo (R$ 454.275.228,63).
+- O empenhado não bate (+5,14% em 2025 e +4,3% em 2026). A lista e a API mostram o mesmo valor, o original
+  de cada empenho. Hipótese: o balancete desconta as anulações. **A confirmar** com um empenho anulado.
+- Decisão: o portão de conferência usa o **pago dentro do exercício**. Liquidado e empenhado aparecem como
+  informativos, cada um com a explicação.
+
+**"Pago em Restos" em branco.** Nos meses de 2026, a coluna vem vazia, e não `R$ 0,00`, em empenhos do ano corrente.
+O rodapé do portal diz R$ 0,00. Só essa coluna aceita branco, lido como zero e registrado; qualquer outro campo vazio
+continua parando a coleta.
+
+**O que os dados reais pegaram no nosso código (antes de publicar).**
+- Portão de privacidade com dois falsos positivos:
+  - hashes sha256 com 11 dígitos seguidos;
+  - valores em centavos acima de R$ 100 mi (11 dígitos).
+
+  Agora a fronteira exclui letras, e nos JSON só os textos são examinados.
+- "Parcela contratada com disputa" estava inflada (72,8%): contava adesão a ata de outro órgão, credenciamento e
+  chamada pública. O valor honesto é **52,1%**.
+- O explorador dizia "pago + restos", mas o pago já inclui os restos. Corrigido para "dos quais … em anos seguintes".
+- **Alterações fantasmas:** a comparação usava `JSON.stringify`. Com as chaves em ordem diferente entre a base em
+  disco e o parser, um valor idêntico aparecia como "alterado", o que bloquearia toda incremental. Agora a comparação
+  é feita na forma canônica, com teste.
+- Renormalizar uma coleta antiga por cima de coletas posteriores gerava eventos falsos. O CLI agora recusa e manda
+  usar `--escopo reprocessar`.
+- Os derivados das três primeiras coletas (eventos, normalização, revisão) foram regenerados pelo reprocessamento
+  `2026-10-23T012753Z`. Os brutos, os manifestos e os carimbos não mudaram.
+
+**Determinismo verificado.** Duas execuções de `reprocessar` produzem os mesmos sha256 nos 34 arquivos derivados.

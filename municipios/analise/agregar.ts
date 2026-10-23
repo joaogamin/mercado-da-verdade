@@ -162,7 +162,7 @@ export async function analisar(cfg: ConfigCidade, base: Base): Promise<Record<st
   const resumo: Record<string, unknown> = {};
   for (const [k, es] of [...grupos].sort(([a], [b]) => a.localeCompare(b))) {
     const [entidade, ano] = [k.slice(0, k.lastIndexOf("-")), Number(k.slice(k.lastIndexOf("-") + 1))];
-    const pct = conf?.exercicios.find((x) => x.entidade === entidade && x.ano === ano)?.diferencaPct.empenhado ?? null;
+    const pct = conf?.exercicios.find((x) => x.entidade === entidade && x.ano === ano)?.diferencaPct ?? null;
     const ex = agregarExercicio(cfg, entidade, ano, es, pct);
     await gravarJson(join(caminhos(cfg.slug).analise, `${k}.json`), ex);
     resumo[k] = { empenhos: ex.totais.empenhos, orgaos: ex.orgaos.length, credores: ex.credores.length };

@@ -28,7 +28,7 @@ Os demais usam o de compras e outros serviços. É uma regra conservadora, que t
 | Item | ✓ quando | Estado neutro (?) |
 |---|---|---|
 | A soma confere com o balancete | diferença ≤ 0,5% | sem balancete coletado |
-| Parcela contratada com disputa | ≥ 50% do contratado fora da folha teve licitação com disputa | sem detalhes |
+| Parcela contratada com disputa | ≥ 50% do contratado fora da folha teve disputa feita pela prefeitura: pregão, concorrência, tomada de preços, convite, leilão ou concurso. Adesão a ata de outro órgão, credenciamento e chamada pública **não contam**: contá-las inflaria este item (em março de 2025, de 52,1% para 72,8%) | sem detalhes |
 | Prazo típico de pagamento | mediana ≤ 30 dias | sem pagamentos detalhados |
 | Mínimos constitucionais (saúde 15%, educação 25%) | ainda não implementado: depende da receita de impostos (RREO) | sempre "?" por enquanto |
 

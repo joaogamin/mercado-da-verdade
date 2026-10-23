@@ -24,7 +24,8 @@ import { incorporar, type ResultadoNormalizacao } from "./normalizar.ts";
 import { avaliarPortoes, varrerPrivacidade, type Portao } from "./portoes.ts";
 import { gerarRevisao } from "./revisao.ts";
 
-type Dobra = { antes: Base; depois: Base; eventos: Evento[]; avisos: string[]; divergencias: string[]; soNaApi: number };
+type PorColeta = { eventos: Evento[]; avisos: string[]; divergencias: string[]; soNaApi: number };
+type Dobra = PorColeta & { antes: Base; depois: Base; porColeta: Map<string, PorColeta> };
 
 export type Contexto = { cfg: ConfigCidade; estado: Estado; log: (s: string) => void; dobra?: Dobra };
 
@@ -54,14 +55,16 @@ async function dobrar(ctx: Contexto): Promise<Dobra> {
   const antes = await carregarBase(cfg.slug);
   const atual = reprocessar ? baseVazia() : clonarBase(antes);
   const coletas = reprocessar ? await todasAsColetas(cfg.slug) : [estado.id];
-  const d: Dobra = { antes, depois: atual, eventos: [], avisos: [], divergencias: [], soNaApi: 0 };
+  const d: Dobra = { antes, depois: atual, eventos: [], avisos: [], divergencias: [], soNaApi: 0, porColeta: new Map() };
 
   for (const coleta of coletas) {
     const anterior = clonarBase(atual);
     const r: ResultadoNormalizacao = await incorporar(atual, [coleta], fonte, cfg);
-    d.eventos.push(...comparar(anterior.empenhos, atual.empenhos, {
+    const eventos = comparar(anterior.empenhos, atual.empenhos, {
       coberturas: r.coberturas, ausentes: r.ausentes, campos: cfg.portoes.camposSensiveis, coleta, em: instanteDaColeta(coleta),
-    }));
+    });
+    d.eventos.push(...eventos);
+    d.porColeta.set(coleta, { eventos, avisos: r.avisos, divergencias: r.divergencias, soNaApi: r.soNaApi.length });
     if (coleta === coletas[coletas.length - 1]) {
       d.avisos = r.avisos; d.divergencias = r.divergencias; d.soNaApi = r.soNaApi.length;
     }
@@ -97,12 +100,19 @@ const EXECUTORES: Record<Exclude<NomeEtapa, "publicar">, (ctx: Contexto) => Prom
     const p = caminhos(ctx.cfg.slug);
     const d = ctx.dobra;
     await gravarBase(ctx.cfg.slug, d.depois);
-    // o reprocessamento reconstroi a historia inteira; a coleta normal so acrescenta
-    if (ctx.estado.escopo === "reprocessar") await gravarNdjson(p.eventos, d.eventos);
-    else await acrescentarNdjson(p.eventos, d.eventos);
+    // o reprocessamento reconstroi a historia inteira, inclusive os derivados de
+    // cada coleta; a coleta normal so acrescenta
+    if (ctx.estado.escopo === "reprocessar") {
+      await gravarNdjson(p.eventos, d.eventos);
+      for (const [id, c] of d.porColeta) {
+        await gravarNdjson(join(p.coleta(id), "eventos.ndjson"), c.eventos);
+        await gravarJson(join(p.coleta(id), "normalizacao.json"), { avisos: c.avisos, divergencias: c.divergencias, soNaApi: c.soNaApi });
+      }
+    } else await acrescentarNdjson(p.eventos, d.eventos);
     await gravarNdjson(join(p.coleta(ctx.estado.id), "eventos.ndjson"), d.eventos);
     const conta = (t: string) => d.eventos.filter((e) => e.tipo === t).length;
-    return { novos: conta("novo"), alterados: conta("alterado"), removidos: conta("removido"), reaparecidos: conta("reaparecido") };
+    const novos = [...d.depois.empenhos.keys()].filter((k) => !d.antes.empenhos.has(k)).length;
+    return { novos, alterados: conta("alterado"), removidos: conta("removido"), reaparecidos: conta("reaparecido") };
   },
 
   async conferir(ctx) {
@@ -111,7 +121,7 @@ const EXECUTORES: Record<Exclude<NomeEtapa, "publicar">, (ctx: Contexto) => Prom
     const n = await lerJson<{ divergencias: string[]; soNaApi: number }>(join(p.coleta(ctx.estado.id), "normalizacao.json"), { divergencias: [], soNaApi: 0 });
     const c = conferir(base, { divergenciasPortal: n.divergencias, soNaApi: n.soNaApi });
     await gravarJson(p.conferencia, c);
-    return Object.fromEntries(c.exercicios.map((x) => [x.ano, `${x.diferencaPct.empenhado ?? "—"}% · detalhe ${x.cobertura.pct}%`]));
+    return Object.fromEntries(c.exercicios.map((x) => [x.ano, `${x.diferencaPct ?? "—"}% · detalhe ${x.cobertura.pct}%`]));
   },
 
   async analisar(ctx) {

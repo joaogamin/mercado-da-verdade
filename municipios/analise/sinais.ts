@@ -132,7 +132,7 @@ function prazos(es: Empenho[]): { sinal: Sinal; mediana: number | null } {
     sinal: {
       id: "prazo-pagamento",
       titulo: "Espera entre liquidação e pagamento",
-      resumo: mediana === null ? "Ainda sem pagamentos detalhados." : `Metade dos pagamentos sai em até ${mediana} dia(s) depois da liquidação. Abaixo, as esperas mais longas.`,
+      resumo: mediana === null ? "Ainda sem pagamentos detalhados." : `Metade dos pagamentos sai em até ${mediana} ${mediana === 1 ? "dia" : "dias"} depois da liquidação. Abaixo, as esperas mais longas.`,
       itens: longos.map((x) => ({
         titulo: `${x.e.ano}/${x.e.numero} · ${x.e.credor.nome}`, valor: x.valor,
         detalhe: `${x.dias} dias entre a liquidação e o pagamento`, chaveCredor: chaveCredor(x.e), empenhos: [x.e.numero],
@@ -148,25 +148,29 @@ export function calcularSinais(todos: Empenho[], ano: number, conferenciaPct: nu
   const p = prazos(es);
   const c = es.filter(contratavel);
   const total = c.reduce((s, e) => s + e.empenhado, 0);
-  const competitivo = c.filter((e) => e.detalhe!.licitacao && !/dispensa|inexig/i.test(e.detalhe!.licitacao.modalidade)).reduce((s, e) => s + e.empenhado, 0);
+  // Disputa e so a que a propria prefeitura fez entre concorrentes. Adesao a ata
+  // de outro orgao, credenciamento e chamada publica nao entram: contar como
+  // disputa inflaria justamente o item "em ordem".
+  const DISPUTA = /preg[aã]o|concorr[eê]ncia|tomada de pre[cç]os|convite|leil[aã]o|concurso/i;
+  const competitivo = c.filter((e) => DISPUTA.test(e.detalhe!.licitacao?.modalidade ?? "")).reduce((s, e) => s + e.empenhado, 0);
 
   const emOrdem: EmOrdem[] = [
     {
       id: "conferencia",
       titulo: "A soma confere com o balancete da prefeitura",
-      detalhe: conferenciaPct === null ? "Ainda sem balancete coletado para comparar." : `Nossa soma dos empenhos difere ${conferenciaPct.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}% do balancete oficial.`,
+      detalhe: conferenciaPct === null ? "Ainda sem balancete coletado para comparar." : `Somando empenho a empenho o que foi pago dentro do ano, a diferença para o balancete do portal é de ${conferenciaPct.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}%.`,
       ok: conferenciaPct === null ? null : Math.abs(conferenciaPct) <= 0.5,
     },
     {
       id: "licitado",
       titulo: "Parcela contratada com disputa",
-      detalhe: total ? `${pct(competitivo / total)} do que foi contratado fora da folha teve licitação com disputa (pregão, concorrência e similares).` : "Ainda sem detalhes suficientes.",
+      detalhe: total ? `${pct(competitivo / total)} do que foi contratado fora da folha teve disputa feita pela prefeitura (pregão, concorrência, tomada de preços, convite). Adesão a ata de outro órgão, credenciamento e chamada pública ficam de fora.` : "Ainda sem detalhes suficientes.",
       ok: total ? competitivo / total >= 0.5 : null,
     },
     {
       id: "prazo",
       titulo: "Prazo típico de pagamento",
-      detalhe: p.mediana === null ? "Ainda sem pagamentos detalhados." : `Metade dos pagamentos sai em até ${p.mediana} dia(s) depois da liquidação.`,
+      detalhe: p.mediana === null ? "Ainda sem pagamentos detalhados." : `Metade dos pagamentos sai em até ${p.mediana} ${p.mediana === 1 ? "dia" : "dias"} depois da liquidação.`,
       ok: p.mediana === null ? null : p.mediana <= 30,
     },
     {

@@ -104,5 +104,5 @@ async function exportarDownloads(cfg: ConfigCidade, dir: string, k: string, es: 
     nota: "Valores em reais exatamente como publicados pela prefeitura. CPF de pessoa física mascarado no mesmo padrão das telas do portal. Cada linha traz a página oficial, o instante da coleta e o sha256 da resposta original.",
     gerado_em: new Date().toISOString().slice(0, 10),
     empenhos: linhas,
-  }, null, 1), "utf8");
+  }), "utf8");
 }

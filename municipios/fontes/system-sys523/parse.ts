@@ -20,6 +20,7 @@ import { atualizacao } from "./jsf.ts";
 export type ComAvisos<T> = { valor: T; avisos: string[]; divergencias?: string[] };
 
 const latin1 = (b: Uint8Array) => new TextDecoder("latin1").decode(b);
+const reais = (c: number) => (c / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const utf8 = (b: Uint8Array) => new TextDecoder("utf-8").decode(b);
 const limpar = (s: string) => s.replace(/ /g, " ").replace(/\s+/g, " ").trim();
 
@@ -54,6 +55,11 @@ export function lerListaEmpenhos(bytes: Uint8Array): ComAvisos<{ itens: EmpenhoL
   const avisos: string[] = [];
   const itens: EmpenhoLista[] = [];
   let total: TotaisLista | undefined;
+  // "Pago em Restos" vem em branco para empenhos do exercicio corrente (restos
+  // so existem depois do fechamento) e o proprio rodape do portal diz R$ 0,00.
+  // So essa coluna aceita branco; qualquer outro campo vazio continua sendo erro.
+  let restosEmBranco = 0;
+  const restos = (v: string) => (v === "" ? (restosEmBranco++, 0) : centavos(v));
   for (const l of linhas.slice(1)) {
     if (l[3] === "Total Geral:") {
       total = { empenhado: centavos(l[4]), liquidado: centavos(l[5]), pago: centavos(l[6]), pagoRestos: centavos(l[7]) };
@@ -69,18 +75,22 @@ export function lerListaEmpenhos(bytes: Uint8Array): ComAvisos<{ itens: EmpenhoL
       empenhado: centavos(l[4]),
       liquidado: centavos(l[5]),
       pago: centavos(l[6]),
-      pagoRestos: centavos(l[7]),
+      pagoRestos: restos(l[7]),
     });
   }
   if (!total) throw new Error("lista de empenhos sem a linha Total Geral (arquivo truncado?)");
+  if (restosEmBranco && total.pagoRestos !== 0) {
+    avisos.push(`${restosEmBranco} linhas com "Pago em Restos" em branco, mas o rodapé não é zero`);
+  }
 
   // O rodape do portal nem sempre e a soma das linhas (em 10/03/2025 o liquidado
   // do rodape inclui algo que as linhas nao mostram). Registramos, nao corrigimos.
   const divergencias: string[] = [];
   const soma = (k: keyof TotaisLista) => itens.reduce((s, i) => s + i[k], 0);
   for (const k of ["empenhado", "liquidado", "pago", "pagoRestos"] as const) {
-    if (soma(k) !== total[k]) divergencias.push(`${k}: soma das linhas ${soma(k)} × Total Geral do portal ${total[k]}`);
+    if (soma(k) !== total[k]) divergencias.push(`${k}: soma das linhas ${reais(soma(k))} × Total Geral do portal ${reais(total[k])}`);
   }
+  if (restosEmBranco) divergencias.push(`${restosEmBranco} linhas com "Pago em Restos" em branco no portal, lidas como R$ 0,00 (o rodapé do portal é R$ 0,00)`);
   return { valor: { itens, total }, avisos, divergencias };
 }
 

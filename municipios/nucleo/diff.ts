@@ -1,6 +1,7 @@
 // Etapa 4: compara a base publicada com a nova e gera os eventos. O historico
 // so cresce: o que some do portal fica na base com removidoEm, nunca e apagado.
 import type { Empenho, Evento } from "./esquema.ts";
+import { jsonEstavel } from "./ndjson.ts";
 
 type Cobertura = { ano: number; entidade: string; de: string; ate: string; numeros: number[] };
 
@@ -22,7 +23,9 @@ function pegar(e: Empenho, caminho: string[]): unknown {
   return v;
 }
 
-const igual = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+// Forma canonica: a base em disco tem as chaves ordenadas e o parser nao, e
+// JSON.stringify direto marcaria como "alterado" um valor identico.
+const igual = (a: unknown, b: unknown) => jsonEstavel(a) === jsonEstavel(b);
 
 export function comparar(
   antes: Map<string, Empenho>,
@@ -31,12 +34,12 @@ export function comparar(
 ): Evento[] {
   const eventos: Evento[] = [];
   const ev = (e: Omit<Evento, "coleta" | "em">) => eventos.push({ ...e, coleta: o.coleta, em: o.em });
-  // Na carga inicial tudo e novo: um evento por empenho so faria barulho.
-  const cargaInicial = antes.size === 0;
+  // Empenho novo e rotina, nao alteracao do portal: so vira contagem no resumo
+  // da coleta (uma carga inicial geraria dezenas de milhares de eventos).
 
   for (const [id, e] of depois) {
     const a = antes.get(id);
-    if (!a) { if (!cargaInicial) ev({ tipo: "novo", id }); continue; }
+    if (!a) continue;
     for (const campo of o.campos) {
       const c = CAMINHOS[campo];
       if (!c) throw new Error(`campo sensivel desconhecido: ${campo}`);

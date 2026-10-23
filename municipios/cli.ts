@@ -6,6 +6,7 @@
 //                                   [--ate-etapa revisar]
 //   --prazo N: depois de N minutos para de pedir detalhes e segue o processo; o resto fica para a proxima coleta.
 //   node municipios/cli.ts <cidade> retomar <id> [--desde normalizar]
+//   node municipios/cli.ts <cidade> status                     (como esta a coleta mais recente; so le)
 //   node municipios/cli.ts <cidade> verificar [<id>]
 //   node municipios/cli.ts <cidade> guardar --destino E:municipios   (copia e confere a prova numa guarda externa)
 //   node municipios/cli.ts exportar
@@ -22,6 +23,7 @@ import { ETAPAS, lerEstado, novoEstado, travar, type Escopo, type NomeEtapa } fr
 import { executar, reabrirDesde, type Contexto } from "./processo/etapas.ts";
 import { exportar } from "./publicar/exportar.ts";
 import { guardar, verificarGuarda } from "./arquivo/guardar.ts";
+import { status } from "./processo/status.ts";
 import type { Manifesto } from "./arquivo/manifesto.ts";
 
 const ESCOPOS: Escopo[] = ["incremental", "abertos", "completo", "periodo", "reprocessar"];
@@ -129,6 +131,11 @@ async function main(): Promise<number> {
     }
     log(`retomando ${estado.id}`);
     return rodar({ cfg, estado, log }, "revisar");
+  }
+
+  if (comando === "status") {
+    for (const l of await status(cfg.slug)) console.log(l);
+    return 0;
   }
 
   if (comando === "verificar" && op.guarda) {

@@ -20,6 +20,10 @@ export function rico(texto: string): ReactNode {
     const link = parte.match(LINK);
     if (link) {
       const [, rotulo, href] = link;
+      // link interno (so usado pelas paginas de municipios): mesma aba, sem nofollow
+      if (href.startsWith("/")) {
+        return <a key={i} href={href} className="rico-link">{rotulo}</a>;
+      }
       return (
         <a
           key={i}

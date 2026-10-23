@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Municipios — so o especifico. Tokens, tipografia, .sec/.wrap/.eyebrow/.duo,
+   cabecalho e regras de celular vem de globals.css e mobile.css do Mercado.
+   Regras do Mercado mantidas: alvos de toque >= 44px, texto >= 12px,
+   amarelo nunca sobre verde, texto nunca na cor do dado.
+   ========================================================================== */
+
+.mun-h1 { font-size: clamp(34px, 6vw, 64px); line-height: 1.02; max-width: 18ch; margin: 10px 0 0; }
+.mun-h2 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; max-width: 22ch; margin: 0; }
+.mun-h3 { font-size: 24px; margin: 0 0 10px; }
+.mun-muted { color: var(--muted); }
+.mun-topo { padding: 34px 0 30px; background: var(--white); border-bottom: 1px solid var(--line); }
+.mun-heroi { font-family: var(--body); font-weight: 700; font-size: clamp(44px, 9vw, 84px); line-height: 1; letter-spacing: -0.02em; margin: 18px 0 6px; }
+.mun-heroi-rot { font-size: 16px; color: var(--muted); margin: 0; max-width: 60ch; }
+
+/* ---------- linha de fonte: sempre visivel ---------- */
+.mun-fonte { font-size: 12px; line-height: 1.7; color: var(--muted); margin: 18px 0 0; padding-top: 10px; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.mun-fonte a { color: var(--ink); text-underline-offset: 2px; display: inline-block; padding: 12px 0; margin: -12px 0; }
+.mun-fonte code { font-family: var(--mono); font-size: 12px; }
+.mun-fonte-rot { display: inline-block; font-weight: 700; color: var(--white); background: var(--brand); padding: 1px 7px; margin-right: 4px; }
+.mun-fonte-rot--comp { background: var(--tint); }
+.mun-calc { display: inline-block; font-size: 12px; color: var(--muted); border: 1px dashed var(--line); padding: 1px 6px; }
+
+/* ---------- trilha ---------- */
+.mun-trilha ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0 8px; padding: 0; margin: 0; font-size: 12px; }
+.mun-trilha li + li::before { content: "›"; margin-right: 8px; color: var(--muted-l); }
+.mun-trilha a, .mun-trilha [aria-current] { display: inline-flex; align-items: center; min-height: 44px; }
+.mun-trilha a { color: var(--muted); }
+.mun-trilha [aria-current] { color: var(--ink); }
+
+/* ---------- indicadores ---------- */
+.mun-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin-top: 26px; }
+.mun-kpi { background: var(--white); padding: 18px 18px 16px; border-top: 4px solid var(--brand); }
+.mun-topo .mun-kpi { background: var(--paper); }
+.mun-kpi-rot { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.mun-kpi-val { font-size: clamp(24px, 3.4vw, 32px); font-weight: 700; margin-top: 6px; line-height: 1.1; }
+.mun-kpi-det { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+/* ---------- barras (uma serie: sem legenda; trilho no tom claro da mesma cor) ---------- */
+.mun-barras { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 4px; }
+.mun-barra { display: grid; gap: 4px; padding: 6px 0; }
+.mun-barra-link { color: var(--ink); text-decoration: none; font-size: 15.5px; line-height: 1.3; min-height: 24px; display: block; }
+a.mun-barra-link { padding: 12px 0; margin: -12px 0 -8px; }
+a.mun-barra-link:hover .mun-barra-nome, a.mun-barra-link:focus-visible .mun-barra-nome { text-decoration: underline; text-underline-offset: 3px; }
+a.mun-barra-link .mun-barra-nome::after { content: " →"; color: var(--brand); }
+.mun-barra-linha { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; }
+.mun-barra-trilho { height: 12px; background: var(--tint-l); display: block; }
+.mun-barra-fill { display: block; height: 100%; background: var(--brand); border-radius: 0 4px 4px 0; }
+.mun-barra-num { font-size: 13px; white-space: nowrap; color: var(--ink); }
+.mun-barra-nota { font-size: 12px; color: var(--muted); }
+.mun-resto { font-size: 12px; color: var(--muted); margin: 12px 0 0; }
+
+/* ---------- serie mensal ---------- */
+.mun-mensal { margin: 26px 0 0; }
+.mun-mensal-colunas { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; height: 180px; align-items: end; }
+.mun-mensal-col { display: grid; grid-template-rows: 18px 1fr 22px; height: 100%; min-width: 0; }
+.mun-mensal-num { font-size: 12px; text-align: center; white-space: nowrap; overflow: visible; color: var(--ink); }
+.mun-mensal-barra { align-self: end; justify-self: center; width: min(24px, 80%); background: var(--brand); border-radius: 4px 4px 0 0; }
+.mun-mensal-mes { font-size: 12px; text-align: center; color: var(--muted); padding-top: 4px; border-top: 1px solid var(--line); }
+.mun-tabela-det { margin-top: 12px; }
+.mun-tabela-det summary { cursor: pointer; font-size: 12px; color: var(--muted); min-height: 44px; display: flex; align-items: center; }
+
+/* ---------- tabelas ---------- */
+.mun-tabela-rolagem { overflow-x: auto; margin-top: 20px; }
+.mun-tabela { width: 100%; border-collapse: collapse; font-size: 14px; }
+.mun-tabela th { text-align: left; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 10px 8px 0; border-bottom: 2px solid var(--ink); }
+.mun-tabela td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.mun-tabela td.num, .mun-tabela th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mun-tabela a { color: var(--ink); display: inline-block; padding: 12px 0; margin: -8px 0; }
+
+/* ---------- avisos, sinais, em ordem ---------- */
+.mun-aviso { background: #fff8d6; border-left: 6px solid var(--accent-d); padding: 14px 16px; font-size: 14.5px; margin: 22px 0 0; max-width: 80ch; }
+.mun-duo { margin-top: 26px; align-items: start; }
+.mun-sinal, .mun-ordem { background: var(--white); padding: 16px 18px; border-left: 6px solid var(--alert); }
+.mun-sinal h4, .mun-ordem h4 { margin: 0 0 6px; font-family: var(--body); font-size: 17px; }
+.mun-sinal p, .mun-ordem p { margin: 0 0 8px; font-size: 14.5px; }
+.mun-sinal ul { margin: 6px 0 8px; padding-left: 18px; font-size: 14.5px; display: grid; gap: 8px; }
+.mun-sinal a { color: var(--ink); }
+.mun-mais { font-size: 12px; color: var(--ink); display: inline-block; padding: 12px 0 0; }
+.mun-ordem--true { border-left-color: var(--green); }
+.mun-ordem--false { border-left-color: var(--alert); }
+.mun-ordem--null { border-left-color: var(--line); }
+.mun-ordem-rot { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+
+/* ---------- textos das paginas de transparencia ---------- */
+.mun-texto { max-width: 68ch; }
+.mun-texto p, .mun-texto li { font-size: 16.5px; }
+.mun-texto h2 { font-size: 26px; margin: 34px 0 8px; }
+.mun-texto details { border-top: 1px solid var(--line); padding: 4px 0; }
+.mun-texto details summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+.mun-texto code { font-family: var(--mono); font-size: 14px; background: var(--gray); padding: 1px 5px; overflow-wrap: anywhere; }
+
+.mun-rodape-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 18px; }
+.mun-rodape-links a { color: #fff; font-size: 13px; padding: 12px 0; display: inline-block; }
+
+/* ---------- explorador ---------- */
+.mun-filtros { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 20px; }
+.mun-filtros label { display: grid; gap: 4px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.mun-filtros input, .mun-filtros select { font: inherit; font-family: var(--body); font-size: 16px; min-height: 44px; padding: 8px 10px; border: 2px solid var(--line); background: var(--white); color: var(--ink); }
+.mun-contagem { font-size: 13px; color: var(--muted); margin: 16px 0 0; }
+.mun-detalhe { background: var(--white); padding: 18px; margin-top: 20px; border-top: 4px solid var(--brand); }
+.mun-detalhe dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 12px 0 0; font-size: 14.5px; }
+.mun-detalhe dt { color: var(--muted); }
+.mun-detalhe dd { margin: 0; overflow-wrap: anywhere; }
+.mun-botao { font-family: var(--mono); font-size: 13px; min-height: 44px; padding: 0 16px; background: var(--ink); color: #fff; border: 0; cursor: pointer; }
+.mun-removido { display: inline-block; font-family: var(--mono); font-size: 12px; color: #fff; background: var(--alert); padding: 1px 7px; }
+
+@media (max-width: 560px) {
+  .mun-barra-linha { grid-template-columns: 1fr; gap: 4px; }
+  .mun-mensal-colunas { height: 150px; }
+  .mun-mensal-num { font-size: 12px; }
+  .mun-detalhe dl { grid-template-columns: 1fr; }
+  .mun-detalhe dt { margin-top: 6px; }
+}

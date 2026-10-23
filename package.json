@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node municipios/publicar/podar.ts",
     "start": "next start",
     "lint": "eslint",
     "prebuild": "node scripts/gerar-dados.mjs && node municipios/cli.ts exportar",

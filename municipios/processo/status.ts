@@ -1,7 +1,7 @@
 // "Como esta a coleta?" — so le o estado salvo; pode rodar a qualquer momento,
 // inclusive durante uma coleta, sem a trava.
 import { existsSync } from "node:fs";
-import { readdir, stat } from "node:fs/promises";
+import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { caminhos } from "./caminhos.ts";
 import { ETAPAS, lerEstado, lerProgresso } from "./estado.ts";
@@ -31,15 +31,21 @@ export async function status(cidade: string): Promise<string[]> {
     // o progresso e salvo a cada 20 tarefas: o ritmo usa o horario do arquivo
     const arquivo = join(p.brutosDaColeta(id), "progresso.json");
     const ate = existsSync(arquivo) ? (await stat(arquivo)).mtime : new Date();
+    // ritmo recente: compara com a leitura anterior do proprio status (guardada
+    // ao lado dos brutos); sem ela, a media desde o inicio da coleta
+    const amostraArq = join(p.brutosDaColeta(id), "status.json");
+    const anterior = existsSync(amostraArq) ? JSON.parse(await readFile(amostraArq, "utf8")) as { em: number; feitos: number } : null;
+    await writeFile(amostraArq, JSON.stringify({ em: ate.getTime(), feitos }));
+    const recente = anterior && feitos > anterior.feitos && ate.getTime() - anterior.em > 30_000 && ate.getTime() - anterior.em < 2 * 3600_000;
     const inicioDetalhes = Date.parse(e.iniciadoEm);
-    const ritmo = feitos > 20 ? (ate.getTime() - inicioDetalhes) / feitos : 0;
-    linhas.push(`detalhes: ${feitos.toLocaleString("pt-BR")} de ${alvos.toLocaleString("pt-BR")} (${((feitos / alvos) * 100).toFixed(1)}%)${ritmo ? ` · ~${(ritmo / 1000).toFixed(1)} s por empenho` : ""}`);
+    const ritmo = recente ? (ate.getTime() - anterior!.em) / (feitos - anterior!.feitos) : feitos > 20 ? (ate.getTime() - inicioDetalhes) / feitos : 0;
+    linhas.push(`detalhes: ${feitos.toLocaleString("pt-BR")} de ${alvos.toLocaleString("pt-BR")} (${((feitos / alvos) * 100).toFixed(1)}%)${ritmo ? ` · ~${(ritmo / 1000).toFixed(1)} s por empenho (${recente ? "desde a última consulta" : "média da coleta; rode de novo em 1 min para o ritmo recente"})` : ""}`);
     if (ritmo && feitos < alvos) {
       const restante = (alvos - feitos) * ritmo;
       const prazo = e.prazoAte ? Date.parse(e.prazoAte) : Infinity;
       const fimEstimado = Date.now() + restante;
       linhas.push(fimEstimado > prazo
-        ? `para no prazo às ${hora(new Date(prazo))} com ~${Math.round((prazo - inicioDetalhes) / ritmo).toLocaleString("pt-BR")} detalhes; o resto (~${Math.max(0, Math.round(alvos - (prazo - inicioDetalhes) / ritmo)).toLocaleString("pt-BR")}) fica para a próxima`
+        ? `para no prazo às ${hora(new Date(prazo))} com ~${Math.min(alvos, Math.round(feitos + (prazo - Date.now()) / ritmo)).toLocaleString("pt-BR")} detalhes; o resto (~${Math.max(0, Math.round(alvos - feitos - (prazo - Date.now()) / ritmo)).toLocaleString("pt-BR")}) fica para a próxima`
         : `termina em ~${duracao(restante)} (por volta de ${hora(new Date(fimEstimado))})`);
     }
   }

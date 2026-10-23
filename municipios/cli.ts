@@ -7,6 +7,7 @@
 //   --prazo N: depois de N minutos para de pedir detalhes e segue o processo; o resto fica para a proxima coleta.
 //   node municipios/cli.ts <cidade> retomar <id> [--desde normalizar]
 //   node municipios/cli.ts <cidade> verificar [<id>]
+//   node municipios/cli.ts <cidade> guardar --destino E:municipios   (copia e confere a prova numa guarda externa)
 //   node municipios/cli.ts exportar
 //
 // Saida: 0 = portoes verdes (merge pode ser automatico) · 2 = precisa de revisao humana · 1 = erro.
@@ -20,6 +21,7 @@ import { caminhos } from "./processo/caminhos.ts";
 import { ETAPAS, lerEstado, novoEstado, travar, type Escopo, type NomeEtapa } from "./processo/estado.ts";
 import { executar, reabrirDesde, type Contexto } from "./processo/etapas.ts";
 import { exportar } from "./publicar/exportar.ts";
+import { guardar, verificarGuarda } from "./arquivo/guardar.ts";
 import type { Manifesto } from "./arquivo/manifesto.ts";
 
 const ESCOPOS: Escopo[] = ["incremental", "abertos", "completo", "periodo", "reprocessar"];
@@ -129,7 +131,22 @@ async function main(): Promise<number> {
     return rodar({ cfg, estado, log }, "revisar");
   }
 
+  if (comando === "verificar" && op.guarda) {
+    const r = await verificarGuarda(cfg.slug, op.guarda);
+    log(`guarda ${op.guarda}: ${r.conferidos} brutos conferem com os manifestos`);
+    for (const f of r.falhas) console.error(`FALHA: ${f}`);
+    return r.falhas.length ? 1 : 0;
+  }
   if (comando === "verificar") return verificar(cfg.slug, arg);
+
+  if (comando === "guardar") {
+    if (!op.destino || op.destino === "true") throw new Error("informe --destino (ex.: --destino E:\\municipios)");
+    const r = await guardar(cfg.slug, op.destino, log);
+    log(`guarda: ${r.coletas} coletas · ${r.copiados} copiados · ${r.jaPresentes} já presentes · ${r.verificados} brutos conferidos no destino`);
+    for (const i of r.ignoradas) log(`ignorada: ${i}`);
+    for (const f of r.falhas) console.error(`FALHA: ${f}`);
+    return r.falhas.length ? 1 : 0;
+  }
 
   throw new Error("uso: node municipios/cli.ts <cidade> atualizar|retomar|verificar … | exportar");
 }

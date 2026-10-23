@@ -66,6 +66,22 @@ Ritmo medido em 22/10/2026: cerca de 2,3 s por empenho detalhado (duas requisiç
 Um ano completo (cerca de 20 mil empenhos) leva perto de 13 h e ocupa ~0,8 GB de WARC comprimido (cerca de 42 KB por empenho: a página oficial e a expansão do detalhe). No B2 isso custa centavos de dólar por mês. Com `--prazo`, a carga se completa em
 algumas execuções incrementais seguidas.
 
+## Guarda em HD externo (modo atual)
+
+Enquanto não houver guarda em nuvem, os brutos ficam neste computador e são copiados para um HD externo:
+
+```bash
+npm run municipio -- erechim guardar --destino E:\municipios     # copia e confere no destino (incremental)
+npm run municipio -- erechim verificar --guarda E:\municipios    # confere o HD sozinho, sem copiar
+```
+
+- O `guardar` recalcula o sha256 de cada WARC **no HD** e compara com o manifesto carimbado. A coleta em andamento,
+  que ainda não tem manifesto, fica para a próxima vez.
+- O `api.warc.gz` contém CPF completo. **O HD precisa estar criptografado** (BitLocker To Go: no Explorer, botão
+  direito na unidade → "Ativar o BitLocker"), e a chave de recuperação fica fora do HD.
+- Rode o `guardar` depois de cada coleta e o `verificar --guarda` de tempos em tempos. Se um único byte mudar, ele acusa.
+- O workflow do GitHub exige o B2 e por isso não coleta neste modo. As coletas rodam aqui.
+
 ## Para ligar a automação (passos manuais, uma vez)
 
 1. **Backblaze B2**: bucket com **Object Lock** e retenção padrão (ex.: 10 anos). Secrets do repositório:

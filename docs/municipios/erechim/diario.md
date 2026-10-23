@@ -189,3 +189,21 @@ parou na primeira requisição, sem publicar nada.
 - O item "Mínimos constitucionais" do "o que está em ordem" deixa de ser "?" para 2025 (✓). Em 2026, continua "?"
   até o 6º bimestre, com os percentuais parciais à vista: o mínimo é anual.
 - As respostas ficam em `complementares.warc.gz`, público. Coleta de teste: 20 requisições em 25 s, nenhum aviso de leitura.
+
+## 23/10/2026: carga completa de 2025 e o portão de privacidade
+
+- A carga terminou às 09:24, com 34.389 detalhes. 2025 ficou com 100% do detalhe (19.798 empenhos), e 2026 com 96,9%:
+  os 518 restantes passaram do prazo e entram na próxima incremental.
+- **Anulações confirmadas no ano inteiro:** com todo o detalhe de 2025, o empenhado após anulações soma
+  R$ 580.159.750,75, idêntico ao balancete do portal. O pago dentro do exercício também bate ao centavo
+  (R$ 536.447.146,90).
+- **O portão de privacidade bloqueou a coleta**, como deveria. Achou 35 sequências de 11 dígitos, todas no
+  número do documento fiscal de liquidações e pagamentos de empresas: faturas da RGE, guias do Poder Judiciário,
+  uma seguradora e uma livraria. Não eram CPFs: o mesmo campo traz números de 1 a 14 dígitos, e dos 12 valores
+  distintos só um passa nos dígitos verificadores do CPF, o que é compatível com acaso.
+- Correção da regra, sem afrouxar a proteção:
+  - o portão só conta o que passa nos dígitos verificadores (todo CPF real passa);
+  - um número de documento com a forma de um CPF válido é mascarado na leitura, no padrão das telas, e marcado
+    `documentoMascarado`. Hoje isso afeta uma fatura da RGE (empenho 2026/215) entre 108.911 documentos.
+- Reprocessamento sem rede (coleta 2026-10-23T122750Z): portões verdes, nenhum evento novo.
+

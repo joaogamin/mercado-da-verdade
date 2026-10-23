@@ -52,8 +52,8 @@
     {
       "ano": 2025,
       "cobertura": {
-        "comDetalhe": 1503,
-        "pct": 7.6,
+        "comDetalhe": 19798,
+        "pct": 100,
         "total": 19798
       },
       "comparacoes": [
@@ -85,11 +85,11 @@
           "rotulo": "Empenhado (valor original)"
         },
         {
-          "comparavel": false,
-          "diferencaPct": 4.947,
-          "explicacao": "Soma do valor atual do detalhe onde ele já foi coletado (1503 de 19798) e do valor original nos demais; só fica comparável com o detalhe completo.",
+          "comparavel": true,
+          "diferencaPct": 0,
+          "explicacao": "Soma do valor atual de cada empenho (detalhe), já descontadas as anulações. Com o detalhe completo, deve bater com o balancete.",
           "id": "empenhado-liquido",
-          "nosso": 60886019539,
+          "nosso": 58015975075,
           "oficial": 58015975075,
           "rotulo": "Empenhado após anulações"
         }
@@ -112,8 +112,8 @@
         "empenhado": 58015975075,
         "liquidado": 54871565141,
         "origem": {
-          "coleta": "2026-10-22T224402Z",
-          "coletadoEm": "2026-10-22T22:44:05.362Z",
+          "coleta": "2026-10-23T022332Z",
+          "coletadoEm": "2026-10-23T02:23:37.593Z",
           "fonte": "Portal da Transparência da Prefeitura de Erechim",
           "sha256": "b3f4053f8343b7e002b897ff7bf8572571183c2343d5950b79e368d6289fc799",
           "url": "https://www.erechim.rs.gov.br/sys523/publico/balDespOrgao.xhtml"
@@ -124,15 +124,15 @@
       "orgaos": [
         {
           "codigo": "2",
-          "diferencaPct": -91.3027,
+          "diferencaPct": 0,
           "nome": "GABINETE DO PREFEITO",
           "nosso": {
-            "empenhado": 66167109,
-            "empenhos": 68,
-            "liquidado": 65683343,
-            "pago": 65683343,
-            "pagoNoExercicio": 65659081,
-            "pagoRestos": 24262
+            "empenhado": 776126937,
+            "empenhos": 753,
+            "liquidado": 766239290,
+            "pago": 766239290,
+            "pagoNoExercicio": 754935021,
+            "pagoRestos": 11304269
           },
           "oficial": {
             "dotacaoAtualizada": 760000000,
@@ -145,15 +145,15 @@
         },
         {
           "codigo": "3",
-          "diferencaPct": -94.0684,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE PLANEJAMENTO",
           "nosso": {
-            "empenhado": 43149126,
-            "empenhos": 39,
-            "liquidado": 42160314,
-            "pago": 42160314,
-            "pagoNoExercicio": 42160314,
-            "pagoRestos": 0
+            "empenhado": 836110200,
+            "empenhos": 409,
+            "liquidado": 813633489,
+            "pago": 813633489,
+            "pagoNoExercicio": 710778359,
+            "pagoRestos": 102855130
           },
           "oficial": {
             "dotacaoAtualizada": 974295000,
@@ -166,15 +166,15 @@
         },
         {
           "codigo": "4",
-          "diferencaPct": -92.7714,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE ADMINISTRAÇAO",
           "nosso": {
-            "empenhado": 121005228,
-            "empenhos": 70,
-            "liquidado": 118322780,
-            "pago": 118322780,
-            "pagoNoExercicio": 116894630,
-            "pagoRestos": 1428150
+            "empenhado": 1738140377,
+            "empenhos": 913,
+            "liquidado": 1670241528,
+            "pago": 1668259828,
+            "pagoNoExercicio": 1617108807,
+            "pagoRestos": 51151021
           },
           "oficial": {
             "dotacaoAtualizada": 1830000000,
@@ -187,15 +187,15 @@
         },
         {
           "codigo": "5",
-          "diferencaPct": -91.9284,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DA FAZENDA",
           "nosso": {
-            "empenhado": 98075576,
-            "empenhos": 46,
-            "liquidado": 97712983,
-            "pago": 97712983,
-            "pagoNoExercicio": 90878253,
-            "pagoRestos": 6834730
+            "empenhado": 1290662791,
+            "empenhos": 576,
+            "liquidado": 1197045158,
+            "pago": 1197045158,
+            "pagoNoExercicio": 1125907051,
+            "pagoRestos": 71138107
           },
           "oficial": {
             "dotacaoAtualizada": 1220000000,
@@ -208,15 +208,15 @@
         },
         {
           "codigo": "6",
-          "diferencaPct": -91.8209,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE DESENVOLVIMENTO ECONÔMICO, INOVAÇÃO E TURISMO",
           "nosso": {
-            "empenhado": 126170011,
-            "empenhos": 54,
-            "liquidado": 124777543,
-            "pago": 124777543,
-            "pagoNoExercicio": 124393183,
-            "pagoRestos": 384360
+            "empenhado": 1607342526,
+            "empenhos": 627,
+            "liquidado": 1571164676,
+            "pago": 1571164676,
+            "pagoNoExercicio": 1520874126,
+            "pagoRestos": 50290550
           },
           "oficial": {
             "dotacaoAtualizada": 1290000000,
@@ -229,15 +229,15 @@
         },
         {
           "codigo": "7",
-          "diferencaPct": -82.039,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE AGRICULTURA, ABASTECIMENTO E SEGURANÇA ALIMENTAR",
           "nosso": {
-            "empenhado": 220088572,
-            "empenhos": 64,
-            "liquidado": 208908245,
-            "pago": 208908245,
-            "pagoNoExercicio": 207614019,
-            "pagoRestos": 1294226
+            "empenhado": 1344309952,
+            "empenhos": 752,
+            "liquidado": 1278419682,
+            "pago": 1278419682,
+            "pagoNoExercicio": 1155915243,
+            "pagoRestos": 122504439
           },
           "oficial": {
             "dotacaoAtualizada": 1292553000,
@@ -250,15 +250,15 @@
         },
         {
           "codigo": "8",
-          "diferencaPct": -92.0724,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE CULTURA E ESPORTE",
           "nosso": {
-            "empenhado": 159845744,
-            "empenhos": 121,
-            "liquidado": 153859878,
-            "pago": 153859878,
-            "pagoNoExercicio": 153595534,
-            "pagoRestos": 264344
+            "empenhado": 2151788410,
+            "empenhos": 1380,
+            "liquidado": 2024363728,
+            "pago": 2024303828,
+            "pagoNoExercicio": 1937480218,
+            "pagoRestos": 86823610
           },
           "oficial": {
             "dotacaoAtualizada": 1900424000,
@@ -271,15 +271,15 @@
         },
         {
           "codigo": "9",
-          "diferencaPct": -94.5519,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE SAUDE",
           "nosso": {
-            "empenhado": 701316785,
-            "empenhos": 382,
-            "liquidado": 671378109,
-            "pago": 671378109,
-            "pagoNoExercicio": 662648531,
-            "pagoRestos": 8729578
+            "empenhado": 13655457196,
+            "empenhos": 5243,
+            "liquidado": 12993902094,
+            "pago": 12993264594,
+            "pagoNoExercicio": 12162926063,
+            "pagoRestos": 830338531
           },
           "oficial": {
             "dotacaoAtualizada": 12685551090,
@@ -292,15 +292,15 @@
         },
         {
           "codigo": "10",
-          "diferencaPct": -93.1737,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL",
           "nosso": {
-            "empenhado": 169980869,
-            "empenhos": 108,
-            "liquidado": 149952670,
-            "pago": 149952670,
-            "pagoNoExercicio": 143688650,
-            "pagoRestos": 6264020
+            "empenhado": 2720418649,
+            "empenhos": 1764,
+            "liquidado": 2346210993,
+            "pago": 2344884847,
+            "pagoNoExercicio": 2104934386,
+            "pagoRestos": 239950461
           },
           "oficial": {
             "dotacaoAtualizada": 2000762030,
@@ -313,15 +313,15 @@
         },
         {
           "codigo": "11",
-          "diferencaPct": -94.2474,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE EDUCAÇAO",
           "nosso": {
-            "empenhado": 933107696,
-            "empenhos": 216,
-            "liquidado": 904499133,
-            "pago": 904499133,
-            "pagoNoExercicio": 899729471,
-            "pagoRestos": 4769662
+            "empenhado": 17222951788,
+            "empenhos": 2986,
+            "liquidado": 16436895158,
+            "pago": 16436071368,
+            "pagoNoExercicio": 15640464948,
+            "pagoRestos": 795606420
           },
           "oficial": {
             "dotacaoAtualizada": 15983765000,
@@ -334,15 +334,15 @@
         },
         {
           "codigo": "12",
-          "diferencaPct": -92.7222,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE OBRAS PUBLICAS, HABITAÇÃO, SEGURANÇA E PROTEÇÃO SOCIAL",
           "nosso": {
-            "empenhado": 482539688,
-            "empenhos": 170,
-            "liquidado": 451277856,
-            "pago": 451277856,
-            "pagoNoExercicio": 448754530,
-            "pagoRestos": 2523326
+            "empenhado": 7051636495,
+            "empenhos": 2103,
+            "liquidado": 6630275338,
+            "pago": 6629973312,
+            "pagoNoExercicio": 6166098250,
+            "pagoRestos": 463875062
           },
           "oficial": {
             "dotacaoAtualizada": 6388321000,
@@ -355,15 +355,15 @@
         },
         {
           "codigo": "13",
-          "diferencaPct": -81.5238,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE MEIO AMBIENTE",
           "nosso": {
-            "empenhado": 681853594,
-            "empenhos": 53,
-            "liquidado": 680136932,
-            "pago": 680136932,
-            "pagoNoExercicio": 623915294,
-            "pagoRestos": 56221638
+            "empenhado": 4012293618,
+            "empenhos": 867,
+            "liquidado": 3852203175,
+            "pago": 3852203175,
+            "pagoNoExercicio": 3376865918,
+            "pagoRestos": 475337257
           },
           "oficial": {
             "dotacaoAtualizada": 3571000000,
@@ -376,15 +376,15 @@
         },
         {
           "codigo": "14",
-          "diferencaPct": -97.8847,
+          "diferencaPct": 0,
           "nome": "SECRETARIA MUNICIPAL DE GESTÃO E GOVERNANÇA",
           "nosso": {
-            "empenhado": 60861480,
-            "empenhos": 52,
-            "liquidado": 60672239,
-            "pago": 60672239,
-            "pagoNoExercicio": 59857389,
-            "pagoRestos": 814850
+            "empenhado": 3955815706,
+            "empenhos": 703,
+            "liquidado": 3212059955,
+            "pago": 3212059955,
+            "pagoNoExercicio": 2829751346,
+            "pagoRestos": 382308609
           },
           "oficial": {
             "dotacaoAtualizada": 988600000,
@@ -397,15 +397,15 @@
         },
         {
           "codigo": "15",
-          "diferencaPct": -87.1991,
+          "diferencaPct": 0,
           "nome": "ENCARGOS GERAIS DO MUNICÍPIO",
           "nosso": {
-            "empenhado": 325821859,
-            "empenhos": 60,
-            "liquidado": 325738158,
-            "pago": 325738158,
-            "pagoNoExercicio": 325229957,
-            "pagoRestos": 508201
+            "empenhado": 2634308440,
+            "empenhos": 722,
+            "liquidado": 2620631537,
+            "pago": 2620193602,
+            "pagoNoExercicio": 2540674954,
+            "pagoRestos": 79518648
           },
           "oficial": {
             "dotacaoAtualizada": 2614728880,
@@ -446,8 +446,8 @@
     {
       "ano": 2026,
       "cobertura": {
-        "comDetalhe": 0,
-        "pct": 0,
+        "comDetalhe": 16094,
+        "pct": 96.9,
         "total": 16612
       },
       "comparacoes": [
@@ -480,10 +480,10 @@
         },
         {
           "comparavel": false,
-          "diferencaPct": 4.3027,
-          "explicacao": "Soma do valor atual do detalhe onde ele já foi coletado (0 de 16612) e do valor original nos demais; só fica comparável com o detalhe completo.",
+          "diferencaPct": 0.0008,
+          "explicacao": "Soma do valor atual do detalhe onde ele já foi coletado (16094 de 16612) e do valor original nos demais; só fica comparável com o detalhe completo.",
           "id": "empenhado-liquido",
-          "nosso": 56166568824,
+          "nosso": 53850029779,
           "oficial": 53849591326,
           "rotulo": "Empenhado após anulações"
         }
@@ -506,8 +506,8 @@
         "empenhado": 53849591326,
         "liquidado": 45427522863,
         "origem": {
-          "coleta": "2026-10-22T224402Z",
-          "coletadoEm": "2026-10-22T22:46:24.820Z",
+          "coleta": "2026-10-23T022332Z",
+          "coletadoEm": "2026-10-23T02:25:43.115Z",
           "fonte": "Portal da Transparência da Prefeitura de Erechim",
           "sha256": "286f1632383ab471ce88899636aed656416a24483f3b95e055c73dace8752967",
           "url": "https://www.erechim.rs.gov.br/sys523/publico/balDespOrgao.xhtml"
@@ -518,14 +518,14 @@
       "orgaos": [
         {
           "codigo": "2",
-          "diferencaPct": -100,
+          "diferencaPct": 0.413,
           "nome": "GABINETE DO PREFEITO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 697040895,
+            "empenhos": 568,
+            "liquidado": 657419371,
+            "pago": 659890051,
+            "pagoNoExercicio": 659890051,
             "pagoRestos": 0
           },
           "oficial": {
@@ -539,14 +539,14 @@
         },
         {
           "codigo": "3",
-          "diferencaPct": -100,
+          "diferencaPct": -2.4524,
           "nome": "SECRETARIA MUNICIPAL DE PLANEJAMENTO, MOBILIDADE URBANA E SEGURANÇA PÚBLICA",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 1741127326,
+            "empenhos": 699,
+            "liquidado": 1417568914,
+            "pago": 1416195683,
+            "pagoNoExercicio": 1416195683,
             "pagoRestos": 0
           },
           "oficial": {
@@ -560,14 +560,14 @@
         },
         {
           "codigo": "4",
-          "diferencaPct": -100,
+          "diferencaPct": -0.7354,
           "nome": "SECRETARIA MUNICIPAL DE ADMINISTRAÇAO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 1594215207,
+            "empenhos": 669,
+            "liquidado": 1387940836,
+            "pago": 1380408870,
+            "pagoNoExercicio": 1380408870,
             "pagoRestos": 0
           },
           "oficial": {
@@ -581,14 +581,14 @@
         },
         {
           "codigo": "5",
-          "diferencaPct": -100,
+          "diferencaPct": 0.0912,
           "nome": "SECRETARIA MUNICIPAL DA FAZENDA",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 1313588028,
+            "empenhos": 453,
+            "liquidado": 1157297498,
+            "pago": 1157447013,
+            "pagoNoExercicio": 1157447013,
             "pagoRestos": 0
           },
           "oficial": {
@@ -602,14 +602,14 @@
         },
         {
           "codigo": "6",
-          "diferencaPct": -100,
+          "diferencaPct": 0.0775,
           "nome": "SECRETARIA MUNICIPAL DE DESENVOLVIMENTO ECONÔMICO, INOVAÇÃO E TURISMO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 2236296916,
+            "empenhos": 570,
+            "liquidado": 1777967735,
+            "pago": 1751411762,
+            "pagoNoExercicio": 1751411762,
             "pagoRestos": 0
           },
           "oficial": {
@@ -623,14 +623,14 @@
         },
         {
           "codigo": "7",
-          "diferencaPct": -100,
+          "diferencaPct": -0.2472,
           "nome": "SECRETARIA MUNICIPAL DE AGRICULTURA, ABASTECIMENTO E SEGURANÇA ALIMENTAR",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 1065775193,
+            "empenhos": 738,
+            "liquidado": 925865145,
+            "pago": 915450451,
+            "pagoNoExercicio": 915450451,
             "pagoRestos": 0
           },
           "oficial": {
@@ -644,14 +644,14 @@
         },
         {
           "codigo": "8",
-          "diferencaPct": -100,
+          "diferencaPct": -0.1448,
           "nome": "SECRETARIA MUNICIPAL DE CULTURA, ESPORTE E ECONOMIA CRIATIVA",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 2781478639,
+            "empenhos": 1085,
+            "liquidado": 1863318123,
+            "pago": 1835733578,
+            "pagoNoExercicio": 1835733578,
             "pagoRestos": 0
           },
           "oficial": {
@@ -665,14 +665,14 @@
         },
         {
           "codigo": "9",
-          "diferencaPct": -100,
+          "diferencaPct": -0.1164,
           "nome": "SECRETARIA MUNICIPAL DE SAUDE",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 11717785158,
+            "empenhos": 4164,
+            "liquidado": 9770110566,
+            "pago": 9735681146,
+            "pagoNoExercicio": 9735681146,
             "pagoRestos": 0
           },
           "oficial": {
@@ -686,14 +686,14 @@
         },
         {
           "codigo": "10",
-          "diferencaPct": -100,
+          "diferencaPct": -0.0929,
           "nome": "SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 2570658509,
+            "empenhos": 1478,
+            "liquidado": 1938661277,
+            "pago": 1908532977,
+            "pagoNoExercicio": 1908532977,
             "pagoRestos": 0
           },
           "oficial": {
@@ -707,14 +707,14 @@
         },
         {
           "codigo": "11",
-          "diferencaPct": -100,
+          "diferencaPct": -0.0658,
           "nome": "SECRETARIA MUNICIPAL DE EDUCAÇAO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 14694533210,
+            "empenhos": 2244,
+            "liquidado": 13024961177,
+            "pago": 12971572574,
+            "pagoNoExercicio": 12971572574,
             "pagoRestos": 0
           },
           "oficial": {
@@ -728,14 +728,14 @@
         },
         {
           "codigo": "12",
-          "diferencaPct": -100,
+          "diferencaPct": -0.2099,
           "nome": "SECRETARIA MUNICIPAL DE OBRAS PUBLICAS E HABITAÇÃO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 6649021336,
+            "empenhos": 1413,
+            "liquidado": 4644951445,
+            "pago": 4592800176,
+            "pagoNoExercicio": 4592800176,
             "pagoRestos": 0
           },
           "oficial": {
@@ -749,14 +749,14 @@
         },
         {
           "codigo": "13",
-          "diferencaPct": -100,
+          "diferencaPct": -0.0395,
           "nome": "SECRETARIA MUNICIPAL DE MEIO AMBIENTE",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 3813532108,
+            "empenhos": 818,
+            "liquidado": 2922404673,
+            "pago": 2912945455,
+            "pagoNoExercicio": 2912945455,
             "pagoRestos": 0
           },
           "oficial": {
@@ -770,14 +770,14 @@
         },
         {
           "codigo": "14",
-          "diferencaPct": -100,
+          "diferencaPct": -0.2341,
           "nome": "SECRETARIA MUNICIPAL DE GESTÃO E GOVERNANÇA",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 1456528814,
+            "empenhos": 608,
+            "liquidado": 1268572982,
+            "pago": 1266109020,
+            "pagoNoExercicio": 1266109020,
             "pagoRestos": 0
           },
           "oficial": {
@@ -791,14 +791,14 @@
         },
         {
           "codigo": "15",
-          "diferencaPct": -100,
+          "diferencaPct": -1.9986,
           "nome": "ENCARGOS GERAIS DO MUNICÍPIO",
           "nosso": {
-            "empenhado": 0,
-            "empenhos": 0,
-            "liquidado": 0,
-            "pago": 0,
-            "pagoNoExercicio": 0,
+            "empenhado": 2630695705,
+            "empenhos": 587,
+            "liquidado": 2516947246,
+            "pago": 2512561741,
+            "pagoNoExercicio": 2512561741,
             "pagoRestos": 0
           },
           "oficial": {

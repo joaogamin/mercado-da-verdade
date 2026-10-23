@@ -1,0 +1,90 @@
+{
+  "anos": [],
+  "cidade": "erechim",
+  "escopo": "reprocessar",
+  "etapas": {
+    "analisar": {
+      "fim": "2026-10-23T12:28:44.810Z",
+      "inicio": "2026-10-23T12:28:43.986Z",
+      "resumo": {
+        "prefeitura-2025": {
+          "credores": 1788,
+          "empenhos": 19798,
+          "orgaos": 14
+        },
+        "prefeitura-2026": {
+          "credores": 1834,
+          "empenhos": 16612,
+          "orgaos": 14
+        }
+      },
+      "status": "ok"
+    },
+    "arquivar": {
+      "fim": "2026-10-23T12:27:50.314Z",
+      "inicio": "2026-10-23T12:27:50.314Z",
+      "resumo": {
+        "semRede": true
+      },
+      "status": "ok"
+    },
+    "coletar": {
+      "fim": "2026-10-23T12:27:50.313Z",
+      "inicio": "2026-10-23T12:27:50.312Z",
+      "resumo": {
+        "semRede": true
+      },
+      "status": "ok"
+    },
+    "comparar": {
+      "fim": "2026-10-23T12:28:43.483Z",
+      "inicio": "2026-10-23T12:28:42.659Z",
+      "resumo": {
+        "alterados": 0,
+        "novos": 0,
+        "reaparecidos": 0,
+        "removidos": 0
+      },
+      "status": "ok"
+    },
+    "conferir": {
+      "fim": "2026-10-23T12:28:43.985Z",
+      "inicio": "2026-10-23T12:28:43.484Z",
+      "resumo": {
+        "2025": "0% · detalhe 100%",
+        "2026": "0.0297% · detalhe 96.9%"
+      },
+      "status": "ok"
+    },
+    "normalizar": {
+      "fim": "2026-10-23T12:28:42.658Z",
+      "inicio": "2026-10-23T12:27:50.315Z",
+      "resumo": {
+        "avisos": 0,
+        "empenhos": 36410,
+        "eventos": 0
+      },
+      "status": "ok"
+    },
+    "publicar": {
+      "status": "pendente"
+    },
+    "revisar": {
+      "fim": "2026-10-23T12:28:46.908Z",
+      "inicio": "2026-10-23T12:28:44.811Z",
+      "resumo": {
+        "liberado": true,
+        "portoes": {
+          "Conferência": true,
+          "Leitura": true,
+          "Privacidade": true,
+          "Queda": true,
+          "Remoção ou alteração": true
+        }
+      },
+      "status": "ok"
+    }
+  },
+  "id": "2026-10-23T122750Z",
+  "iniciadoEm": "2026-10-23T12:27:50.309Z"
+}

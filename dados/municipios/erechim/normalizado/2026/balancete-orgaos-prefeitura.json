@@ -9,7 +9,7 @@
       "empenhado": 691215020,
       "liquidado": 657684677,
       "orgao": "GABINETE DO PREFEITO",
-      "pago": 657176042,
+      "pago": 657287637,
       "pagoRestos": 11304269
     },
     {
@@ -17,9 +17,9 @@
       "dotacaoAtualizada": 2017248697,
       "dotacaoInicial": 2017248697,
       "empenhado": 1665346331,
-      "liquidado": 1456368789,
+      "liquidado": 1469632596,
       "orgao": "SECRETARIA MUNICIPAL DE PLANEJAMENTO, MOBILIDADE URBANA E SEGURANÇA PÚBLICA",
-      "pago": 1451800005,
+      "pago": 1453220871,
       "pagoRestos": 102855130
     },
     {
@@ -27,9 +27,9 @@
       "dotacaoAtualizada": 1970000000,
       "dotacaoInicial": 1970000000,
       "empenhado": 1570715434,
-      "liquidado": 1399472001,
+      "liquidado": 1400452159,
       "orgao": "SECRETARIA MUNICIPAL DE ADMINISTRAÇAO",
-      "pago": 1390635515,
+      "pago": 1391320003,
       "pagoRestos": 51139019
     },
     {
@@ -39,7 +39,7 @@
       "empenhado": 1297194711,
       "liquidado": 1157584706,
       "orgao": "SECRETARIA MUNICIPAL DA FAZENDA",
-      "pago": 1156391899,
+      "pago": 1156665224,
       "pagoRestos": 71138107
     },
     {
@@ -49,7 +49,7 @@
       "empenhado": 2229917849,
       "liquidado": 1779146830,
       "orgao": "SECRETARIA MUNICIPAL DE DESENVOLVIMENTO ECONÔMICO, INOVAÇÃO E TURISMO",
-      "pago": 1750056064,
+      "pago": 1750203394,
       "pagoRestos": 50290550
     },
     {
@@ -59,7 +59,7 @@
       "empenhado": 1090542128,
       "liquidado": 930545668,
       "orgao": "SECRETARIA MUNICIPAL DE AGRICULTURA, ABASTECIMENTO E SEGURANÇA ALIMENTAR",
-      "pago": 917718733,
+      "pago": 919051840,
       "pagoRestos": 122516297
     },
     {
@@ -67,29 +67,29 @@
       "dotacaoAtualizada": 2087183122,
       "dotacaoInicial": 2087183122,
       "empenhado": 2690573486,
-      "liquidado": 1866308948,
+      "liquidado": 1868905448,
       "orgao": "SECRETARIA MUNICIPAL DE CULTURA, ESPORTE E ECONOMIA CRIATIVA",
-      "pago": 1838395843,
+      "pago": 1838779445,
       "pagoRestos": 86823610
     },
     {
       "codigo": "9",
       "dotacaoAtualizada": 13730764711,
       "dotacaoInicial": 13730764711,
-      "empenhado": 11707450767,
-      "liquidado": 9782156734,
+      "empenhado": 11704300767,
+      "liquidado": 9782581761,
       "orgao": "SECRETARIA MUNICIPAL DE SAUDE",
-      "pago": 9747028604,
+      "pago": 9750079573,
       "pagoRestos": 832386550
     },
     {
       "codigo": "10",
       "dotacaoAtualizada": 2345396920,
       "dotacaoInicial": 2345396920,
-      "empenhado": 2522908785,
-      "liquidado": 1940472789,
+      "empenhado": 2523148785,
+      "liquidado": 1940712789,
       "orgao": "SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL",
-      "pago": 1910306815,
+      "pago": 1911185094,
       "pagoRestos": 240984189
     },
     {
@@ -97,9 +97,9 @@
       "dotacaoAtualizada": 17573495973,
       "dotacaoInicial": 17573495973,
       "empenhado": 14190505153,
-      "liquidado": 13037917011,
+      "liquidado": 13039881444,
       "orgao": "SECRETARIA MUNICIPAL DE EDUCAÇAO",
-      "pago": 12980118797,
+      "pago": 12984885908,
       "pagoRestos": 795930168
     },
     {
@@ -107,9 +107,9 @@
       "dotacaoAtualizada": 5822178434,
       "dotacaoInicial": 5822178434,
       "empenhado": 6095613780,
-      "liquidado": 4656262800,
+      "liquidado": 4656662800,
       "orgao": "SECRETARIA MUNICIPAL DE OBRAS PUBLICAS E HABITAÇÃO",
-      "pago": 4602461531,
+      "pago": 4620860819,
       "pagoRestos": 465960071
     },
     {
@@ -117,9 +117,9 @@
       "dotacaoAtualizada": 3299981810,
       "dotacaoInicial": 3299981810,
       "empenhado": 3956360842,
-      "liquidado": 2923859413,
+      "liquidado": 2983141646,
       "orgao": "SECRETARIA MUNICIPAL DE MEIO AMBIENTE",
-      "pago": 2914096629,
+      "pago": 2915559475,
       "pagoRestos": 476394275
     },
     {
@@ -129,7 +129,7 @@
       "empenhado": 1475662286,
       "liquidado": 1271554576,
       "orgao": "SECRETARIA MUNICIPAL DE GESTÃO E GOVERNANÇA",
-      "pago": 1269079775,
+      "pago": 1269863826,
       "pagoRestos": 382308609
     },
     {
@@ -139,23 +139,23 @@
       "empenhado": 2665584754,
       "liquidado": 2568187921,
       "orgao": "ENCARGOS GERAIS DO MUNICÍPIO",
-      "pago": 2563802416,
+      "pago": 2566236668,
       "pagoRestos": 79518648
     }
   ],
   "origem": {
-    "coleta": "2026-10-23T022332Z",
-    "coletadoEm": "2026-10-23T02:25:43.115Z",
+    "coleta": "2026-10-23T123320Z",
+    "coletadoEm": "2026-10-23T12:37:53.095Z",
     "fonte": "Portal da Transparência da Prefeitura de Erechim",
-    "sha256": "286f1632383ab471ce88899636aed656416a24483f3b95e055c73dace8752967",
+    "sha256": "22748492dd44aab944f23dd1e6d86dcf58aeb9a526b3ec5e0ca63cf8aef2b39e",
     "url": "https://www.erechim.rs.gov.br/sys523/publico/balDespOrgao.xhtml"
   },
   "total": {
     "dotacaoAtualizada": 60500000000,
     "dotacaoInicial": 60500000000,
-    "empenhado": 53849591326,
-    "liquidado": 45427522863,
-    "pago": 45149068668,
+    "empenhado": 53846681326,
+    "liquidado": 45506675021,
+    "pago": 45185199777,
     "pagoRestos": 3769549492
   }
 }

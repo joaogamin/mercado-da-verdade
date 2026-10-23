@@ -1,0 +1,122 @@
+{
+  "anos": [
+    2025,
+    2026
+  ],
+  "cidade": "erechim",
+  "escopo": "incremental",
+  "etapas": {
+    "analisar": {
+      "fim": "2026-10-23T12:53:32.321Z",
+      "inicio": "2026-10-23T12:53:31.494Z",
+      "resumo": {
+        "prefeitura-2025": {
+          "credores": 1788,
+          "empenhos": 19798,
+          "orgaos": 14
+        },
+        "prefeitura-2026": {
+          "credores": 1834,
+          "empenhos": 16614,
+          "orgaos": 14
+        }
+      },
+      "status": "ok"
+    },
+    "arquivar": {
+      "fim": "2026-10-23T12:53:27.153Z",
+      "inicio": "2026-10-23T12:53:23.014Z",
+      "resumo": {
+        "carimbo": {
+          "calendarios": [
+            "https://a.pool.opentimestamps.org",
+            "https://b.pool.opentimestamps.org",
+            "https://a.pool.eternitywall.com"
+          ],
+          "falhas": [],
+          "situacao": "pendente-no-bitcoin"
+        },
+        "manifesto": [
+          "telas.warc.gz d6c2ce281ed3…",
+          "api.warc.gz b4c409c3b5d6…",
+          "complementares.warc.gz ef00ad9360fb…"
+        ],
+        "registros": {
+          "api-empenhos": 2,
+          "balancete-orgaos": 2,
+          "detalhe-empenho": 566,
+          "lista-empenhos": 22,
+          "pesquisa-balancete-orgaos": 2,
+          "pesquisa-lista-empenhos": 22,
+          "siope-indicadores": 10,
+          "siops-indicadores": 10
+        }
+      },
+      "status": "ok"
+    },
+    "coletar": {
+      "fim": "2026-10-23T12:53:23.013Z",
+      "inicio": "2026-10-23T12:33:20.792Z",
+      "resumo": {
+        "adiados": 0,
+        "ausentesNoDetalhe": 0,
+        "detalhes": 566,
+        "requisicoes": 661,
+        "viaIndividual": 0,
+        "viaLote": 566
+      },
+      "status": "ok"
+    },
+    "comparar": {
+      "fim": "2026-10-23T12:53:30.999Z",
+      "inicio": "2026-10-23T12:53:30.188Z",
+      "resumo": {
+        "alterados": 0,
+        "novos": 2,
+        "reaparecidos": 0,
+        "removidos": 0
+      },
+      "status": "ok"
+    },
+    "conferir": {
+      "fim": "2026-10-23T12:53:31.493Z",
+      "inicio": "2026-10-23T12:53:31.000Z",
+      "resumo": {
+        "2025": "0% · detalhe 100%",
+        "2026": "0.0297% · detalhe 100%"
+      },
+      "status": "ok"
+    },
+    "normalizar": {
+      "fim": "2026-10-23T12:53:30.188Z",
+      "inicio": "2026-10-23T12:53:27.154Z",
+      "resumo": {
+        "avisos": 0,
+        "empenhos": 36412,
+        "eventos": 0
+      },
+      "status": "ok"
+    },
+    "publicar": {
+      "status": "pendente"
+    },
+    "revisar": {
+      "fim": "2026-10-23T12:53:34.941Z",
+      "inicio": "2026-10-23T12:53:32.322Z",
+      "resumo": {
+        "liberado": true,
+        "portoes": {
+          "Conferência": true,
+          "Leitura": true,
+          "Privacidade": true,
+          "Queda": true,
+          "Remoção ou alteração": true
+        }
+      },
+      "status": "ok"
+    }
+  },
+  "id": "2026-10-23T123320Z",
+  "iniciadoEm": "2026-10-23T12:33:20.789Z",
+  "prazoAte": "2026-10-23T13:33:20.789Z"
+}

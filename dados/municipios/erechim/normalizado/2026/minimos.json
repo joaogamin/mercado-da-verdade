@@ -1,0 +1,146 @@
+[
+  {
+    "ano": 2026,
+    "aplicado": 1424292962,
+    "area": "educacao",
+    "bimestre": 1,
+    "exigido": 2428271402,
+    "indicador": "1.1 Percentual de aplicação das receitas de impostos e transferências vinculadas à educação em MDE (mínimo de 25% para estados, DF e municípios)",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:35.097Z",
+      "fonte": "SIOPE · FNDE, Ministério da Educação",
+      "sha256": "1892777d09f578d29e446e2cb819f7d26fa2a7958a770c04d071503ca3e1be20",
+      "url": "https://www.fnde.gov.br/olinda-ide/servico/DADOS_ABERTOS_SIOPE/versao/v1/odata/Indicadores_Siope(Ano_Consulta=2026,Num_Peri=1,Sig_UF='RS')?%24filter=COD_MUNI%20eq%20430700&%24format=json"
+    },
+    "percentual": 14.66,
+    "piso": 25,
+    "receitaBase": null
+  },
+  {
+    "ano": 2026,
+    "aplicado": 3888609372,
+    "area": "educacao",
+    "bimestre": 2,
+    "exigido": 4258880048,
+    "indicador": "1.1 Percentual de aplicação das receitas de impostos e transferências vinculadas à educação em MDE (mínimo de 25% para estados, DF e municípios)",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:37.912Z",
+      "fonte": "SIOPE · FNDE, Ministério da Educação",
+      "sha256": "32bbe11c8f0433f7bd61131916bea86e747e2a295fec797b1d4e1bdb15b7ad52",
+      "url": "https://www.fnde.gov.br/olinda-ide/servico/DADOS_ABERTOS_SIOPE/versao/v1/odata/Indicadores_Siope(Ano_Consulta=2026,Num_Peri=2,Sig_UF='RS')?%24filter=COD_MUNI%20eq%20430700&%24format=json"
+    },
+    "percentual": 22.83,
+    "piso": 25,
+    "receitaBase": null
+  },
+  {
+    "ano": 2026,
+    "aplicado": 6591819012,
+    "area": "educacao",
+    "bimestre": 3,
+    "exigido": 6247224694,
+    "indicador": "1.1 Percentual de aplicação das receitas de impostos e transferências vinculadas à educação em MDE (mínimo de 25% para estados, DF e municípios)",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:42.381Z",
+      "fonte": "SIOPE · FNDE, Ministério da Educação",
+      "sha256": "79a0bbc63f9f7c51514cd3d13b9c6999ffca86a9fb1032ea295f20f87331434f",
+      "url": "https://www.fnde.gov.br/olinda-ide/servico/DADOS_ABERTOS_SIOPE/versao/v1/odata/Indicadores_Siope(Ano_Consulta=2026,Num_Peri=3,Sig_UF='RS')?%24filter=COD_MUNI%20eq%20430700&%24format=json"
+    },
+    "percentual": 26.38,
+    "piso": 25,
+    "receitaBase": null
+  },
+  {
+    "ano": 2026,
+    "aplicado": 8712137587,
+    "area": "educacao",
+    "bimestre": 4,
+    "exigido": 8129477320,
+    "indicador": "1.1 Percentual de aplicação das receitas de impostos e transferências vinculadas à educação em MDE (mínimo de 25% para estados, DF e municípios)",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:45.176Z",
+      "fonte": "SIOPE · FNDE, Ministério da Educação",
+      "sha256": "dd9a22b64357139507bf0ab3831457008e046113e4e16899ed87f054ac4732cf",
+      "url": "https://www.fnde.gov.br/olinda-ide/servico/DADOS_ABERTOS_SIOPE/versao/v1/odata/Indicadores_Siope(Ano_Consulta=2026,Num_Peri=4,Sig_UF='RS')?%24filter=COD_MUNI%20eq%20430700&%24format=json"
+    },
+    "percentual": 26.79,
+    "piso": 25,
+    "receitaBase": null
+  },
+  {
+    "ano": 2026,
+    "aplicado": 1042285367,
+    "area": "saude",
+    "bimestre": 1,
+    "exigido": null,
+    "indicador": "3.2 % da receita própria aplicada em ASPS conforme a LC 141/:ano",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:35.251Z",
+      "fonte": "SIOPS · Ministério da Saúde",
+      "sha256": "34ec15b81a177f89e010813308b56b0addae3be6d38afea26de28a47b5485762",
+      "url": "https://siops-consulta-publica-api.saude.gov.br/v1/indicador/municipal/430700/2026/12"
+    },
+    "percentual": 10.73,
+    "piso": 15,
+    "receitaBase": 9713085608
+  },
+  {
+    "ano": 2026,
+    "aplicado": 2566016891,
+    "area": "saude",
+    "bimestre": 2,
+    "exigido": null,
+    "indicador": "3.2 % da receita própria aplicada em ASPS conforme a LC 141/:ano",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:40.501Z",
+      "fonte": "SIOPS · Ministério da Saúde",
+      "sha256": "49785483133ebdb70cf978e599770d1b0ceaa6e2dde2827c007a5b2d6614a4f8",
+      "url": "https://siops-consulta-publica-api.saude.gov.br/v1/indicador/municipal/430700/2026/14"
+    },
+    "percentual": 15.06,
+    "piso": 15,
+    "receitaBase": 17035520190
+  },
+  {
+    "ano": 2026,
+    "aplicado": 4459984082,
+    "area": "saude",
+    "bimestre": 3,
+    "exigido": null,
+    "indicador": "3.2 % da receita própria aplicada em ASPS conforme a LC 141/:ano",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:42.538Z",
+      "fonte": "SIOPS · Ministério da Saúde",
+      "sha256": "5d33194144673caf971fd2d9eb2d2f69c4f29fe9274631cc9239c98a6e934906",
+      "url": "https://siops-consulta-publica-api.saude.gov.br/v1/indicador/municipal/430700/2026/1"
+    },
+    "percentual": 17.84,
+    "piso": 15,
+    "receitaBase": 24988898775
+  },
+  {
+    "ano": 2026,
+    "aplicado": 6137741405,
+    "area": "saude",
+    "bimestre": 4,
+    "exigido": null,
+    "indicador": "3.2 % da receita própria aplicada em ASPS conforme a LC 141/:ano",
+    "origem": {
+      "coleta": "2026-10-23T123320Z",
+      "coletadoEm": "2026-10-23T12:42:45.370Z",
+      "fonte": "SIOPS · Ministério da Saúde",
+      "sha256": "9bd0396945acf5cc52d7239ac1546280b2de1a07adbd963c061b6e8863945946",
+      "url": "https://siops-consulta-publica-api.saude.gov.br/v1/indicador/municipal/430700/2026/18"
+    },
+    "percentual": 19.11,
+    "piso": 15,
+    "receitaBase": 32102370930
+  }
+]

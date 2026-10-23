@@ -81,7 +81,10 @@ export function fonteSystem(base: string): Fonte {
   return {
     id: "system-sys523",
     nome: "Portal da Transparência da Prefeitura",
+    papel: "prefeitura",
     capacidades: new Set(["lista-empenhos", "detalhe-empenho", "api-empenhos", "balancete-orgaos"]),
+    // pesquisa-* ficam no WARC como prova, sem leitura propria (o leitor devolve null)
+    etiquetas: new Set(["lista-empenhos", "pesquisa-lista-empenhos", "pagina-empenho", "detalhe-empenho", "api-empenhos", "balancete-orgaos", "pesquisa-balancete-orgaos"]),
     leitor: new LeitorSystem(base),
   };
 }

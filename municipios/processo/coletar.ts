@@ -9,6 +9,7 @@ import type { EmpenhoLista } from "../nucleo/esquema.ts";
 import type { ConfigCidade } from "../cidades/tipos.ts";
 import { ColetorSystem } from "../fontes/system-sys523/coletor.ts";
 import { fonteSystem } from "../fontes/system-sys523/leitor.ts";
+import { bimestresEncerrados, coletarMinimo, ibge6 } from "../fontes/minimos/coletor.ts";
 import type { Base } from "./base.ts";
 import { caminhos } from "./caminhos.ts";
 import { gravarProgresso, lerProgresso, type Estado } from "./estado.ts";
@@ -80,10 +81,13 @@ export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, sal
   const info = { software: "municipios (Mercado da Verdade)", cidade: cfg.nome, coleta: estado.id, escopo: estado.escopo };
   const gTelas = new GravadorWarc(join(dir, "telas.warc.gz"));
   const gApi = new GravadorWarc(join(dir, "api.warc.gz"));
+  // sistemas federais (SIOPE, SIOPS): arquivo proprio, sem dado pessoal, sempre publico
+  const gComp = new GravadorWarc(join(dir, "complementares.warc.gz"));
   await gTelas.abrir(info);
   await gApi.abrir(info);
   const telas = new Cliente({ userAgent: USER_AGENT, intervaloMs: cfg.coleta.intervaloTelasMs, gravador: gTelas });
   const api = new Cliente({ userAgent: USER_AGENT, intervaloMs: cfg.coleta.intervaloApiMs, gravador: gApi, timeoutMs: 300_000 });
+  const federal = new Cliente({ userAgent: USER_AGENT, intervaloMs: cfg.coleta.intervaloTelasMs, gravador: gComp });
   const coletor = new ColetorSystem(cfg.fonte, telas, api);
   const leitor = fonteSystem(cfg.fonte.base).leitor;
 
@@ -114,6 +118,30 @@ export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, sal
       }
     }
     await salvarTudo();
+
+    // Minimos constitucionais (fonte complementar), antes dos detalhes: o prazo
+    // nunca os corta. Um sistema federal fora do ar nao derruba a coleta da
+    // prefeitura; o ultimo valor visto continua na base, e a falha vai no resumo.
+    const falhasComplementares: string[] = [];
+    if (estado.escopo !== "periodo") {
+      await gComp.abrir(info);
+      const fora = new Set<string>();
+      for (const ano of estado.anos) {
+        for (const bimestre of bimestresEncerrados(ano, hoje)) {
+          for (const area of ["educacao", "saude"] as const) {
+            if (fora.has(area)) continue;
+            try {
+              await tarefa(`minimo:${area}:${ano}:${bimestre}`, () => coletarMinimo(federal, { area, municipio: ibge6(cfg.ibge), uf: cfg.uf, ano, bimestre }));
+            } catch (e) {
+              fora.add(area);
+              falhasComplementares.push(`${area === "educacao" ? "SIOPE" : "SIOPS"} ${ano}/${bimestre}: ${(e as Error).message}`);
+            }
+          }
+        }
+      }
+      log(`minimos constitucionais (SIOPE e SIOPS): ${federal.requisicoes} requisições${falhasComplementares.length ? `; falhou: ${falhasComplementares.join("; ")}` : ""}`);
+      await salvarTudo();
+    }
 
     // As listas do exercicio (ja no WARC) dizem o universo de cada exercicio;
     // relidas sempre, o que e rapido e permite retomar no meio.
@@ -173,9 +201,13 @@ export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, sal
     adiados = total - n;
     if (adiados > 0) log(`prazo atingido: ${adiados} detalhes ficam para a proxima coleta incremental`);
     await salvarTudo();
-    return { requisicoes: telas.requisicoes + api.requisicoes, detalhes: total - adiados, adiados, viaLote, viaIndividual, ausentesNoDetalhe: ausentes };
+    return {
+      requisicoes: telas.requisicoes + api.requisicoes + federal.requisicoes, detalhes: total - adiados, adiados, viaLote, viaIndividual, ausentesNoDetalhe: ausentes,
+      ...(falhasComplementares.length ? { falhasComplementares } : {}),
+    };
   } finally {
     await gTelas.fechar();
     await gApi.fechar();
+    await gComp.fechar();
   }
 }

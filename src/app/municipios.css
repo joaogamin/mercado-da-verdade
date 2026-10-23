@@ -81,6 +81,7 @@ a.mun-barra-link .mun-barra-nome::after { content: " →"; color: var(--brand); 
 .mun-ordem--false { border-left-color: var(--alert); }
 .mun-ordem--null { border-left-color: var(--line); }
 .mun-ordem-rot { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+.mun-ordem .mun-ordem-fonte { font-size: 12px; color: var(--muted); margin: 0; }
 
 /* ---------- textos das paginas de transparencia ---------- */
 .mun-texto { max-width: 68ch; }

@@ -24,6 +24,8 @@ export type Pedido = {
    * fica diferente do que foi gravado.
    */
   etiqueta?: Etiqueta | ((corpo: Uint8Array) => Etiqueta | undefined);
+  /** Status de erro que sao resposta valida (ex.: 404 = "ainda nao publicado"), devolvidos sem excecao. */
+  aceitar?: number[];
 };
 
 export type Resposta = {
@@ -83,7 +85,7 @@ export class Cliente {
           await dormir(this.o.esperasMs[tentativa]);
           continue;
         }
-        if (r.status >= 400) throw new Error(`HTTP ${r.status} em ${p.metodo} ${p.url}`);
+        if (r.status >= 400 && !p.aceitar?.includes(r.status)) throw new Error(`HTTP ${r.status} em ${p.metodo} ${p.url}`);
         return { status: r.status, headers: r.headers, corpo: bytes, registro };
       } catch (e) {
         const rede = e instanceof TypeError || (e instanceof DOMException && e.name === "TimeoutError");

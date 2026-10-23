@@ -29,6 +29,8 @@ const ROTULO_TIPO: Record<string, string> = {
   "api-empenhos": "respostas da API",
   "balancete-orgaos": "balancetes por órgão (CSV)",
   "pesquisa-balancete-orgaos": "pesquisas do balancete",
+  "siope-indicadores": "indicadores do SIOPE (educação)",
+  "siops-indicadores": "indicadores do SIOPS (saúde)",
 };
 
 export default async function PaginaFontes({ params }: Props) {
@@ -46,7 +48,7 @@ export default async function PaginaFontes({ params }: Props) {
           <div className="wrap">
             <Trilha passos={[{ href: "/municipios/", rotulo: "Municípios" }, { href: `/municipios/${municipio}/`, rotulo: c.nome }, { rotulo: "Fontes" }]} />
             <h1 className="mun-h1" style={{ marginTop: 14 }}>De onde veio, exatamente?</h1>
-            <p className="sec-lead">Todo número deste site vem do Portal da Transparência da Prefeitura de {c.nome}. Abaixo estão as páginas oficiais, cada coleta que fizemos e como você confere sem precisar confiar em nós.</p>
+            <p className="sec-lead">Os números deste site vêm do Portal da Transparência da Prefeitura de {c.nome}. Os que vêm de outra fonte oficial levam o selo “complementar”. Abaixo estão as páginas oficiais, cada coleta que fizemos e como você confere sem precisar confiar em nós.</p>
           </div>
         </section>
 
@@ -68,6 +70,8 @@ export default async function PaginaFontes({ params }: Props) {
             <h2>Fontes complementares</h2>
             <p>Sempre com selo próprio, nunca misturadas aos números da prefeitura:</p>
             <ul>
+              <li><a href="https://www.fnde.gov.br/olinda-ide/servico/DADOS_ABERTOS_SIOPE/versao/v1/aplicacao" target="_blank" rel="noopener noreferrer nofollow">SIOPE · FNDE, Ministério da Educação ↗</a>: o percentual da receita de impostos aplicado em educação (mínimo de 25%), como a prefeitura declarou, bimestre a bimestre. Coletado a cada atualização e arquivado como as telas.</li>
+              <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores" target="_blank" rel="noopener noreferrer nofollow">SIOPS · Ministério da Saúde ↗</a>: o percentual aplicado em saúde (mínimo de 15%), declarado e homologado pela prefeitura. Coletado e arquivado do mesmo jeito.</li>
               {c.populacao.map((p) => <li key={p.ano}><a href={p.url} target="_blank" rel="noopener noreferrer nofollow">{p.fonte} ↗</a>: população de {p.ano}, {inteiro(p.valor)} habitantes. Usada só no valor por habitante.</li>)}
               <li>{FONTE_ELEMENTOS}: nome dos elementos de despesa (a prefeitura publica o código).</li>
               <li>Decretos 12.343/2024 e 12.807/2025 (Planalto): limites de dispensa por valor, usados no sinal de fracionamento.</li>

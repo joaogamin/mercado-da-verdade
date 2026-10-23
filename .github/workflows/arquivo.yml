@@ -50,11 +50,15 @@ jobs:
           [ -z "$M" ] && M=$(date -u -d "$(date -u +%Y-%m-01) -1 day" +%Y-%m)
           echo "mes=$M" >> "$GITHUB_OUTPUT"
 
-      - name: Baixar os brutos das telas (B2)
-        if: vars.MUNICIPIOS_PUBLICAR_BRUTOS == 'sim' && env.B2_BUCKET != ''
+      - name: Baixar os brutos publicos (B2)
+        if: env.B2_BUCKET != ''
         run: |
+          # complementares (SIOPE, SIOPS) sempre; telas do portal so com MUNICIPIOS_PUBLICAR_BRUTOS=sim
+          F="complementares.warc.gz"; [ "${{ vars.MUNICIPIOS_PUBLICAR_BRUTOS }}" = "sim" ] && F="$F telas.warc.gz"
           for C in $(ls dados/municipios/erechim/coletas | grep "^${{ steps.mes.outputs.mes }}"); do
-            aws s3 cp "s3://$B2_BUCKET/erechim/$C/telas.warc.gz" "dados/municipios/erechim/brutos/$C/telas.warc.gz" --endpoint-url "$B2_ENDPOINT" || true
+            for A in $F; do
+              aws s3 cp "s3://$B2_BUCKET/erechim/$C/$A" "dados/municipios/erechim/brutos/$C/$A" --endpoint-url "$B2_ENDPOINT" || true
+            done
           done
 
       - name: Montar o pacote

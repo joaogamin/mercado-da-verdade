@@ -149,6 +149,7 @@ export function SinaisEmOrdem({ sinais, emOrdem, hrefCredor }: { sinais: Sinal[]
               <article key={o.id} className={`mun-ordem mun-ordem--${k}`}>
                 <h4><span aria-hidden="true">{ICONE[k]}</span> {o.titulo} <span className="mun-ordem-rot mono">{ROTULO[k]}</span></h4>
                 <p className="mun-muted">{o.detalhe}</p>
+                {o.fonte ? <p className="mono mun-ordem-fonte"><span className="mun-fonte-rot mun-fonte-rot--comp">Complementar</span> {o.fonte}</p> : null}
               </article>
             );
           })}

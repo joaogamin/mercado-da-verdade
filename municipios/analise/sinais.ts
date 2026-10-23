@@ -6,6 +6,7 @@ import type { Centavos, Empenho } from "../nucleo/esquema.ts";
 import { agruparPor } from "../nucleo/agrupar.ts";
 import { ELEMENTO_OBRAS, LIMITES_DISPENSA } from "./limites.ts";
 import { chaveCredor, valorAtual } from "./chaves.ts";
+import { itemMinimos, type MinimosDoAno } from "./minimos.ts";
 
 export type ItemSinal = {
   titulo: string;
@@ -27,7 +28,11 @@ export type Sinal = {
   limites: string;
 };
 
-export type EmOrdem = { id: string; titulo: string; detalhe: string; ok: boolean | null };
+export type EmOrdem = {
+  id: string; titulo: string; detalhe: string; ok: boolean | null;
+  /** Fonte complementar (fora do portal da prefeitura), mostrada com selo proprio. */
+  fonte?: string;
+};
 
 const ativos = (es: Empenho[]) => es.filter((e) => !e.removidoEm);
 const reais = (c: number) => (c / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -143,7 +148,7 @@ function prazos(es: Empenho[]): { sinal: Sinal; mediana: number | null } {
   };
 }
 
-export function calcularSinais(todos: Empenho[], ano: number, conferenciaPct: number | null): { sinais: Sinal[]; emOrdem: EmOrdem[] } {
+export function calcularSinais(todos: Empenho[], ano: number, conferenciaPct: number | null, minimos: MinimosDoAno): { sinais: Sinal[]; emOrdem: EmOrdem[] } {
   const es = ativos(todos);
   const p = prazos(es);
   const c = es.filter(contratavel);
@@ -173,12 +178,7 @@ export function calcularSinais(todos: Empenho[], ano: number, conferenciaPct: nu
       detalhe: p.mediana === null ? "Ainda sem pagamentos detalhados." : `Metade dos pagamentos sai em até ${p.mediana} ${p.mediana === 1 ? "dia" : "dias"} depois da liquidação.`,
       ok: p.mediana === null ? null : p.mediana <= 30,
     },
-    {
-      id: "minimos",
-      titulo: "Mínimos constitucionais de saúde e educação",
-      detalhe: "Ainda não verificado: depende da receita de impostos (RREO), que ainda não coletamos.",
-      ok: null,
-    },
+    itemMinimos(minimos),
   ];
 
   return { sinais: [concentracao(es), contratacaoDireta(es), fracionamento(es, ano), p.sinal], emOrdem };

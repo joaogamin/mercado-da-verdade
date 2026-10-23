@@ -149,6 +149,31 @@ export type Balancete = {
   origem: Origem;
 };
 
+/**
+ * Aplicacao minima da Constituicao, como a propria prefeitura declarou ao
+ * sistema federal: educacao no SIOPE (FNDE), saude no SIOPS (Ministerio da
+ * Saude). Fonte complementar: nunca se mistura aos numeros do portal.
+ */
+export type Minimo = {
+  area: "educacao" | "saude";
+  ano: number;
+  /** Bimestre do RREO (1 a 6). O 6º fecha o exercicio; antes dele, o percentual e parcial. */
+  bimestre: number;
+  /** Percentual aplicado, exatamente como o sistema federal publica (ex.: 27.89). */
+  percentual: number;
+  /** Piso constitucional em %: 25 (CF art. 212) ou 15 (LC 141/2012, art. 7º). */
+  piso: number;
+  /** Valor aplicado, como publicado. */
+  aplicado: Centavos | null;
+  /** Valor minimo exigido, quando o sistema o publica (SIOPE). */
+  exigido: Centavos | null;
+  /** Receita que serve de base ao percentual, quando o sistema a publica (SIOPS). */
+  receitaBase: Centavos | null;
+  /** Codigo e nome do indicador usado, como publicados. */
+  indicador: string;
+  origem: Origem;
+};
+
 export type TipoEvento = "novo" | "alterado" | "removido" | "reaparecido";
 
 export type Evento = {

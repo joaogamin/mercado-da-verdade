@@ -171,3 +171,21 @@ parou na primeira requisição, sem publicar nada.
 - Equivalência: 25 empenhos de março detalhados nos dois métodos, idênticos campo a campo.
 - A carga em andamento foi interrompida e retomada no método novo, sem repetir as listas nem os 554 detalhes já feitos.
   O gravador agora corta um registro incompleto no fim do WARC ao reabrir (teste incluído).
+
+## 23/10/2026: mínimos constitucionais (fonte complementar)
+
+- O RREO do Tesouro (SICONFI) tem Erechim, mas sem os anexos de educação (8) e saúde (12): para municípios, eles
+  saem do SIOPE e do SIOPS. A coleta passou a ir direto aos dois sistemas, onde a própria prefeitura declara esses
+  gastos a cada bimestre.
+- Os dois usam o código IBGE de 6 dígitos (430700). O SIOPS não numera os períodos de 1 a 6: o 1º bimestre é 12, o
+  2º é 14, o 1º semestre é 1, o 4º e o 5º bimestres são 18 e 20, e o ano inteiro é 2. Mapa em `fontes/minimos.md`.
+- Erechim, como declarado:
+
+  | Exercício | Educação (MDE, mínimo 25%) | Saúde (ASPS, mínimo 15%) |
+  |---|---|---|
+  | 2025, ano fechado | 27,89% (R$ 123,6 mi aplicados; exigido R$ 110,8 mi) | 22,46% (R$ 97,1 mi sobre R$ 432,0 mi de receita base) |
+  | 2026, até o 4º bimestre | 26,79% | 19,11% |
+
+- O item "Mínimos constitucionais" do "o que está em ordem" deixa de ser "?" para 2025 (✓). Em 2026, continua "?"
+  até o 6º bimestre, com os percentuais parciais à vista: o mínimo é anual.
+- As respostas ficam em `complementares.warc.gz`, público. Coleta de teste: 20 requisições em 25 s, nenhum aviso de leitura.

@@ -30,7 +30,18 @@ Os demais usam o de compras e outros serviços. É uma regra conservadora, que t
 | A soma confere com o balancete | diferença ≤ 0,5% | sem balancete coletado |
 | Parcela contratada com disputa | ≥ 50% do contratado fora da folha teve disputa feita pela prefeitura: pregão, concorrência, tomada de preços, convite, leilão ou concurso. Adesão a ata de outro órgão, credenciamento e chamada pública **não contam**: contá-las inflaria este item (em março de 2025, de 52,1% para 72,8%) | sem detalhes |
 | Prazo típico de pagamento | mediana ≤ 30 dias | sem pagamentos detalhados |
-| Mínimos constitucionais (saúde 15%, educação 25%) | ainda não implementado: depende da receita de impostos (RREO) | sempre "?" por enquanto |
+| Mínimos constitucionais (educação 25%, saúde 15%) | no 6º bimestre, os dois percentuais declarados ≥ piso: educação (MDE) no SIOPE, saúde (ASPS) no SIOPS. Abaixo do piso no ano fechado = "!" | ano em curso (só acompanhamento: o mínimo é anual) ou área ainda não declarada |
+
+Os mínimos são fonte complementar: o percentual é o que a prefeitura declarou ao sistema federal, mostrado
+como publicado e com selo próprio. A base de cálculo (receita de impostos e transferências) não está no portal,
+então não sai da soma dos empenhos. Detalhes em [../fontes/minimos.md](../fontes/minimos.md).
+
+Valores de Erechim conferidos em 23/10/2026:
+
+| Exercício | Educação (MDE, mín. 25%) | Saúde (ASPS, mín. 15%) |
+|---|---|---|
+| 2025, ano fechado | 27,89% | 22,46% |
+| 2026, até o 4º bimestre | 26,79% | 19,11% |
 
 ## Próximos sinais (depois do MVP)
 

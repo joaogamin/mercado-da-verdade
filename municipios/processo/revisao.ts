@@ -8,6 +8,7 @@ import type { Base } from "./base.ts";
 import type { Estado } from "./estado.ts";
 import type { Portao } from "./portoes.ts";
 import { urlDetalhe } from "../fontes/system-sys523/coletor.ts";
+import { AREAS, NOME_AREA, percentual, periodo } from "../analise/minimos.ts";
 
 const reais = (c: number) => (c / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const pct = (v: number | null) => (v === null ? "—" : `${v.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}%`);
@@ -60,6 +61,19 @@ export function gerarRevisao(o: {
   const qualidade = o.conferencia.exercicios.flatMap((x) => x.qualidade.map((q) => `${x.ano}: ${q}`));
   if (qualidade.length) add("", "Qualidade dos dados do portal:", ...qualidade.map((q) => `- ${q}`));
   add("");
+
+  // fonte complementar: o ultimo bimestre declarado de cada area, por exercicio
+  const anos = [...new Set([...o.base.minimos.values()].map((m) => m.ano))].sort();
+  const falhas = (estado.etapas.coletar.resumo?.falhasComplementares as string[] | undefined) ?? [];
+  if (anos.length || falhas.length) {
+    add("## Mínimos constitucionais (complementar: SIOPE e SIOPS)", "");
+    for (const ano of anos) {
+      const ult = AREAS.map((a) => [...o.base.minimos.values()].filter((m) => m.ano === ano && m.area === a).sort((x, y) => x.bimestre - y.bimestre).at(-1));
+      add(`- ${ano}: ${ult.map((m, i) => (m ? `${NOME_AREA[m.area]} ${percentual(m.percentual)} ${periodo(m)} (mínimo ${m.piso}%)${m.origem.coleta === estado.id ? "" : ", visto em coleta anterior"}` : `${NOME_AREA[AREAS[i]]} sem dado`)).join(" · ")}`);
+    }
+    if (falhas.length) add("", "Não coletado nesta execução (fica o último valor visto):", ...falhas.map((f) => `- ${f}`));
+    add("");
+  }
 
   const sensiveis = o.eventos.filter((e) => e.tipo === "removido" || e.tipo === "alterado").slice(0, 50);
   if (sensiveis.length) {

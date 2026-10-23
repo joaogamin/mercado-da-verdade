@@ -77,6 +77,7 @@ npm run municipio -- erechim verificar --guarda E:\municipios    # confere o HD 
 
 - O `guardar` recalcula o sha256 de cada WARC **no HD** e compara com o manifesto carimbado. A coleta em andamento,
   que ainda não tem manifesto, fica para a próxima vez.
+- `complementares.warc.gz` (SIOPE e SIOPS) não tem dado pessoal e é público. Ele vai sempre no pacote mensal.
 - O `api.warc.gz` contém CPF completo. **O HD precisa estar criptografado** (BitLocker To Go: no Explorer, botão
   direito na unidade → "Ativar o BitLocker"), e a chave de recuperação fica fora do HD.
 - Rode o `guardar` depois de cada coleta e o `verificar --guarda` de tempos em tempos. Se um único byte mudar, ele acusa.
@@ -99,6 +100,7 @@ npm run municipio -- erechim verificar --guarda E:\municipios    # confere o HD 
 |---|---|
 | [arquitetura.md](arquitetura.md) | Camadas, contrato da fonte, esquema canônico, como acrescentar uma cidade |
 | [fontes/system-sys523.md](fontes/system-sys523.md) | Mapa técnico do portal System (Erechim): endpoints, parâmetros, armadilhas |
+| [fontes/minimos.md](fontes/minimos.md) | SIOPE e SIOPS: os mínimos de educação e saúde declarados pela prefeitura (fonte complementar) |
 | [erechim/diario.md](erechim/diario.md) | Diário datado: coletas, conferências, achados e decisões |
 | [erechim/sinais.md](erechim/sinais.md) | Catálogo de sinais e de "o que está em ordem": regra, base legal, limites |
 

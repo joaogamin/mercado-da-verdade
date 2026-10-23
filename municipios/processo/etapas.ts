@@ -13,6 +13,7 @@ import type { Evento } from "../nucleo/esquema.ts";
 import { acrescentarNdjson, gravarJson, gravarNdjson, lerJson, lerNdjson } from "../nucleo/ndjson.ts";
 import type { ConfigCidade } from "../cidades/tipos.ts";
 import { fonteSystem } from "../fontes/system-sys523/leitor.ts";
+import { FONTES_MINIMOS } from "../fontes/minimos/leitor.ts";
 import { conferir, type Conferencia } from "../analise/conferencia.ts";
 import { analisar } from "../analise/agregar.ts";
 import { arquivar } from "../arquivo/manifesto.ts";
@@ -50,7 +51,7 @@ async function todasAsColetas(cidade: string): Promise<string[]> {
  */
 async function dobrar(ctx: Contexto): Promise<Dobra> {
   const { cfg, estado } = ctx;
-  const fonte = fonteSystem(cfg.fonte.base);
+  const fontes = [fonteSystem(cfg.fonte.base), ...FONTES_MINIMOS];
   const reprocessar = estado.escopo === "reprocessar";
   const antes = await carregarBase(cfg.slug);
   const atual = reprocessar ? baseVazia() : clonarBase(antes);
@@ -59,7 +60,7 @@ async function dobrar(ctx: Contexto): Promise<Dobra> {
 
   for (const coleta of coletas) {
     const anterior = clonarBase(atual);
-    const r: ResultadoNormalizacao = await incorporar(atual, [coleta], fonte, cfg);
+    const r: ResultadoNormalizacao = await incorporar(atual, [coleta], fontes, cfg);
     const eventos = comparar(anterior.empenhos, atual.empenhos, {
       coberturas: r.coberturas, ausentes: r.ausentes, campos: cfg.portoes.camposSensiveis, coleta, em: instanteDaColeta(coleta),
     });

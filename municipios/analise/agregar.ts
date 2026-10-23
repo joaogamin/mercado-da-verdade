@@ -2,7 +2,7 @@
 // Sao a fonte unica das paginas, dos resumos e dos downloads — nada e
 // recalculado no componente, entao miniatura e pagina nao divergem.
 import { join } from "node:path";
-import type { Balancete, Centavos, Empenho, LinhaBalancete, Origem } from "../nucleo/esquema.ts";
+import type { Balancete, Centavos, Empenho, LinhaBalancete, Minimo, Origem } from "../nucleo/esquema.ts";
 import { gravarJson, lerJson } from "../nucleo/ndjson.ts";
 import { nomeDoElemento } from "./elementos.ts";
 import type { Conferencia } from "./conferencia.ts";
@@ -11,6 +11,7 @@ import { chaveCredor, modalidade, slugCredor, valorAtual } from "./chaves.ts";
 
 export { modalidade };
 import { calcularSinais, type EmOrdem, type Sinal } from "./sinais.ts";
+import { minimosDoAno, type MinimosDoAno } from "./minimos.ts";
 import type { ConfigCidade } from "../cidades/tipos.ts";
 import type { Base } from "../processo/base.ts";
 import { caminhos } from "../processo/caminhos.ts";
@@ -53,6 +54,11 @@ export type Exercicio = {
   mensal: { mes: string; empenhado: Centavos; pago: Centavos }[];
   sinais: Sinal[];
   emOrdem: EmOrdem[];
+  /**
+   * Minimos constitucionais do municipio (fonte complementar: SIOPE e SIOPS).
+   * Valem para o municipio inteiro, por isso so acompanham a entidade padrao.
+   */
+  minimos: MinimosDoAno;
   /** O balancete oficial do exercicio, quando coletado: e o numero de destaque. */
   oficial: (Omit<LinhaBalancete, "codigo" | "orgao"> & { origem: Origem }) | null;
   /** Soma do valor ORIGINAL da lista (antes das anulacoes), para explicar a diferenca. */
@@ -102,7 +108,10 @@ const elementoDe = (e: Empenho) => e.detalhe ? { chave: e.detalhe.classificacao.
 const subelementoDe = (e: Empenho) => e.detalhe ? { chave: e.detalhe.classificacao.subelemento, nome: e.detalhe.classificacao.descricao || e.detalhe.classificacao.subelemento } : null;
 const credorDe = (e: Empenho) => ({ chave: chaveCredor(e), nome: e.credor.nome });
 
-export function agregarExercicio(cfg: ConfigCidade, entidade: string, ano: number, todos: Empenho[], conferenciaPct: number | null = null, balancete?: Balancete): Exercicio {
+export function agregarExercicio(
+  cfg: ConfigCidade, entidade: string, ano: number, todos: Empenho[],
+  conferenciaPct: number | null = null, balancete?: Balancete, minimosDaCidade: Iterable<Minimo> = [],
+): Exercicio {
   const es = todos.filter((e) => !e.removidoEm);
   const t = zerado();
   for (const e of es) somar(t, e);
@@ -140,7 +149,8 @@ export function agregarExercicio(cfg: ConfigCidade, entidade: string, ano: numbe
   const coletas = es.flatMap((e) => [e.origens.lista?.coletadoEm, e.origens.detalhe?.coletadoEm]).filter((x): x is string => !!x).sort();
   const origem = es.map((e) => e.origens.lista).filter((o): o is Origem => !!o)
     .sort((a, b) => b.coletadoEm.localeCompare(a.coletadoEm))[0] ?? null;
-  const { sinais, emOrdem } = calcularSinais(todos, ano, conferenciaPct);
+  const minimos = minimosDoAno(entidade === cfg.entidades[0].id ? minimosDaCidade : [], ano);
+  const { sinais, emOrdem } = calcularSinais(todos, ano, conferenciaPct, minimos);
 
   return {
     cidade: cfg.slug, entidade, ano,
@@ -154,6 +164,7 @@ export function agregarExercicio(cfg: ConfigCidade, entidade: string, ano: numbe
     mensal: mensal(es),
     sinais,
     emOrdem,
+    minimos,
     oficial: balancete ? { ...balancete.total, origem: balancete.origem } : null,
     somaListaOriginal: es.reduce((s, e) => s + e.empenhado, 0),
     origem,
@@ -169,7 +180,7 @@ export async function analisar(cfg: ConfigCidade, base: Base): Promise<Record<st
   for (const [k, es] of [...grupos].sort(([a], [b]) => a.localeCompare(b))) {
     const [entidade, ano] = [k.slice(0, k.lastIndexOf("-")), Number(k.slice(k.lastIndexOf("-") + 1))];
     const pct = conf?.exercicios.find((x) => x.entidade === entidade && x.ano === ano)?.diferencaPct ?? null;
-    const ex = agregarExercicio(cfg, entidade, ano, es, pct, base.balancetes.get(k));
+    const ex = agregarExercicio(cfg, entidade, ano, es, pct, base.balancetes.get(k), base.minimos.values());
     await gravarJson(join(caminhos(cfg.slug).analise, `${k}.json`), ex);
     resumo[k] = { empenhos: ex.totais.empenhos, orgaos: ex.orgaos.length, credores: ex.credores.length };
   }

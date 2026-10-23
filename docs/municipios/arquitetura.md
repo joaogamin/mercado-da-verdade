@@ -5,18 +5,19 @@ municipios/            o pipeline (TypeScript executado direto pelo Node 24)
   cli.ts               porta de entrada única
   processo/            as 8 etapas, o estado, os portões e o relatório de revisão
   nucleo/              esquema, dinheiro, datas, CSV, HTTP, WARC, privacidade, diff
-  fontes/              um adaptador por software de portal (hoje: system-sys523)
+  fontes/              um adaptador por software de portal (hoje: system-sys523) e as fontes
+                       complementares nacionais (minimos/: SIOPE e SIOPS, servem a qualquer município)
   analise/             conferência, agregados, sinais, limites legais, nomes de elementos
   arquivo/             manifesto + carimbo, pacote mensal, Wayback
   publicar/            exportar: dados/ → public/dados/ (no prebuild, sem rede)
   cidades/             uma configuração por cidade
 dados/municipios/<cidade>/
   coletas/<id>/        estado.json, manifesto.json(.ots), normalizacao.json, eventos.ndjson, revisao.md
-  normalizado/<ano>/   empenhos-MM.ndjson e balancete-orgaos-<entidade>.json
+  normalizado/<ano>/   empenhos-MM.ndjson, balancete-orgaos-<entidade>.json e minimos.json (complementar)
   eventos.ndjson       histórico só de acréscimo: novo, alterado, removido, reaparecido
   conferencia.json     nossa soma × balancete oficial
   analise/             um JSON por exercício: a fonte única das páginas
-  brutos/<id>/         WARC (fora do git; telas e API em arquivos separados)
+  brutos/<id>/         WARC (fora do git): telas, API e complementares em arquivos separados
 src/municipios/        leitura de dados/, componentes, textos, páginas compartilhadas
 src/app/(br)/municipios/   as rotas (layout aninhado no root (br), noindex)
 ```
@@ -48,6 +49,10 @@ Uma fonte é um par:
 
 - **coletor**: rede → WARC etiquetado. Cada resposta leva `WARC-Municipios-Tipo`, `-Params` e `-Url-Oficial`.
 - **leitor**: resposta etiquetada → esquema canônico. Não faz rede, por isso o reprocessamento roda offline.
+
+Cada fonte declara as etiquetas que lê (`etiquetas`) e o seu `papel`: `prefeitura` (a fonte primária) ou
+`complementar` (selo próprio na linha de fonte, nunca misturada aos números do portal). A normalização entrega
+cada resposta à fonte que declara a etiqueta dela.
 
 O esquema (`nucleo/esquema.ts`) não depende da fonte e é importado também pelo site: se divergir, o build quebra. Valores em centavos inteiros, datas em ISO.
 

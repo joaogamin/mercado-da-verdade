@@ -6,6 +6,7 @@ import { Barras, Indicadores, Mensal } from "../componentes/Graficos";
 import { dataCurta, inteiro, mesCurto, pct, reais, reaisCurto } from "../formato";
 import { hrefCredor, hrefOrgao, navCidade } from "../navegacao";
 import { FONTE_ELEMENTOS } from "@pipeline/analise/elementos.ts";
+import { AREAS, NOME_AREA, percentual, periodo } from "@pipeline/analise/minimos.ts";
 
 export default function VisaoGeral({ slug, ano }: { slug: string; ano: number }) {
   const c = cidadeDe(slug);
@@ -33,6 +34,10 @@ export default function VisaoGeral({ slug, ano }: { slug: string; ano: number })
   const origem = ex.origem;
   const fonte = origem ? <Fonte origem={origem} cidade={slug} comoLer="empenho" /> : null;
   const credorPorChave = new Map(ex.credores.map((x) => [x.chave, x.slug]));
+  // Minimos constitucionais (fonte complementar): o ultimo bimestre declarado de cada area
+  const minimos = ex.minimos ?? { educacao: [], saude: [] };
+  const ultimosMinimos = AREAS.map((a) => minimos[a].at(-1)).filter((m) => m !== undefined);
+  const bimestres = [...new Set(AREAS.flatMap((a) => minimos[a].map((m) => m.bimestre)))].sort((a, b) => a - b);
 
   return (
     <>
@@ -97,6 +102,37 @@ export default function VisaoGeral({ slug, ano }: { slug: string; ano: number })
           <SinaisEmOrdem sinais={ex.sinais} emOrdem={ex.emOrdem} hrefCredor={(k) => { const s = credorPorChave.get(k); return s ? hrefCredor(slug, ano, s) : undefined; }} />
           {fonte}
         </Secao>
+
+        {ultimosMinimos.length ? (
+          <Secao id="minimos" eyebrow="Mínimos da Constituição" titulo="Saúde e educação: o piso foi cumprido?" fundo="white"
+            lead="O município tem de aplicar pelo menos **25%** da receita de impostos em educação (Constituição, art. 212) e **15%** em saúde (art. 198 e Lei Complementar 141/2012). Os números são os que a própria prefeitura declarou aos sistemas federais.">
+            <Indicadores itens={ultimosMinimos.map((m) => ({
+              rotulo: NOME_AREA[m.area], valor: percentual(m.percentual),
+              detalhe: `${periodo(m)} · mínimo ${m.piso}%${m.aplicado !== null ? ` · ${reaisCurto(m.aplicado)} aplicados` : ""}`,
+            }))} />
+            {ultimosMinimos.some((m) => m.bimestre < 6) ? (
+              <p className="mun-muted" style={{ margin: "12px 0 0" }}>O mínimo vale para o ano inteiro. Antes do fechamento (6º bimestre), o percentual acumulado é acompanhamento, não veredito.</p>
+            ) : null}
+            <details className="mun-tabela-det">
+              <summary className="mono">bimestre a bimestre (acumulado no ano)</summary>
+              <table className="mun-tabela" style={{ maxWidth: 560 }}>
+                <thead><tr><th>Até o</th>{AREAS.map((a) => <th key={a} className="num">{NOME_AREA[a]}</th>)}</tr></thead>
+                <tbody>
+                  {bimestres.map((b) => (
+                    <tr key={b}>
+                      <td>{b}º bimestre</td>
+                      {AREAS.map((a) => { const m = minimos[a].find((x) => x.bimestre === b); return <td key={a} className="num">{m ? percentual(m.percentual) : "—"}</td>; })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </details>
+            {ultimosMinimos.map((m) => (
+              <FonteComplementar key={m.area} fonte={m.origem.fonte} url={m.origem.url} arquivada={{ origem: m.origem, cidade: slug }}
+                nota={`declarado pela prefeitura · indicador ${m.indicador.split(" ")[0]}`} />
+            ))}
+          </Secao>
+        ) : null}
 
         <Secao id="orgaos" eyebrow="Quem gasta" titulo="Por secretaria e órgão"
           lead="Clique em um órgão para ver em que ele gastou, com quem e como contratou.">

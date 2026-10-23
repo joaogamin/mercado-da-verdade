@@ -6,7 +6,7 @@ import type { Empenho, Origem } from "../nucleo/esquema.ts";
 import { lerWarc } from "../nucleo/warc.ts";
 import type { Fonte } from "../fontes/tipos.ts";
 import type { ConfigCidade } from "../cidades/tipos.ts";
-import { chaveBalancete, type Base } from "./base.ts";
+import { chaveBalancete, chaveMinimo, type Base } from "./base.ts";
 import { caminhos } from "./caminhos.ts";
 
 export type Cobertura = { ano: number; entidade: string; de: string; ate: string; numeros: number[] };
@@ -22,22 +22,25 @@ export type ResultadoNormalizacao = {
   leituras: number;
 };
 
-/** Arquivos WARC de uma coleta, telas antes da API. */
+/** Arquivos WARC de uma coleta: telas antes da API, e as fontes complementares por ultimo. */
 export function warcsDaColeta(cidade: string, id: string): string[] {
   const dir = caminhos(cidade).brutosDaColeta(id);
-  return ["telas.warc.gz", "api.warc.gz"].map((a) => join(dir, a)).filter((a) => existsSync(a));
+  return ["telas.warc.gz", "api.warc.gz", "complementares.warc.gz"].map((a) => join(dir, a)).filter((a) => existsSync(a));
 }
 
 const somaLiquida = (xs: { valor: number; estornado: number }[]) => xs.reduce((s, x) => s + x.valor - x.estornado, 0);
 
-export async function incorporar(base: Base, coletas: string[], fonte: Fonte, cfg: ConfigCidade): Promise<ResultadoNormalizacao> {
+/** Cada resposta e lida pela fonte que declara a sua etiqueta; a da prefeitura vem primeiro. */
+export async function incorporar(base: Base, coletas: string[], fontes: Fonte[], cfg: ConfigCidade): Promise<ResultadoNormalizacao> {
   const r: ResultadoNormalizacao = { coberturas: [], ausentes: [], avisos: [], divergencias: [], soNaApi: [], leituras: 0 };
-  const nomeFonte = `${fonte.nome} de ${cfg.nome}`;
+  const nomeFonte = (f: Fonte) => (f.papel === "prefeitura" ? `${f.nome} de ${cfg.nome}` : f.nome);
 
   for (const coleta of [...coletas].sort()) {
     for (const arquivo of warcsDaColeta(cfg.slug, coleta)) {
       for await (const lido of lerWarc(arquivo)) {
-        const origem: Origem = { fonte: nomeFonte, url: lido.etiqueta.urlOficial, coletadoEm: lido.data, sha256: lido.sha256, coleta };
+        const fonte = fontes.find((f) => f.etiquetas.has(lido.etiqueta.tipo));
+        if (!fonte) continue;
+        const origem: Origem = { fonte: nomeFonte(fonte), url: lido.etiqueta.urlOficial, coletadoEm: lido.data, sha256: lido.sha256, coleta };
         let saida;
         try {
           saida = fonte.leitor.ler(lido);
@@ -96,6 +99,9 @@ export async function incorporar(base: Base, coletas: string[], fonte: Fonte, cf
           }
         } else if (l.tipo === "balancete-orgaos") {
           base.balancetes.set(chaveBalancete(l.entidade, l.ano), { ano: l.ano, entidade: l.entidade, ...l.balancete, origem });
+        } else if (l.tipo === "minimo") {
+          // "ainda nao declarado" nao apaga o que ja foi visto: o anterior continua no WARC e na base
+          if (l.minimo) base.minimos.set(chaveMinimo(l.minimo), { ...l.minimo, origem });
         }
       }
     }

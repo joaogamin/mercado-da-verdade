@@ -31,9 +31,11 @@ export async function montarPacote(cidade: string, mes: string, saida: string, c
 
   for (const id of coletas) {
     await cp(p.coleta(id), join(saida, "coletas", id), { recursive: true });
-    if (comBrutos) {
-      const telas = join(p.brutosDaColeta(id), "telas.warc.gz");
-      if (existsSync(telas)) await cp(telas, join(saida, "brutos", id, "telas.warc.gz"));
+    // as respostas dos sistemas federais (SIOPE, SIOPS) nao tem dado pessoal: vao sempre
+    const brutos = comBrutos ? ["telas.warc.gz", "complementares.warc.gz"] : ["complementares.warc.gz"];
+    for (const nome of brutos) {
+      const f = join(p.brutosDaColeta(id), nome);
+      if (existsSync(f)) await cp(f, join(saida, "brutos", id, nome));
     }
   }
   for (const k of ["normalizado", "analise"] as const) if (existsSync(p[k])) await cp(p[k], join(saida, k), { recursive: true });
@@ -47,7 +49,8 @@ export async function montarPacote(cidade: string, mes: string, saida: string, c
     "- `coletas/<id>/manifesto.json`: cada arquivo bruto da coleta, com tamanho e sha256.",
     "- `coletas/<id>/manifesto.json.ots`: carimbo de tempo OpenTimestamps do manifesto (confira em https://opentimestamps.org).",
     "- `coletas/<id>/revisao.md`: o relatório de revisão daquela coleta.",
-    comBrutos ? "- `brutos/<id>/telas.warc.gz`: as respostas das telas do portal, byte a byte (abra em https://replayweb.page)." : "- Os arquivos brutos (WARC) ficam em guarda privada; o sha256 de cada um está no manifesto.",
+    comBrutos ? "- `brutos/<id>/telas.warc.gz`: as respostas das telas do portal, byte a byte (abra em https://replayweb.page)." : "- Os brutos das telas do portal (WARC) ficam em guarda privada; o sha256 de cada um está no manifesto.",
+    "- `brutos/<id>/complementares.warc.gz`: as respostas do SIOPE (FNDE) e do SIOPS (Ministério da Saúde), byte a byte.",
     "- `normalizado/`, `analise/`, `eventos.ndjson`, `conferencia.json`: os dados como o site os usa.",
     "- `SHA256SUMS`: sha256 de cada arquivo deste pacote.",
     "",

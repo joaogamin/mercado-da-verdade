@@ -73,6 +73,11 @@ export const COMO_LER: PaginaTexto = {
       texto: "**Com disputa**: pregão, concorrência e similares. **Direto**: dispensa (valor baixo, emergência e outros casos da lei) e inexigibilidade (quando não há como competir). Folha e encargos não passam por licitação.",
     },
     {
+      id: "minimos", titulo: "Mínimos de saúde e educação",
+      texto: "A Constituição obriga o município a aplicar ao menos **25%** da receita de impostos (incluídas as transferências de impostos, como o FPM e o ICMS) na **manutenção e desenvolvimento do ensino** e **15%** em **ações e serviços públicos de saúde**. A prefeitura declara esses gastos a cada bimestre ao SIOPE (educação) e ao SIOPS (saúde), os sistemas do governo federal. É de lá que vêm os nossos números, com o selo de fonte complementar.",
+      mais: "O percentual é acumulado no ano: no 2º bimestre, é a aplicação de janeiro a abril. Só o 6º bimestre diz se o mínimo foi cumprido. A base de cálculo não é a despesa total do portal, por isso esses percentuais não saem da soma dos empenhos.",
+    },
+    {
       id: "credor", titulo: "Credor",
       texto: "Quem recebe: empresa (CNPJ), pessoa (CPF, que o portal mostra mascarado) ou a própria folha de pagamento, que o portal agrega como um credor só.",
     },

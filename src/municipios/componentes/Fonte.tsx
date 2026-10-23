@@ -24,14 +24,26 @@ export function Fonte({ origem, cidade, comoLer }: { origem: Origem; cidade: str
   );
 }
 
-/** Fonte complementar (fora da prefeitura): sempre com selo proprio. */
-export function FonteComplementar({ fonte, url, nota }: { fonte: string; url: string; nota?: string }) {
+/**
+ * Fonte complementar (fora da prefeitura): sempre com selo proprio. Quando a
+ * coletamos (e nao so a citamos), `arquivada` traz a coleta, a copia e o sha256.
+ */
+export function FonteComplementar({ fonte, url, nota, arquivada }: {
+  fonte: string; url: string; nota?: string; arquivada?: { origem: Origem; cidade: string };
+}) {
   return (
     <p className="mun-fonte mun-fonte--comp mono">
       <span className="mun-fonte-rot mun-fonte-rot--comp">Complementar</span>{" "}
       {fonte}
       {" · "}
       <a href={url} target="_blank" rel="noopener noreferrer nofollow">ver fonte ↗</a>
+      {arquivada ? (
+        <>
+          {" · "}coletado em {dataHora(arquivada.origem.coletadoEm)}
+          {" · "}<a href={`/municipios/${arquivada.cidade}/fontes/#coleta-${arquivada.origem.coleta}`}>cópia arquivada</a>
+          {" · "}sha256 <code title={arquivada.origem.sha256}>{arquivada.origem.sha256.slice(0, 12)}…</code>
+        </>
+      ) : null}
       {nota ? <>{" · "}{nota}</> : null}
     </p>
   );

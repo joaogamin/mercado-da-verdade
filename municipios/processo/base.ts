@@ -1,9 +1,10 @@
 // A base normalizada versionada: empenhos particionados por ano e mes (so os
-// meses que mudam aparecem no diff) e um balancete por exercicio.
+// meses que mudam aparecem no diff), um balancete por exercicio e os minimos
+// constitucionais declarados aos sistemas federais (fonte complementar).
 import { existsSync } from "node:fs";
 import { readdir, rm } from "node:fs/promises";
 import { join } from "node:path";
-import type { Balancete, Empenho } from "../nucleo/esquema.ts";
+import type { Balancete, Empenho, Minimo } from "../nucleo/esquema.ts";
 import { gravarJson, gravarNdjson, lerJson, lerNdjson } from "../nucleo/ndjson.ts";
 import { caminhos } from "./caminhos.ts";
 import { agruparPor } from "../nucleo/agrupar.ts";
@@ -11,12 +12,14 @@ import { agruparPor } from "../nucleo/agrupar.ts";
 export type Base = {
   empenhos: Map<string, Empenho>;
   balancetes: Map<string, Balancete>;
+  minimos: Map<string, Minimo>;
 };
 
 export const chaveBalancete = (entidade: string, ano: number) => `${entidade}-${ano}`;
+export const chaveMinimo = (m: Pick<Minimo, "area" | "ano" | "bimestre">) => `${m.area}-${m.ano}-${m.bimestre}`;
 
 export function baseVazia(): Base {
-  return { empenhos: new Map(), balancetes: new Map() };
+  return { empenhos: new Map(), balancetes: new Map(), minimos: new Map() };
 }
 
 export async function carregarBase(cidade: string): Promise<Base> {
@@ -31,6 +34,8 @@ export async function carregarBase(cidade: string): Promise<Base> {
       } else if (/^balancete-orgaos-.+\.json$/.test(arq)) {
         const b = await lerJson<Balancete | null>(join(dir, arq), null);
         if (b) base.balancetes.set(chaveBalancete(b.entidade, b.ano), b);
+      } else if (arq === "minimos.json") {
+        for (const m of await lerJson<Minimo[]>(join(dir, arq), [])) base.minimos.set(chaveMinimo(m), m);
       }
     }
   }
@@ -38,7 +43,11 @@ export async function carregarBase(cidade: string): Promise<Base> {
 }
 
 export function clonarBase(b: Base): Base {
-  return { empenhos: new Map(structuredClone([...b.empenhos])), balancetes: new Map(structuredClone([...b.balancetes])) };
+  return {
+    empenhos: new Map(structuredClone([...b.empenhos])),
+    balancetes: new Map(structuredClone([...b.balancetes])),
+    minimos: new Map(structuredClone([...b.minimos])),
+  };
 }
 
 /** Regrava a base inteira de forma deterministica. Devolve os arquivos gravados. */
@@ -55,6 +64,12 @@ export async function gravarBase(cidade: string, base: Base): Promise<string[]> 
   for (const b of base.balancetes.values()) {
     const k = join(String(b.ano), `balancete-orgaos-${b.entidade}.json`);
     await gravarJson(join(normalizado, k), b);
+    gravados.push(k);
+  }
+  for (const [ano, lista] of [...agruparPor(base.minimos.values(), (m) => String(m.ano))].sort(([a], [b]) => a.localeCompare(b))) {
+    lista.sort((a, b) => a.area.localeCompare(b.area) || a.bimestre - b.bimestre);
+    const k = join(ano, "minimos.json");
+    await gravarJson(join(normalizado, k), lista);
     gravados.push(k);
   }
   return gravados;

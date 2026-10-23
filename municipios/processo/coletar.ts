@@ -52,7 +52,29 @@ export function alvosDeDetalhe(estado: Estado, itens: (EmpenhoLista & { entidade
   });
 }
 
+/**
+ * O portal sai do ar inteiro as vezes (a aplicacao /sys523/ responde 404 do
+ * servidor enquanto o site da prefeitura funciona; visto em 22/10/2026, 23h).
+ * Melhor falhar com a causa certa, antes de abrir arquivos, do que com um 404
+ * no meio da coleta.
+ */
+export async function portalNoAr(cfg: ConfigCidade): Promise<{ ok: boolean; status: number }> {
+  try {
+    const r = await fetch(`${cfg.fonte.base}${cfg.fonte.contexto}/publico/index.xhtml`, {
+      headers: { "User-Agent": USER_AGENT }, signal: AbortSignal.timeout(60_000),
+    });
+    await r.arrayBuffer();
+    return { ok: r.status === 200, status: r.status };
+  } catch {
+    return { ok: false, status: 0 };
+  }
+}
+
 export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, salvar: () => Promise<void>, log: (s: string) => void) {
+  const saude = await portalNoAr(cfg);
+  if (!saude.ok) {
+    throw new Error(`o portal da prefeitura está fora do ar (HTTP ${saude.status || "sem resposta"} em ${cfg.fonte.contexto}/publico/); nada foi coletado. Tente de novo mais tarde ou use "retomar".`);
+  }
   const dir = caminhos(cfg.slug).brutosDaColeta(estado.id);
   const info = { software: "municipios (Mercado da Verdade)", cidade: cfg.nome, coleta: estado.id, escopo: estado.escopo };
   const gTelas = new GravadorWarc(join(dir, "telas.warc.gz"));

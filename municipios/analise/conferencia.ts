@@ -9,8 +9,9 @@
 //   "pago em restos", os dois batem ao centavo — essa e a metrica do portao;
 // - o "liquidado" da lista tambem inclui liquidacoes de anos seguintes; so e
 //   comparavel no exercicio em curso;
-// - o "empenhado" da lista e o valor original do empenho; o balancete parece
-//   descontar anulacoes. Mostramos, mas nao bloqueia.
+// - o "empenhado" da lista (e da API) e o valor original do empenho; o
+//   balancete e o "Valor" do detalhe descontam as anulacoes. Com o detalhe
+//   completo, a soma do valor do detalhe deve bater com o balancete.
 import type { Balancete, Centavos, Empenho, Origem } from "../nucleo/esquema.ts";
 import type { Base } from "../processo/base.ts";
 import { agruparPor } from "../nucleo/agrupar.ts";
@@ -18,7 +19,7 @@ import { agruparPor } from "../nucleo/agrupar.ts";
 type Totais = { empenhado: Centavos; liquidado: Centavos; pago: Centavos; pagoRestos: Centavos; pagoNoExercicio: Centavos };
 
 export type Comparacao = {
-  id: "pago-exercicio" | "liquidado" | "empenhado";
+  id: "pago-exercicio" | "liquidado" | "empenhado" | "empenhado-liquido";
   rotulo: string;
   nosso: Centavos;
   oficial: Centavos;
@@ -87,6 +88,8 @@ export function conferir(base: Base, extras: { divergenciasPortal: string[]; soN
     const [entidade, ano] = [k.slice(0, k.lastIndexOf("-")), Number(k.slice(k.lastIndexOf("-") + 1))];
     const nosso = soma(ativos);
     const comDetalhe = ativos.filter((e) => e.detalhe).length;
+    // o detalhe traz o valor atual (descontadas as anulacoes); a lista, o original
+    const liquidoDasAnulacoes = ativos.reduce((s, e) => s + (e.detalhe ? e.detalhe.valor : e.empenhado), 0);
     // em curso = o exercicio ainda nao tinha fechado quando o balancete foi coletado
     const emCurso = b ? ano >= Number(b.origem.coletadoEm.slice(0, 4)) : true;
 
@@ -104,9 +107,16 @@ export function conferir(base: Base, extras: { divergenciasPortal: string[]; soN
           : "Em exercício fechado, a lista inclui liquidações feitas nos anos seguintes (restos não processados) e o balancete não; a diferença é esperada.",
       },
       {
-        id: "empenhado", rotulo: "Empenhado",
+        id: "empenhado", rotulo: "Empenhado (valor original)",
         nosso: nosso.empenhado, oficial: b.total.empenhado, diferencaPct: pct(nosso.empenhado, b.total.empenhado), comparavel: false,
-        explicacao: "A lista e a API mostram o valor original de cada empenho; o balancete parece descontar as anulações. Hipótese ainda a confirmar com um empenho anulado.",
+        explicacao: "A lista e a API mostram o valor original de cada empenho; o balancete desconta as anulações. Em março de 2025, em 90 de 93 empenhos com diferença, o valor atual do detalhe é exatamente o que foi liquidado: o saldo não usado foi anulado.",
+      },
+      {
+        id: "empenhado-liquido", rotulo: "Empenhado após anulações",
+        nosso: liquidoDasAnulacoes, oficial: b.total.empenhado, diferencaPct: pct(liquidoDasAnulacoes, b.total.empenhado), comparavel: comDetalhe === ativos.length,
+        explicacao: comDetalhe === ativos.length
+          ? "Soma do valor atual de cada empenho (detalhe), já descontadas as anulações. Com o detalhe completo, deve bater com o balancete."
+          : `Soma do valor atual do detalhe onde ele já foi coletado (${comDetalhe} de ${ativos.length}) e do valor original nos demais; só fica comparável com o detalhe completo.`,
       },
     ] : [];
 

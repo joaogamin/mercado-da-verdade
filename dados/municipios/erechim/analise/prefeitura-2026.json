@@ -29441,6 +29441,21 @@
       "participacao": 1
     }
   ],
+  "oficial": {
+    "dotacaoAtualizada": 60500000000,
+    "dotacaoInicial": 60500000000,
+    "empenhado": 53849591326,
+    "liquidado": 45427522863,
+    "origem": {
+      "coleta": "2026-10-22T224402Z",
+      "coletadoEm": "2026-10-22T22:46:24.820Z",
+      "fonte": "Portal da Transparência da Prefeitura de Erechim",
+      "sha256": "286f1632383ab471ce88899636aed656416a24483f3b95e055c73dace8752967",
+      "url": "https://www.erechim.rs.gov.br/sys523/publico/balDespOrgao.xhtml"
+    },
+    "pago": 45149068668,
+    "pagoRestos": 3769549492
+  },
   "orgaos": [],
   "origem": {
     "coleta": "2026-10-22T224402Z",
@@ -29489,6 +29504,7 @@
       "titulo": "Espera entre liquidação e pagamento"
     }
   ],
+  "somaListaOriginal": 56166568824,
   "totais": {
     "comDetalhe": 0,
     "credores": 1834,

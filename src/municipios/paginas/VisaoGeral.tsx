@@ -13,7 +13,12 @@ export default function VisaoGeral({ slug, ano }: { slug: string; ano: number })
   if (!c || !ex) notFound();
   const t = ex.totais;
   const ent = c.entidades[0];
-  const porHab = ex.populacao ? Math.round(t.empenhado / ex.populacao.valor) : null;
+  // O destaque e o numero oficial do balancete (ja descontadas as anulacoes);
+  // a soma da lista e maior porque ela mostra o valor original de cada empenho.
+  const of = ex.oficial;
+  const empenhadoOficial = of ? of.empenhado : t.empenhado;
+  const anulacoes = of ? ex.somaListaOriginal - of.empenhado : 0;
+  const porHab = ex.populacao ? Math.round(empenhadoOficial / ex.populacao.valor) : null;
   const outros = anos(slug).filter((a) => a !== ano);
 
   // A regua: mesmo periodo do ano anterior (meses ja decorridos no ano exibido)
@@ -44,20 +49,32 @@ export default function VisaoGeral({ slug, ano }: { slug: string; ano: number })
               </p>
             ) : null}
 
-            <p className="mun-heroi">{reaisCurto(t.empenhado)}</p>
+            <p className="mun-heroi">{reaisCurto(empenhadoOficial)}</p>
             <p className="mun-heroi-rot">
-              empenhados (comprometidos) em {inteiro(t.empenhos)} empenhos para {inteiro(t.credores)} credores
-              {ex.coletadoEm ? `, segundo o portal da prefeitura em ${dataCurta(ex.coletadoEm)}` : ""}. Valor exato: {reais(t.empenhado)}.
+              {of
+                ? <>empenhados (comprometidos) em {ano}, já descontadas as anulações, segundo o balancete do portal da prefeitura. Valor exato: {reais(of.empenhado)}. São {inteiro(t.empenhos)} empenhos para {inteiro(t.credores)} credores.</>
+                : <>empenhados (comprometidos) em {inteiro(t.empenhos)} empenhos para {inteiro(t.credores)} credores{ex.coletadoEm ? `, segundo o portal da prefeitura em ${dataCurta(ex.coletadoEm)}` : ""}. Valor exato: {reais(t.empenhado)}.</>}
             </p>
+            {anulacoes > 0 ? (
+              <p className="mun-heroi-rot" style={{ marginTop: 8 }}>
+                Somando a lista de empenhos, dá {reaisCurto(ex.somaListaOriginal)}: a lista mostra o valor original de cada empenho, antes
+                de {reaisCurto(anulacoes)} em anulações. <a href="/municipios/como-ler/#anulacao" style={{ color: "var(--ink)" }}>Como ler</a>
+              </p>
+            ) : null}
 
-            <Indicadores itens={[
+            <Indicadores itens={of ? [
+              { rotulo: "Liquidado", valor: reaisCurto(of.liquidado), detalhe: `${pct(of.empenhado ? of.liquidado / of.empenhado : 0)} do empenhado: serviço entregue e conferido` },
+              { rotulo: "Pago no ano", valor: reaisCurto(of.pago), detalhe: `${pct(of.empenhado ? of.pago / of.empenhado : 0)} do empenhado saiu do caixa dentro de ${ano}` },
+              ...(porHab !== null ? [{ rotulo: "Por habitante", valor: reais(porHab), detalhe: `empenhado ÷ ${inteiro(ex.populacao!.valor)} habitantes` }] : []),
+              { rotulo: "Restos pagos no ano", valor: reaisCurto(of.pagoRestos), detalhe: `pago em ${ano} de empenhos de anos anteriores` },
+            ] : [
               { rotulo: "Liquidado", valor: reaisCurto(t.liquidado), detalhe: `${pct(t.empenhado ? t.liquidado / t.empenhado : 0)} do empenhado: serviço entregue e conferido` },
               { rotulo: "Pago", valor: reaisCurto(t.pago), detalhe: `${pct(t.empenhado ? t.pago / t.empenhado : 0)} do empenhado já saiu do caixa` },
               ...(porHab !== null ? [{ rotulo: "Por habitante", valor: reais(porHab), detalhe: `empenhado ÷ ${inteiro(ex.populacao!.valor)} habitantes` }] : []),
-              { rotulo: "Pago em restos", valor: reaisCurto(t.pagoRestos), detalhe: "parte do pago que saiu em anos seguintes, como restos a pagar" },
             ]} />
             {porHab !== null ? <p style={{ margin: "10px 0 0" }}><Calculado formula="empenhado ÷ população estimada" /></p> : null}
             <AvisoCobertura comDetalhe={t.comDetalhe} total={t.empenhos} />
+            {of ? <Fonte origem={of.origem} cidade={slug} comoLer="dotacao" /> : null}
             {fonte}
             {ex.populacao ? <FonteComplementar fonte={ex.populacao.fonte} url={ex.populacao.url} nota={`população ${ex.populacao.ano}: ${inteiro(ex.populacao.valor)}`} /> : null}
           </div>

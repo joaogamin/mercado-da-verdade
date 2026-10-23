@@ -39,7 +39,12 @@ export const COMO_LER: PaginaTexto = {
     {
       id: "empenho", titulo: "1. Empenho: o dinheiro é reservado",
       texto: "A prefeitura separa o valor no orçamento para um credor e um objeto. **Empenhado ainda não é gasto**: é um compromisso. Pode ser anulado depois, total ou parcialmente.",
-      mais: "Há empenhos por estimativa (ex.: conta de água do ano inteiro), que reservam um valor e são consumidos aos poucos. Por isso o empenhado de janeiro costuma ser alto. O valor empenhado de cada empenho no portal é o original; o balancete parece descontar as anulações, e por isso a soma dos empenhos fica alguns por cento acima dele.",
+      mais: "Há empenhos por estimativa (ex.: conta de água do ano inteiro), que reservam um valor e são consumidos aos poucos. Por isso o empenhado de janeiro costuma ser alto.",
+    },
+    {
+      id: "anulacao", titulo: "Anulação: o que foi reservado e não usado",
+      texto: "Quando um empenho não vai ser usado por inteiro, a prefeitura anula o saldo. A lista de empenhos do portal continua mostrando o **valor original**; o detalhe mostra o **valor atual**, já descontada a anulação, e o balancete também. No explorador, empenhos anulados aparecem com as três linhas: original, anulado e atual.",
+      mais: "Exemplo real: o empenho 2025/3385 reservou R$ 299.980,00 e foi anulado por inteiro (valor atual R$ 0,00, nada liquidado). Somar a lista sem descontar as anulações superestima o gasto em cerca de 5% ao ano.",
     },
     {
       id: "liquidacao", titulo: "2. Liquidação: a entrega é conferida",

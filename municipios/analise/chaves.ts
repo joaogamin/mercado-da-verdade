@@ -30,3 +30,12 @@ export function modalidade(e: Empenho): { chave: string; nome: string } {
   for (const [re, chave, nome] of regras) if (re.test(m)) return { chave, nome };
   return { chave: m.toLowerCase().replace(/[^a-z0-9]+/g, "-"), nome: m };
 }
+
+/**
+ * O valor do empenho que mais se aproxima do oficial: o detalhe traz o valor
+ * atual (descontadas as anulacoes); sem detalhe, so ha o original da lista.
+ * Com o detalhe completo, a soma bate com o balancete.
+ */
+export function valorAtual(e: Empenho): number {
+  return e.detalhe ? e.detalhe.valor : e.empenhado;
+}

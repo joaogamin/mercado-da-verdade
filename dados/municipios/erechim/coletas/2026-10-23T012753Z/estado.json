@@ -4,8 +4,8 @@
   "escopo": "reprocessar",
   "etapas": {
     "analisar": {
-      "fim": "2026-10-23T01:27:59.950Z",
-      "inicio": "2026-10-23T01:27:59.667Z",
+      "fim": "2026-10-23T02:02:36.686Z",
+      "inicio": "2026-10-23T02:02:36.016Z",
       "resumo": {
         "prefeitura-2025": {
           "credores": 1788,
@@ -48,8 +48,8 @@
       "status": "ok"
     },
     "conferir": {
-      "fim": "2026-10-23T01:27:59.666Z",
-      "inicio": "2026-10-23T01:27:59.452Z",
+      "fim": "2026-10-23T02:02:36.014Z",
+      "inicio": "2026-10-23T02:02:35.595Z",
       "resumo": {
         "2025": "0% · detalhe 7.6%",
         "2026": "0.0297% · detalhe 0%"
@@ -70,8 +70,8 @@
       "status": "pendente"
     },
     "revisar": {
-      "fim": "2026-10-23T01:28:00.543Z",
-      "inicio": "2026-10-23T01:27:59.951Z",
+      "fim": "2026-10-23T02:02:39.688Z",
+      "inicio": "2026-10-23T02:02:36.688Z",
       "resumo": {
         "liberado": true,
         "portoes": {

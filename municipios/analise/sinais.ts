@@ -5,7 +5,7 @@
 import type { Centavos, Empenho } from "../nucleo/esquema.ts";
 import { agruparPor } from "../nucleo/agrupar.ts";
 import { ELEMENTO_OBRAS, LIMITES_DISPENSA } from "./limites.ts";
-import { chaveCredor } from "./chaves.ts";
+import { chaveCredor, valorAtual } from "./chaves.ts";
 
 export type ItemSinal = {
   titulo: string;
@@ -41,12 +41,12 @@ function concentracao(es: Empenho[]): Sinal {
   const porOrgao = agruparPor(es.filter(contratavel), (e) => e.detalhe!.classificacao.orgao.nome);
   const itens: ItemSinal[] = [];
   for (const [orgao, lista] of porOrgao) {
-    const total = lista.reduce((s, e) => s + e.empenhado, 0);
+    const total = lista.reduce((s, e) => s + valorAtual(e), 0);
     if (total <= 0) continue;
     const porCredor = agruparPor(lista, chaveCredor);
     const [chave, maior] = [...porCredor].map(([k, l]) => [k, l] as const)
-      .sort((a, b) => b[1].reduce((s, e) => s + e.empenhado, 0) - a[1].reduce((s, e) => s + e.empenhado, 0))[0];
-    const v = maior.reduce((s, e) => s + e.empenhado, 0);
+      .sort((a, b) => b[1].reduce((s, e) => s + valorAtual(e), 0) - a[1].reduce((s, e) => s + valorAtual(e), 0))[0];
+    const v = maior.reduce((s, e) => s + valorAtual(e), 0);
     itens.push({ titulo: `${maior[0].credor.nome} em ${orgao}`, valor: v, participacao: v / total, detalhe: `${pct(v / total)} do que o órgão contratou fora da folha`, chaveCredor: chave, orgao });
   }
   itens.sort((a, b) => (b.participacao ?? 0) - (a.participacao ?? 0) || (b.valor ?? 0) - (a.valor ?? 0));
@@ -65,8 +65,8 @@ function contratacaoDireta(es: Empenho[]): Sinal {
   const direta = (e: Empenho) => /dispensa|inexig/i.test(e.detalhe!.licitacao?.modalidade ?? "");
   const porOrgao = agruparPor(c, (e) => e.detalhe!.classificacao.orgao.nome);
   const itens: ItemSinal[] = [...porOrgao].map(([orgao, l]) => {
-    const total = l.reduce((s, e) => s + e.empenhado, 0);
-    const d = l.filter(direta).reduce((s, e) => s + e.empenhado, 0);
+    const total = l.reduce((s, e) => s + valorAtual(e), 0);
+    const d = l.filter(direta).reduce((s, e) => s + valorAtual(e), 0);
     return { titulo: orgao, valor: d, detalhe: `${pct(total ? d / total : 0)} do contratado pelo órgão saiu por dispensa ou inexigibilidade`, orgao };
   }).filter((i) => (i.valor ?? 0) > 0).sort((a, b) => (b.valor ?? 0) - (a.valor ?? 0));
   return {
@@ -88,7 +88,7 @@ function fracionamento(es: Empenho[], ano: number): Sinal {
     for (const [, l] of grupos) {
       const elemento = l[0].detalhe!.classificacao.elemento;
       const teto = elemento === ELEMENTO_OBRAS ? lim.obras : lim.outros;
-      const soma = l.reduce((s, e) => s + e.empenhado, 0);
+      const soma = l.reduce((s, e) => s + valorAtual(e), 0);
       if (l.length < 2 || soma <= teto) continue;
       itens.push({
         titulo: `${l[0].credor.nome} · elemento ${elemento}`,
@@ -147,12 +147,12 @@ export function calcularSinais(todos: Empenho[], ano: number, conferenciaPct: nu
   const es = ativos(todos);
   const p = prazos(es);
   const c = es.filter(contratavel);
-  const total = c.reduce((s, e) => s + e.empenhado, 0);
+  const total = c.reduce((s, e) => s + valorAtual(e), 0);
   // Disputa e so a que a propria prefeitura fez entre concorrentes. Adesao a ata
   // de outro orgao, credenciamento e chamada publica nao entram: contar como
   // disputa inflaria justamente o item "em ordem".
   const DISPUTA = /preg[aã]o|concorr[eê]ncia|tomada de pre[cç]os|convite|leil[aã]o|concurso/i;
-  const competitivo = c.filter((e) => DISPUTA.test(e.detalhe!.licitacao?.modalidade ?? "")).reduce((s, e) => s + e.empenhado, 0);
+  const competitivo = c.filter((e) => DISPUTA.test(e.detalhe!.licitacao?.modalidade ?? "")).reduce((s, e) => s + valorAtual(e), 0);
 
   const emOrdem: EmOrdem[] = [
     {

@@ -81,7 +81,12 @@ const SCRIPT = `(function(){
       var dl=el('dl');
       linhaDl(dl,'Credor',l[I.credor]+(l[I.documento]?' · '+l[I.documento]:''));
       linhaDl(dl,'Data',dataBr(l[I.data]));
-      linhaDl(dl,'Empenhado',reais(l[I.empenhado]));
+      // a lista traz o valor original; o detalhe, o valor atual (descontadas as anulacoes)
+      if(typeof d.valor==='number'&&d.valor!==l[I.empenhado]){
+        linhaDl(dl,'Empenhado',reais(l[I.empenhado])+' (valor original)');
+        linhaDl(dl,'Anulado',reais(l[I.empenhado]-d.valor));
+        linhaDl(dl,'Valor atual',reais(d.valor));
+      } else linhaDl(dl,'Empenhado',reais(l[I.empenhado]));
       linhaDl(dl,'Liquidado',reais(l[I.liquidado]));
       linhaDl(dl,'Pago',reais(l[I.pago])+(l[I.pagoRestos]?', dos quais '+reais(l[I.pagoRestos])+' em anos seguintes (restos a pagar)':''));
       if(c){linhaDl(dl,'Órgão',c.orgao.nome);linhaDl(dl,'Unidade',c.unidade.nome);linhaDl(dl,'Função',c.funcao.nome+' › '+c.subfuncao.nome);

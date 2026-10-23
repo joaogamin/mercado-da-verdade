@@ -26,10 +26,12 @@ Escopo **reprocessar**
 |---|---|---|---|---|---|
 | 2025 | Pago dentro do exercício | R$ 536.447.146,90 | R$ 536.447.146,90 | 0% | sim |
 | 2025 | Liquidado | R$ 574.132.858,01 | R$ 548.715.651,41 | 4,63% | não: Em exercício fechado, a lista inclui liquidações feitas nos anos seguintes (restos não processados) e o balancete não |
-| 2025 | Empenhado | R$ 609.973.630,85 | R$ 580.159.750,75 | 5,14% | não: A lista e a API mostram o valor original de cada empenho |
+| 2025 | Empenhado (valor original) | R$ 609.973.630,85 | R$ 580.159.750,75 | 5,14% | não: A lista e a API mostram o valor original de cada empenho |
+| 2025 | Empenhado após anulações | R$ 608.860.195,39 | R$ 580.159.750,75 | 4,95% | não: Soma do valor atual do detalhe onde ele já foi coletado (1503 de 19798) e do valor original nos demais |
 | 2026 | Pago dentro do exercício | R$ 451.624.719,89 | R$ 451.490.686,68 | 0,03% | sim |
 | 2026 | Liquidado | R$ 454.275.228,63 | R$ 454.275.228,63 | 0% | informativo |
-| 2026 | Empenhado | R$ 561.665.688,24 | R$ 538.495.913,26 | 4,3% | não: A lista e a API mostram o valor original de cada empenho |
+| 2026 | Empenhado (valor original) | R$ 561.665.688,24 | R$ 538.495.913,26 | 4,3% | não: A lista e a API mostram o valor original de cada empenho |
+| 2026 | Empenhado após anulações | R$ 561.665.688,24 | R$ 538.495.913,26 | 4,3% | não: Soma do valor atual do detalhe onde ele já foi coletado (0 de 16612) e do valor original nos demais |
 
 - 2025: detalhe coletado para 1.503 de 19.798 empenhos (7,6%)
 - 2026: detalhe coletado para 0 de 16.612 empenhos (0%)

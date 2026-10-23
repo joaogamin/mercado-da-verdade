@@ -78,11 +78,20 @@
         {
           "comparavel": false,
           "diferencaPct": 5.1389,
-          "explicacao": "A lista e a API mostram o valor original de cada empenho; o balancete parece descontar as anulações. Hipótese ainda a confirmar com um empenho anulado.",
+          "explicacao": "A lista e a API mostram o valor original de cada empenho; o balancete desconta as anulações. Em março de 2025, em 90 de 93 empenhos com diferença, o valor atual do detalhe é exatamente o que foi liquidado: o saldo não usado foi anulado.",
           "id": "empenhado",
           "nosso": 60997363085,
           "oficial": 58015975075,
-          "rotulo": "Empenhado"
+          "rotulo": "Empenhado (valor original)"
+        },
+        {
+          "comparavel": false,
+          "diferencaPct": 4.947,
+          "explicacao": "Soma do valor atual do detalhe onde ele já foi coletado (1503 de 19798) e do valor original nos demais; só fica comparável com o detalhe completo.",
+          "id": "empenhado-liquido",
+          "nosso": 60886019539,
+          "oficial": 58015975075,
+          "rotulo": "Empenhado após anulações"
         }
       ],
       "diferencaPct": 0,
@@ -463,11 +472,20 @@
         {
           "comparavel": false,
           "diferencaPct": 4.3027,
-          "explicacao": "A lista e a API mostram o valor original de cada empenho; o balancete parece descontar as anulações. Hipótese ainda a confirmar com um empenho anulado.",
+          "explicacao": "A lista e a API mostram o valor original de cada empenho; o balancete desconta as anulações. Em março de 2025, em 90 de 93 empenhos com diferença, o valor atual do detalhe é exatamente o que foi liquidado: o saldo não usado foi anulado.",
           "id": "empenhado",
           "nosso": 56166568824,
           "oficial": 53849591326,
-          "rotulo": "Empenhado"
+          "rotulo": "Empenhado (valor original)"
+        },
+        {
+          "comparavel": false,
+          "diferencaPct": 4.3027,
+          "explicacao": "Soma do valor atual do detalhe onde ele já foi coletado (0 de 16612) e do valor original nos demais; só fica comparável com o detalhe completo.",
+          "id": "empenhado-liquido",
+          "nosso": 56166568824,
+          "oficial": 53849591326,
+          "rotulo": "Empenhado após anulações"
         }
       ],
       "diferencaPct": 0.0297,

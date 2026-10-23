@@ -131,3 +131,30 @@ continua parando a coleta.
   `2026-10-23T012753Z`. Os brutos, os manifestos e os carimbos não mudaram.
 
 **Determinismo verificado.** Duas execuções de `reprocessar` produzem os mesmos sha256 nos 34 arquivos derivados.
+
+---
+
+## 23/10/2026: portal fora do ar
+
+Às 22h57 (horário de Brasília) de 22/10, a aplicação de transparência inteira (`/sys523/`, portas 443 e 8181:
+telas e API) passou a responder 404 do servidor Payara, enquanto o site da prefeitura seguia no ar. A coleta
+parou na primeira requisição, sem publicar nada.
+- A coleta agora verifica a saúde do portal antes de começar e diz a causa ("o portal está fora do ar") em vez de
+  um 404 genérico.
+- A carga de detalhes foi reagendada para quando o portal voltar.
+
+## 23/10/2026: anulações confirmadas na amostra
+
+- Em março de 2025, em 93 dos 1.503 empenhos detalhados, o "Valor" do detalhe é **menor** que o "Valor Empenhado" da
+  lista. Nunca é maior.
+- Em 90 desses 93, o valor do detalhe é exatamente a soma das liquidações, o padrão de quem anula o saldo não usado.
+- Exemplo: 2025/3385 reservou R$ 299.980,00 e foi anulado por inteiro (valor atual R$ 0,00, nada liquidado). Na lista,
+  ele continua aparecendo com R$ 299.980,00.
+- Conclusão: a lista e a API mostram o **valor original**; o detalhe e o balancete, o **valor atual**. A confirmação
+  final é a medida "empenhado após anulações" da conferência, que deve bater com o balancete quando o detalhe de 2025
+  estiver completo.
+- Consequência no site:
+  - o destaque da visão geral passa a ser o empenhado oficial do balancete (R$ 580,2 mi em 2025), com a linha "somando a
+    lista dá R$ 610,0 mi";
+  - os agregados usam o valor atual de cada empenho;
+  - o explorador mostra original, anulado e atual.

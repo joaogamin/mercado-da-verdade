@@ -2,8 +2,8 @@
 // Cada resposta vira um par request/response, mais uma etiqueta propria
 // (WARC-Municipios-*) dizendo o que ela e — e isso que permite reprocessar tudo
 // a partir do arquivo, sem voltar a prefeitura.
-import { createReadStream } from "node:fs";
-import { mkdir, open, stat, type FileHandle } from "node:fs/promises";
+import { createReadStream, existsSync } from "node:fs";
+import { mkdir, open, stat, truncate, type FileHandle } from "node:fs/promises";
 import { dirname } from "node:path";
 import { WARCParser, WARCRecord, WARCSerializer } from "warcio";
 import { sha256 } from "./hash.ts";
@@ -49,10 +49,33 @@ function cabecalhosHttp(headers: [string, string][], corpo: Uint8Array): [string
   return ok;
 }
 
+/**
+ * Corta um resto incompleto no fim do WARC (processo interrompido no meio de
+ * uma gravacao), preservando todos os registros completos. Devolve quantos
+ * bytes foram cortados.
+ */
+export async function repararWarc(caminho: string): Promise<number> {
+  const tamanho = (await stat(caminho)).size;
+  const parser = new WARCParser(createReadStream(caminho));
+  let fimBom = 0;
+  try {
+    for await (const rec of parser) {
+      await rec.readFully();
+      fimBom = parser.offset + parser.recordLength;
+    }
+  } catch {
+    // registro truncado: fica so ate o ultimo completo
+  }
+  if (fimBom < tamanho) await truncate(caminho, fimBom);
+  return tamanho - fimBom;
+}
+
 export class GravadorWarc {
   readonly caminho: string;
   private fh: FileHandle | null = null;
   private offset = 0;
+  /** Bytes de um registro incompleto cortados na abertura (0 = arquivo integro). */
+  cortados = 0;
 
   constructor(caminho: string) {
     this.caminho = caminho;
@@ -60,6 +83,8 @@ export class GravadorWarc {
 
   async abrir(info: Record<string, string>): Promise<void> {
     await mkdir(dirname(this.caminho), { recursive: true });
+    // retomada depois de uma interrupcao: nunca continuar depois de um registro pela metade
+    if (existsSync(this.caminho) && (await stat(this.caminho)).size > 0) this.cortados = await repararWarc(this.caminho);
     this.fh = await open(this.caminho, "a");
     this.offset = (await stat(this.caminho)).size;
     if (this.offset === 0) {

@@ -62,8 +62,8 @@ npm run test:municipios
 Opções: `--limite N` (só N detalhes, para testar) e `--prazo N` (para de pedir detalhes depois de N minutos).
 Saída: `0` portões verdes, `2` precisa de revisão humana, `1` erro.
 
-Ritmo medido em 22/10/2026: cerca de 2,3 s por empenho detalhado (duas requisições a 1 por segundo).
-Um ano completo (cerca de 20 mil empenhos) leva perto de 13 h e ocupa ~0,8 GB de WARC comprimido (cerca de 42 KB por empenho: a página oficial e a expansão do detalhe). No B2 isso custa centavos de dólar por mês. Com `--prazo`, a carga se completa em
+Ritmo medido em 23/10/2026: cerca de 1 s por empenho detalhado no método em lote (uma requisição a 1 por segundo; ver o mapa técnico do portal).
+Um ano completo (cerca de 20 mil empenhos) leva perto de 5,5 h e ocupa ~0,1 GB de WARC comprimido. No B2 isso custa centavos de dólar por mês. Com `--prazo`, a carga se completa em
 algumas execuções incrementais seguidas.
 
 ## Guarda em HD externo (modo atual)

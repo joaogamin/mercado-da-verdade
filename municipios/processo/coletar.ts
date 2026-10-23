@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { Cliente } from "../nucleo/http.ts";
 import { GravadorWarc, lerWarc } from "../nucleo/warc.ts";
 import { fimDoMes } from "../nucleo/datas.ts";
+import { agruparPor } from "../nucleo/agrupar.ts";
 import type { EmpenhoLista } from "../nucleo/esquema.ts";
 import type { ConfigCidade } from "../cidades/tipos.ts";
 import { ColetorSystem } from "../fontes/system-sys523/coletor.ts";
@@ -114,13 +115,15 @@ export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, sal
     }
     await salvarTudo();
 
+    // As listas do exercicio (ja no WARC) dizem o universo de cada exercicio;
+    // relidas sempre, o que e rapido e permite retomar no meio.
+    const itens: (EmpenhoLista & { entidade: string })[] = [];
+    for await (const r of lerWarc(gTelas.caminho)) {
+      if (r.etiqueta.tipo !== "lista-empenhos") continue;
+      const { leitura } = leitor.ler(r);
+      if (leitura?.tipo === "lista-empenhos") itens.push(...leitura.itens.map((i) => ({ ...i, entidade: leitura.entidade })));
+    }
     if (!progresso.alvosDetalhe) {
-      const itens: (EmpenhoLista & { entidade: string })[] = [];
-      for await (const r of lerWarc(gTelas.caminho)) {
-        if (r.etiqueta.tipo !== "lista-empenhos") continue;
-        const { leitura } = leitor.ler(r);
-        if (leitura?.tipo === "lista-empenhos") itens.push(...leitura.itens.map((i) => ({ ...i, entidade: leitura.entidade })));
-      }
       let alvos = alvosDeDetalhe(estado, itens, base);
       if (estado.limite !== undefined) alvos = alvos.slice(0, estado.limite);
       progresso.alvosDetalhe = alvos;
@@ -128,25 +131,49 @@ export async function coletar(cfg: ConfigCidade, estado: Estado, base: Base, sal
     }
 
     const total = progresso.alvosDetalhe.length;
-    let n = 0, ausentes = 0, adiados = 0;
+    let n = 0, ausentes = 0, adiados = 0, viaLote = 0, viaIndividual = 0;
     const prazo = estado.prazoAte ? Date.parse(estado.prazoAte) : Infinity;
-    for (const alvo of progresso.alvosDetalhe) {
-      if (Date.now() > prazo) {
-        adiados = total - n;
-        log(`prazo atingido: ${adiados} detalhes ficam para a proxima coleta incremental`);
-        break;
-      }
+    const pendentes = progresso.alvosDetalhe.filter((a) => !feitos.has(`detalhe:${a}`));
+    n = total - pendentes.length;
+    const registrar = async (alvo: string, encontrado: boolean) => {
       n++;
-      const [entId, ano, numero] = alvo.split(":");
-      const ent = cfg.entidades.find((e) => e.id === entId)!;
-      await tarefa(`detalhe:${alvo}`, async () => {
-        const r = await coletor.detalharEmpenho({ ano: Number(ano), numero: Number(numero), entidade: ent });
-        if (!r.encontrado) ausentes++;
-      });
+      if (!encontrado) ausentes++;
+      feitos.add(`detalhe:${alvo}`);
+      progresso.feitos.push(`detalhe:${alvo}`);
+      if (progresso.feitos.length % 20 === 0) await salvarTudo();
       if (n % 100 === 0 || n === total) log(`detalhe ${n}/${total}`);
+    };
+
+    // Em lote (uma sessao com a lista do exercicio inteiro) quando a coleta tem o
+    // universo completo do exercicio; no escopo "periodo", um a um.
+    const porGrupo = agruparPor(pendentes, (a) => a.split(":").slice(0, 2).join(":"));
+    for (const [grupo, alvos] of porGrupo) {
+      if (Date.now() > prazo) break;
+      const [entId, anoTxt] = grupo.split(":");
+      const ano = Number(anoTxt);
+      const ent = cfg.entidades.find((e) => e.id === entId)!;
+      const numeros = alvos.map((a) => Number(a.split(":")[2]));
+      if (estado.escopo !== "periodo") {
+        const universo = itens.filter((i) => i.entidade === entId && i.ano === ano).map((i) => i.numero);
+        const c = await coletor.detalharEmLote({
+          ano, entidade: ent, numeros, universo, log,
+          deveParar: () => Date.now() > prazo,
+          aoConcluir: async (numero, r) => registrar(`${grupo}:${numero}`, r.encontrado),
+        });
+        viaLote += c.lote; viaIndividual += c.individual;
+      } else {
+        for (const numero of numeros) {
+          if (Date.now() > prazo) break;
+          const r = await coletor.detalharEmpenho({ ano, numero, entidade: ent });
+          viaIndividual++;
+          await registrar(`${grupo}:${numero}`, r.encontrado);
+        }
+      }
     }
+    adiados = total - n;
+    if (adiados > 0) log(`prazo atingido: ${adiados} detalhes ficam para a proxima coleta incremental`);
     await salvarTudo();
-    return { requisicoes: telas.requisicoes + api.requisicoes, detalhes: total - adiados, adiados, ausentesNoDetalhe: ausentes };
+    return { requisicoes: telas.requisicoes + api.requisicoes, detalhes: total - adiados, adiados, viaLote, viaIndividual, ausentesNoDetalhe: ausentes };
   } finally {
     await gTelas.fechar();
     await gApi.fechar();

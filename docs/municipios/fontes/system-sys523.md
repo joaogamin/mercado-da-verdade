@@ -117,8 +117,23 @@ A resposta (`<partial-response>`, `update id="listEmpenhos"`) traz pares `<b>Ró
 "Documentos Digitais" abre o diálogo `frmDocumentosDigitais` por AJAX. Ele veio vazio na
 liquidação testada (2025/3600). Fica a investigar em mais amostras.
 
-Custo: 2 requisições por empenho. Com cerca de 20 mil empenhos por ano e 1 req/s,
-são aproximadamente 11 h por ano completo.
+**Em lote (o método usado na coleta).** Sem `numEmpenho`, a mesma URL (`listaempenhos.xhtml?tipoFil=EMPENHO&anoBal=2025&empresa=1`)
+lista **o exercício inteiro** em ordem de número (os parâmetros `tipoFil=CREDOR` e `ORGAO` são ignorados). A expansão aceita o **índice
+global** da linha (`listEmpenhos_expandedRowIndex`), e não só os da página visível. O índice 0 é o empenho 1 e o 19.797 é o 19.798.
+
+| Medido em 23/10/2026 | Tempo do servidor | Por empenho, a 1 req/s |
+|---|---|---|
+| Um a um (GET da página + expansão) | 1,4 s + 0,33 s | ~2,4 s, 2 requisições, ~125 KB |
+| Em lote (uma sessão + expansão por índice) | 0,33 s por expansão; 25 s para abrir a sessão | ~1 s, 1 requisição, ~25 KB |
+
+- A sessão é reaproveitada por até 3 mil expansões, porque abrir custa ~25 s ao servidor.
+- O índice vem da posição do número no universo do exercício (as listas mensais do dia).
+- **A etiqueta do WARC é tirada do conteúdo** ("Empenho: aaaa/n"), nunca do índice. Se o índice trouxer outro empenho,
+  aquele número volta para o método um a um. Depois de 3 desalinhamentos, o resto do lote segue um a um.
+- Equivalência: 25 empenhos de março de 2025 detalhados nos dois métodos deram resultado idêntico, campo a campo.
+- No escopo `periodo` (sem o universo do exercício), a coleta usa o método um a um.
+
+Ano completo (~20 mil empenhos): ~5,5 h em lote, contra ~13 h um a um, com ~5× menos trabalho para o servidor da prefeitura.
 
 ## Coleta educada
 

@@ -18,7 +18,12 @@ export type Pedido = {
   headers?: Record<string, string>;
   form?: [string, string][];
   cookie?: string;
-  etiqueta?: Etiqueta;
+  /**
+   * Etiqueta do registro no WARC. Pode ser calculada a partir da resposta: quando
+   * o conteudo diz o que ele e (ex.: "Empenho: 2025/3600"), a etiqueta nunca
+   * fica diferente do que foi gravado.
+   */
+  etiqueta?: Etiqueta | ((corpo: Uint8Array) => Etiqueta | undefined);
 };
 
 export type Resposta = {
@@ -72,7 +77,7 @@ export class Cliente {
           requisicao: { metodo: p.metodo, url: p.url, headers: Object.entries(headers), corpo },
           resposta: { status: r.status, statusText: r.statusText, headers: [...r.headers], corpo: bytes },
           data: new Date().toISOString(),
-          etiqueta: p.etiqueta,
+          etiqueta: typeof p.etiqueta === "function" ? p.etiqueta(bytes) : p.etiqueta,
         });
         if (r.status >= 500 && tentativa < this.o.esperasMs.length) {
           await dormir(this.o.esperasMs[tentativa]);

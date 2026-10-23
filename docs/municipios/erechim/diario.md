@@ -158,3 +158,16 @@ parou na primeira requisição, sem publicar nada.
     lista dá R$ 610,0 mi";
   - os agregados usam o valor atual de cada empenho;
   - o explorador mostra original, anulado e atual.
+
+## 23/10/2026: detalhe em lote (2,4× mais rápido, 5× menos carga no portal)
+
+- Sem o número do empenho, a página do detalhe lista o exercício inteiro, e a expansão aceita o índice global da linha.
+  Uma sessão aberta (25 s para o servidor) serve milhares de empenhos, a uma requisição cada.
+- Tempos medidos:
+  - um a um: GET de 1,4 s + expansão de 0,33 s;
+  - em lote: só a expansão, 0,33 s.
+
+  Com a mesma regra de 1 req/s, o ritmo vai de ~2,4 s para ~1 s por empenho.
+- Equivalência: 25 empenhos de março detalhados nos dois métodos, idênticos campo a campo.
+- A carga em andamento foi interrompida e retomada no método novo, sem repetir as listas nem os 554 detalhes já feitos.
+  O gravador agora corta um registro incompleto no fim do WARC ao reabrir (teste incluído).

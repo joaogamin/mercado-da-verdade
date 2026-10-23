@@ -166,6 +166,96 @@ export class ColetorSystem implements Coletor {
     return { encontrado: true };
   }
 
+  /**
+   * Detalhe em lote, numa sessao so. Sem o numero do empenho, a pagina do
+   * detalhe lista o exercicio inteiro em ordem de numero, e a expansao de linha
+   * aceita o indice global — uma requisicao por empenho, em vez de GET + expansao
+   * (descoberto em 23/10/2026: ~2x mais rapido e ~5x menos dados).
+   *
+   * O indice vem da posicao do numero no universo do exercicio (a lista do dia).
+   * A etiqueta e tirada do conteudo ("Empenho: aaaa/n"); se o indice apontar
+   * para outro empenho, aquele numero volta para o metodo de um em um.
+   */
+  async detalharEmLote(q: {
+    ano: number;
+    entidade: Entidade;
+    numeros: number[];
+    /** Todos os numeros do exercicio no portal, para calcular o indice. */
+    universo: number[];
+    /** Chamado a cada empenho concluido (para progresso, retomada e prazo). */
+    aoConcluir: (numero: number, r: ResultadoDetalhe & { via: "lote" | "individual" }) => Promise<void>;
+    deveParar: () => boolean;
+    log: (s: string) => void;
+  }): Promise<{ lote: number; individual: number }> {
+    const ordenado = [...new Set(q.universo)].sort((a, b) => a - b);
+    const indice = new Map(ordenado.map((n, i) => [n, i]));
+    const listaUrl = `${this.cfg.base}${this.cfg.contexto}/publico/listaempenhos.xhtml?tipoFil=EMPENHO&anoBal=${q.ano}&empresa=${q.entidade.codigos.detalhe}`;
+    const contagem = { lote: 0, individual: 0 };
+    type SessaoLista = { s: Sessao; vs: string; usos: number };
+    const sessao: { atual: SessaoLista | null } = { atual: null };
+    let desalinhados = 0;
+
+    const abrir = async () => {
+      const s = new Sessao(this.telas);
+      const get = await s.requisitar({ metodo: "GET", url: listaUrl });
+      const html = texto(get.corpo);
+      const vs = /name="javax\.faces\.ViewState"[^>]*value="([^"]+)"/.exec(html.slice(html.indexOf('<form id="form1"')))?.[1];
+      if (!vs) throw new Error(`lista de empenhos ${q.ano}: ViewState nao encontrado`);
+      sessao.atual = { s, vs, usos: 0 };
+      return sessao.atual;
+    };
+
+    for (const numero of q.numeros) {
+      if (q.deveParar()) break;
+      const i = indice.get(numero);
+      // desalinhou mais de 3 vezes: a ordem do portal nao e a esperada; segue um a um
+      if (i === undefined || desalinhados > 3) {
+        const r = await this.detalharEmpenho({ ano: q.ano, numero, entidade: q.entidade });
+        contagem.individual++;
+        await q.aoConcluir(numero, { ...r, via: "individual" });
+        continue;
+      }
+      // abrir a sessao com a lista inteira custa ~25 s ao servidor: reaproveitar ao maximo
+      const ses: SessaoLista = sessao.atual && sessao.atual.usos < 3000 ? sessao.atual : await abrir();
+      const oficial = urlDetalhe(this.cfg, q.ano, numero, q.entidade.codigos.detalhe);
+      let veio: number | undefined;
+      await ses.s.requisitar({
+        metodo: "POST", url: listaUrl.split("?")[0], headers: AJAX,
+        etiqueta: (corpo) => {
+          const m = /Empenho:\s*(\d{4})\/(\d+)/.exec(new TextDecoder().decode(corpo));
+          if (!m || Number(m[1]) !== q.ano) return undefined;
+          veio = Number(m[2]);
+          return {
+            tipo: "detalhe-empenho",
+            params: { ano: q.ano, numero: veio, entidade: q.entidade.id, via: "lote", indice: i },
+            urlOficial: urlDetalhe(this.cfg, q.ano, veio, q.entidade.codigos.detalhe),
+          };
+        },
+        form: [
+          ["javax.faces.partial.ajax", "true"], ["javax.faces.source", "listEmpenhos"],
+          ["javax.faces.partial.execute", "listEmpenhos"], ["javax.faces.partial.render", "listEmpenhos"],
+          ["javax.faces.behavior.event", "rowToggle"], ["javax.faces.partial.event", "rowToggle"],
+          ["listEmpenhos_rowExpansion", "true"], ["listEmpenhos_expandedRowIndex", String(i)],
+          ["listEmpenhos_encodeFeature", "true"], ["listEmpenhos_skipChildren", "true"],
+          ["form1", "form1"], ["javax.faces.ViewState", ses.vs],
+        ],
+      });
+      ses.usos++;
+      if (veio === numero) {
+        contagem.lote++;
+        await q.aoConcluir(numero, { encontrado: true, via: "lote" });
+        continue;
+      }
+      // resposta sem o empenho (sessao expirou?) ou de outro empenho: refaz esse um a um
+      if (veio === undefined) sessao.atual = null;
+      else { desalinhados++; q.log(`lote ${q.ano}: indice ${i} trouxe ${veio}, nao ${numero}; segue um a um (${oficial})`); }
+      const ind = await this.detalharEmpenho({ ano: q.ano, numero, entidade: q.entidade });
+      contagem.individual++;
+      await q.aoConcluir(numero, { ...ind, via: "individual" });
+    }
+    return contagem;
+  }
+
   async apiEmpenhos(q: { ano: number; entidade: Entidade }): Promise<void> {
     const url = `${this.cfg.baseApi}${this.cfg.contexto}/webresources/api/consultar-empenhos?entidade=${q.entidade.codigos.api}&ano=${q.ano}`;
     await this.api.requisitar({

@@ -1,0 +1,33 @@
+{
+  "anos": [
+    2025
+  ],
+  "arquivos": [
+    {
+      "bytes": 110962074,
+      "nome": "telas.warc.gz",
+      "publico": true,
+      "sha256": "10cb94f8b48b870191f8e67c4f3144e78d33b1f7fa434a8afe9776ace0e5dbb9"
+    },
+    {
+      "bytes": 262,
+      "motivo": "A API devolve o CPF completo de pessoas físicas; o original fica em guarda privada e só o hash é público.",
+      "nome": "api.warc.gz",
+      "publico": false,
+      "sha256": "573f0c13d22a4fcbc9a70c9e181fb38f2b83fcfd114c2829620cb2587bbcecea"
+    }
+  ],
+  "cidade": "erechim",
+  "coleta": "2026-10-22T214438Z",
+  "escopo": "periodo",
+  "iniciadoEm": "2026-10-22T21:44:38.274Z",
+  "portalAtualizadoEm": [
+    "22/10/2026 18:45"
+  ],
+  "registros": {
+    "detalhe-empenho": 1503,
+    "lista-empenhos": 1,
+    "pagina-empenho": 1503,
+    "pesquisa-lista-empenhos": 1
+  }
+}

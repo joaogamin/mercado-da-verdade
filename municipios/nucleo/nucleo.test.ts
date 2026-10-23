@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { centavos, centavosDeNumero } from "./dinheiro.ts";
 import { lerCsv } from "./csv.ts";
 import { isoDeBr, fimDoMes, idDeColeta } from "./datas.ts";
-import { documentoPublico, encontrarCpfs, mascararCpf, mascararCpfsNoTexto } from "./privacidade.ts";
+import { cpfValido, documentoFiscal, documentoPublico, encontrarCpfs, mascararCpf, mascararCpfsNoTexto } from "./privacidade.ts";
 
 test("centavos: formato do portal, com NBSP", () => {
   assert.equal(centavos("R$ 11.087,44"), 1108744);
@@ -54,4 +54,18 @@ test("privacidade: hash hexadecimal com 11 digitos seguidos nao e CPF", () => {
   assert.deepEqual(encontrarCpfs(`ab${cpf}cd`), []);
   assert.deepEqual(encontrarCpfs(`"documento":"${cpf}"`), [cpf]);
   assert.deepEqual(encontrarCpfs(`CPF: ${cpf}.`), [cpf]);
+});
+
+test("privacidade: numero de fatura com 11 digitos nao e CPF; com digitos verificadores validos, mascaramos", () => {
+  // invalido: 11 digitos sem os verificadores de CPF (como as faturas e guias da coleta de 23/10/2026)
+  const fatura = ["123", "456", "789", "00"].join("");
+  assert.equal(cpfValido(cpf), true);
+  assert.equal(cpfValido(fatura), false);
+  assert.equal(cpfValido("11111111111"), false);
+  assert.deepEqual(encontrarCpfs(`"documento":"${fatura}"`), []);
+  assert.deepEqual(documentoFiscal(fatura), { documento: fatura, mascarado: false });
+  assert.deepEqual(documentoFiscal("4521"), { documento: "4521", mascarado: false });
+  assert.deepEqual(documentoFiscal(cpf), { documento: "***.456.789-**", mascarado: true });
+  assert.deepEqual(documentoFiscal("123.456.789-09"), { documento: "***.456.789-**", mascarado: true });
+  assert.deepEqual(documentoFiscal(["930", "1234", "5678", "195"].join("")), { documento: "93012345678195", mascarado: false });
 });

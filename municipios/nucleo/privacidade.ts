@@ -34,7 +34,37 @@ export function mascararCpfsNoTexto(texto: string): { texto: string; mascarou: b
   return { texto: novo, mascarou };
 }
 
-/** Usado pelo portao de privacidade: ha algo com cara de CPF completo? */
+/** Digitos verificadores do CPF. Todo CPF real passa; um numero qualquer de 11 digitos, so 1 em 100. */
+export function cpfValido(digitos: string): boolean {
+  if (!SO_DIGITOS.test(digitos) || /^(\d)\1{10}$/.test(digitos)) return false;
+  const n = [...digitos].map(Number);
+  const dv = (k: number) => {
+    let s = 0;
+    for (let i = 0; i < k; i++) s += n[i] * (k + 1 - i);
+    const r = (s * 10) % 11;
+    return r === 10 ? 0 : r;
+  };
+  return dv(9) === n[9] && dv(10) === n[10];
+}
+
+/**
+ * Numero de documento fiscal (liquidacao, pagamento) publicado no detalhe. Nota
+ * e fatura tem de 1 a 14 digitos; quando o numero tem a forma de um CPF valido,
+ * mascaramos no padrao das telas, como no nome de MEI: na duvida, privacidade.
+ */
+export function documentoFiscal(publicado: string): { documento: string; mascarado: boolean } {
+  const d = publicado.trim();
+  const so = d.replace(/[.-]/g, "");
+  const formaDeCpf = /^\d{11}$/.test(d) || /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(d);
+  // fora disso, o numero fica exatamente como publicado
+  return formaDeCpf && cpfValido(so) ? { documento: mascararCpf(so), mascarado: true } : { documento: publicado, mascarado: false };
+}
+
+/**
+ * Usado pelo portao de privacidade: ha algum CPF completo? So conta o que passa
+ * nos digitos verificadores (todo CPF real passa), para nao travar em numero de
+ * fatura de 11 digitos.
+ */
 export function encontrarCpfs(texto: string): string[] {
-  return [...texto.matchAll(CPF_EM_TEXTO)].map((m) => m[0]);
+  return [...texto.matchAll(CPF_EM_TEXTO)].filter((m) => cpfValido(m[1] + m[2] + m[3] + m[4])).map((m) => m[0]);
 }

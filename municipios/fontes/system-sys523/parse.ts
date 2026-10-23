@@ -6,7 +6,7 @@ import * as cheerio from "cheerio";
 import { lerCsv } from "../../nucleo/csv.ts";
 import { centavos, centavosDeNumero } from "../../nucleo/dinheiro.ts";
 import { isoDeBr } from "../../nucleo/datas.ts";
-import { documentoPublico, mascararCpfsNoTexto } from "../../nucleo/privacidade.ts";
+import { documentoFiscal, documentoPublico, mascararCpfsNoTexto } from "../../nucleo/privacidade.ts";
 import type {
   Balancete, Classificacao, Contrato, Credor, EmpenhoApi, EmpenhoDetalhe, EmpenhoLista,
   Licitacao, Liquidacao, LinhaBalancete, Pagamento,
@@ -216,11 +216,16 @@ export function lerDetalhe(xml: string, base: string): ComAvisos<EmpenhoDetalhe>
     else avisos.push(`contrato fora do formato: ${ct.texto}`);
   }
 
+  // numero do documento fiscal; com forma de CPF valido, mascarado e marcado (ver privacidade.ts)
+  const doc = (publicado: string) => {
+    const { documento, mascarado } = documentoFiscal(publicado);
+    return mascarado ? { documento, documentoMascarado: true as const } : { documento };
+  };
   const liquidacoes: Liquidacao[] = linhasDaTabela($, "tabelaliq").map((c) => ({
-    data: isoDeBr(c[0]), numero: c[1], documento: c[2], valor: centavos(c[3]), estornado: centavos(c[4]),
+    data: isoDeBr(c[0]), numero: c[1], ...doc(c[2]), valor: centavos(c[3]), estornado: centavos(c[4]),
   }));
   const pagamentos: Pagamento[] = linhasDaTabela($, "tabelapag").map((c) => ({
-    data: isoDeBr(c[0]), liquidacao: c[1], documento: c[2], valor: centavos(c[3]), estornado: centavos(c[4]), descontos: centavos(c[5]),
+    data: isoDeBr(c[0]), liquidacao: c[1], ...doc(c[2]), valor: centavos(c[3]), estornado: centavos(c[4]), descontos: centavos(c[5]),
   }));
 
   const ordem = v("Ordem de Compra");

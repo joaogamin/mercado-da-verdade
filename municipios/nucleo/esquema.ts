@@ -61,6 +61,8 @@ export type Liquidacao = {
   documento: string;
   valor: Centavos;
   estornado: Centavos;
+  /** true quando o numero do documento tinha a forma de um CPF valido e foi mascarado por nos. */
+  documentoMascarado?: true;
 };
 
 export type Pagamento = {
@@ -70,6 +72,7 @@ export type Pagamento = {
   valor: Centavos;
   estornado: Centavos;
   descontos: Centavos;
+  documentoMascarado?: true;
 };
 
 /** Linha da lista de empenhos (exportacao CSV da tela). */

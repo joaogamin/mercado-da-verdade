@@ -108,7 +108,7 @@ export const METODOLOGIA: PaginaTexto = {
     },
     {
       titulo: "O que não fazemos",
-      texto: "Não inventamos, não estimamos, não removemos nada. Não buscamos dados de pessoas físicas em outras fontes. O CPF aparece mascarado como nas telas da prefeitura; quando o nome de um MEI traz o CPF do titular, mascaramos no mesmo padrão e avisamos.",
+      texto: "Não inventamos, não estimamos, não removemos nada. Não buscamos dados de pessoas físicas em outras fontes. O CPF aparece mascarado como nas telas da prefeitura; quando o nome de um MEI traz o CPF do titular, mascaramos no mesmo padrão e avisamos. Vale o mesmo para um número de nota ou fatura que tenha a forma de um CPF válido.",
     },
     {
       titulo: "Como reproduzir",

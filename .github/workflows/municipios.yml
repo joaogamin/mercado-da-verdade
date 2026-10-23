@@ -1,0 +1,140 @@
+# Processo linear dos municipios: o mesmo comando do terminal, agendado.
+#   1 coletar → 2 arquivar → 3 normalizar → 4 comparar → 5 conferir → 6 analisar → 7 revisar
+# e o PR com o relatorio de revisao. Fazer o merge e a etapa 8 (publicar).
+#
+# Seguranca: as agendas so rodam com a variavel do repositorio
+# MUNICIPIOS_AGENDA=ativa. O disparo manual (botao "Run workflow") sempre roda.
+name: municipios
+
+on:
+  schedule:
+    - cron: "0 6 * * 1-6"   # 03:00 em Brasilia, seg a sab: incremental
+    - cron: "0 6 * * 0"     # domingo: abertos (todo empenho com saldo)
+  workflow_dispatch:
+    inputs:
+      escopo:
+        description: "incremental, abertos, completo, periodo ou reprocessar"
+        type: choice
+        options: [incremental, abertos, completo, periodo, reprocessar]
+        default: incremental
+      ano:
+        description: "exercicio (so para completo)"
+        required: false
+      de:
+        description: "dd/mm/aaaa (so para periodo)"
+        required: false
+      ate:
+        description: "dd/mm/aaaa (so para periodo)"
+        required: false
+
+concurrency:
+  group: municipios-erechim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  atualizar:
+    if: github.event_name == 'workflow_dispatch' || vars.MUNICIPIOS_AGENDA == 'ativa'
+    runs-on: ubuntu-latest
+    # o job do Actions dura no maximo 6 h; --prazo deixa folga para as etapas 2-7 e o PR
+    timeout-minutes: 355
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.B2_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+      B2_BUCKET: ${{ secrets.B2_BUCKET }}
+      B2_ENDPOINT: ${{ secrets.B2_ENDPOINT }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Exigir guarda dos brutos
+        # sem guarda privada imutavel, a coleta nao deixa prova: melhor nao coletar
+        run: |
+          if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$B2_BUCKET" ] || [ -z "$B2_ENDPOINT" ]; then
+            echo "::error::Configure os secrets B2_KEY_ID, B2_APPLICATION_KEY, B2_BUCKET e B2_ENDPOINT (ver docs/municipios/README.md)."
+            exit 1
+          fi
+
+      - name: Escopo
+        id: escopo
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then E="${{ inputs.escopo }}";
+          elif [ "${{ github.event.schedule }}" = "0 6 * * 0" ]; then E=abertos; else E=incremental; fi
+          A=""; [ -n "${{ inputs.ano }}" ] && A="--ano ${{ inputs.ano }}"
+          P=""; [ -n "${{ inputs.de }}" ] && P="--de ${{ inputs.de }} --ate ${{ inputs.ate }}"
+          echo "args=--escopo $E $A $P --prazo 300" >> "$GITHUB_OUTPUT"
+
+      - name: Etapas 1 a 7
+        id: processo
+        run: |
+          set +e
+          npm run --silent municipio -- erechim atualizar ${{ steps.escopo.outputs.args }}
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+          echo "coleta=$(ls dados/municipios/erechim/coletas | sort | tail -1)" >> "$GITHUB_OUTPUT"
+
+      - name: Guardar brutos (B2, Object Lock)
+        if: always() && steps.processo.outputs.coleta != ''
+        run: |
+          C="${{ steps.processo.outputs.coleta }}"
+          D="dados/municipios/erechim/brutos/$C"
+          [ -d "$D" ] && aws s3 cp "$D" "s3://$B2_BUCKET/erechim/$C/" --recursive --endpoint-url "$B2_ENDPOINT"
+
+      - name: Testes e build
+        id: build
+        run: |
+          set +e
+          npm run --silent test:municipios && npm run build > /tmp/build.log 2>&1
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+          tail -30 /tmp/build.log
+
+      - name: Abrir o PR da coleta
+        if: steps.processo.outputs.codigo != '1'
+        run: |
+          C="${{ steps.processo.outputs.coleta }}"
+          R="dados/municipios/erechim/coletas/$C/revisao.md"
+          git config user.name "municipios-bot"
+          git config user.email "municipios-bot@users.noreply.github.com"
+          git checkout -b "coleta/erechim-$C"
+          git add dados/municipios
+          git commit -m "Coleta Erechim $C" -m "Relatório de revisão: $R"
+          git push -u origin "coleta/erechim-$C"
+          if [ "${{ steps.build.outputs.codigo }}" != "0" ]; then
+            printf '\n> ❌ **Testes ou build falharam** nesta coleta. Ver o log do workflow.\n' >> "$R"
+          fi
+          gh pr create --title "Coleta Erechim $C" --body-file "$R" --base main
+
+      - name: Merge automático (todos os portões verdes)
+        if: steps.processo.outputs.codigo == '0' && steps.build.outputs.codigo == '0'
+        run: gh pr merge "coleta/erechim-${{ steps.processo.outputs.coleta }}" --squash --delete-branch
+
+      - name: Avisar remoções do portal
+        if: steps.processo.outputs.codigo == '2'
+        run: |
+          C="${{ steps.processo.outputs.coleta }}"
+          E="dados/municipios/erechim/coletas/$C/eventos.ndjson"
+          N=$(grep -c '"tipo":"removido"' "$E" || true)
+          if [ "$N" -gt 0 ]; then
+            gh issue create --title "Erechim: $N empenho(s) removido(s) do portal ($C)" \
+              --body "A coleta $C encontrou $N empenho(s) que deixaram de aparecer no portal. A cópia arquivada continua disponível. Ver o PR da coleta e /municipios/erechim/alteracoes/."
+          fi
+
+      - name: Falha do processo
+        if: steps.processo.outputs.codigo == '1'
+        run: |
+          # a proxima coleta agendada recomeca do zero (o processo e idempotente);
+          # para retomar esta, baixe os brutos do B2 e rode `retomar <id>` localmente
+          echo "::error::O processo falhou na coleta ${{ steps.processo.outputs.coleta }}. Os brutos estão no B2; veja o log acima."
+          exit 1

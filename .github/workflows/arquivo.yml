@@ -1,0 +1,106 @@
+# Arquivamento mensal: copias fora do nosso controle.
+#   GitHub Release (o Zenodo arquiva sozinho, com DOI, se a integracao estiver ligada)
+#   → item no Internet Archive → Save Page Now das paginas oficiais
+#   → upgrade dos carimbos OpenTimestamps → espelho do repositorio.
+# Cada passo so roda se o secret correspondente existir.
+# Agenda so com MUNICIPIOS_AGENDA=ativa; o disparo manual sempre roda.
+name: municipios-arquivo
+
+on:
+  schedule:
+    - cron: "0 9 2 * *"   # dia 2, depois da virada do mes
+  workflow_dispatch:
+    inputs:
+      mes:
+        description: "aaaa-mm (padrao: mes anterior)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  arquivar:
+    if: github.event_name == 'workflow_dispatch' || vars.MUNICIPIOS_AGENDA == 'ativa'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.B2_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+      B2_BUCKET: ${{ secrets.B2_BUCKET }}
+      B2_ENDPOINT: ${{ secrets.B2_ENDPOINT }}
+      IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+      IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+      ESPELHO_URL: ${{ secrets.ESPELHO_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Mes
+        id: mes
+        run: |
+          M="${{ inputs.mes }}"
+          [ -z "$M" ] && M=$(date -u -d "$(date -u +%Y-%m-01) -1 day" +%Y-%m)
+          echo "mes=$M" >> "$GITHUB_OUTPUT"
+
+      - name: Baixar os brutos das telas (B2)
+        if: vars.MUNICIPIOS_PUBLICAR_BRUTOS == 'sim' && env.B2_BUCKET != ''
+        run: |
+          for C in $(ls dados/municipios/erechim/coletas | grep "^${{ steps.mes.outputs.mes }}"); do
+            aws s3 cp "s3://$B2_BUCKET/erechim/$C/telas.warc.gz" "dados/municipios/erechim/brutos/$C/telas.warc.gz" --endpoint-url "$B2_ENDPOINT" || true
+          done
+
+      - name: Montar o pacote
+        run: |
+          B=""; [ "${{ vars.MUNICIPIOS_PUBLICAR_BRUTOS }}" = "sim" ] && B="--com-brutos"
+          node municipios/arquivo/pacote.ts erechim "${{ steps.mes.outputs.mes }}" pacote $B
+          npm run build > /dev/null && cp -r out pacote/site
+          (cd pacote && zip -qr "../municipios-erechim-${{ steps.mes.outputs.mes }}.zip" .)
+
+      - name: GitHub Release (e Zenodo)
+        run: |
+          T="municipios-erechim-${{ steps.mes.outputs.mes }}"
+          gh release create "$T" "$T.zip" pacote/SHA256SUMS --title "Municípios · Erechim · ${{ steps.mes.outputs.mes }}" \
+            --notes-file pacote/LEIAME.md
+
+      - name: Internet Archive (item)
+        if: env.IA_ACCESS_KEY != ''
+        run: |
+          pip install -q internetarchive
+          mkdir -p ~/.config/internetarchive
+          printf '[s3]\naccess = %s\nsecret = %s\n' "$IA_ACCESS_KEY" "$IA_SECRET_KEY" > ~/.config/internetarchive/ia.ini
+          ia upload "municipios-erechim-${{ steps.mes.outputs.mes }}" "municipios-erechim-${{ steps.mes.outputs.mes }}.zip" \
+            --metadata="title:Municípios · Erechim · ${{ steps.mes.outputs.mes }}" \
+            --metadata="mediatype:data" --metadata="collection:opensource" \
+            --metadata="description:Dados públicos do Portal da Transparência da Prefeitura de Erechim (RS), com manifesto sha256 e carimbo OpenTimestamps."
+
+      - name: Save Page Now das páginas oficiais
+        if: env.IA_ACCESS_KEY != ''
+        run: node municipios/arquivo/wayback.ts erechim 60
+
+      - name: Upgrade dos carimbos (pendente → Bitcoin)
+        run: |
+          pip install -q opentimestamps-client
+          for f in dados/municipios/*/coletas/*/manifesto.json.ots; do ots upgrade "$f" || true; done
+          rm -f dados/municipios/*/coletas/*/manifesto.json.ots.bak
+
+      - name: PR com carimbos atualizados e registro do arquivo
+        run: |
+          git config user.name "municipios-bot"
+          git config user.email "municipios-bot@users.noreply.github.com"
+          if [ -n "$(git status --porcelain dados/municipios)" ]; then
+            B="arquivo/erechim-${{ steps.mes.outputs.mes }}"
+            git checkout -b "$B" && git add dados/municipios && git commit -m "Arquivo Erechim ${{ steps.mes.outputs.mes }}: carimbos e capturas"
+            git push -u origin "$B" && gh pr create --title "Arquivo Erechim ${{ steps.mes.outputs.mes }}" --body "Carimbos OpenTimestamps atualizados e capturas no Internet Archive." --base main
+          fi
+
+      - name: Espelho do repositório
+        if: env.ESPELHO_URL != ''
+        run: git push --mirror "$ESPELHO_URL"
